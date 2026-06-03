@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENG4U — An Shi Wang</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #06060f;
+      font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+      cursor: none;
+    }
+
+    #canvas {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    /* ── Navigation ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; height: 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(6,6,15,0.65);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+      opacity: 0; transform: translateY(-8px);
+      transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1),
+                  transform 1.2s cubic-bezier(0.22,1,0.36,1);
+    }
+    nav.show { opacity: 1; transform: translateY(0); }
+
+    .nav-brand {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+    .nav-tabs { display: flex; gap: 0; list-style: none; }
+    .nav-tabs a {
+      display: block; padding: 6px 16px;
+      font-size: 12.5px; font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none; letter-spacing: 0.015em;
+      border-radius: 20px;
+      transition: color 0.22s, background 0.22s;
+    }
+    .nav-tabs a:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.07); }
+    .nav-tabs li.active a { color: rgba(255,255,255,0.92); background: rgba(255,255,255,0.09); }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 10; pointer-events: none;
+      text-align: center;
+      padding-bottom: 34vh; /* lift text above Earth horizon */
+    }
+
+    .eyebrow {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(170,145,210,0.7);
+      margin-bottom: 26px;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+    }
+    .title {
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 600;
+      letter-spacing: -0.028em;
+      line-height: 1.04;
+      color: #f0f0f4;
+      margin-bottom: 20px;
+      text-shadow: 0 0 80px rgba(60,50,160,0.55),
+                   0 0 30px rgba(20,20,80,0.8),
+                   0 2px 14px rgba(0,0,0,0.95);
+    }
+    .subtitle {
+      font-size: clamp(14px, 1.7vw, 20px);
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: rgba(195,195,215,0.58);
+      margin-bottom: 48px;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+    }
+    .author {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(160,140,200,0.48);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.95);
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 1.4s cubic-bezier(0.22,1,0.36,1),
+                  transform 1.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* ── Scroll Cue ─────────────────────────────────────────── */
+    .scroll-cue {
+      position: fixed; bottom: 38px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10; pointer-events: none;
+      display: flex; flex-direction: column; align-items: center; gap: 9px;
+      opacity: 0; transition: opacity 2s ease;
+    }
+    .scroll-cue.show { opacity: 0.38; }
+    .scroll-cue span {
+      font-size: 9px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55);
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:.25; transform:scaleY(1); }
+      50%      { opacity:.85; transform:scaleY(1.12); }
+    }
+
+    /* ── Cursor ─────────────────────────────────────────────── */
+    #cur-ring {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 22px; height: 22px;
+      border: 1px solid rgba(255,255,255,0.35); border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    #cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.8); border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div id="cur-ring"></div>
+<div id="cur-dot"></div>
+
+<nav id="nav">
+  <div class="nav-brand">ENG4U</div>
+  <ul class="nav-tabs">
+    <li class="active"><a href="#">Intro</a></li>
+    <li><a href="#">Argumentation</a></li>
+    <li><a href="#">Literary Criticism</a></li>
+    <li><a href="#">Book Club</a></li>
+    <li><a href="#">Drama</a></li>
+    <li><a href="#">Conclusion</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p  class="eyebrow  reveal" id="el-eyebrow">Independent Study Project · ENG4U</p>
+  <h1 class="title    reveal" id="el-title">What ENG4U<br>Has Taught Me</h1>
+  <p  class="subtitle reveal" id="el-sub">Learning to look beyond the surface</p>
+  <p  class="author   reveal" id="el-author">An Shi Wang</p>
+</div>
+
+<div class="scroll-cue" id="scroll-cue">
+  <span>Explore</span>
+  <div class="scroll-line"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  CANVAS SETUP
+// ═══════════════════════════════════════════════════════════════
+const canvas = document.getElementById('canvas');
+const ctx    = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', () => { resize(); buildStars(); });
+
+// ═══════════════════════════════════════════════════════════════
+//  CURSOR
+// ═══════════════════════════════════════════════════════════════
+let mx = W/2, my = H/2, rx = W/2, ry = H/2;
+const ring = document.getElementById('cur-ring');
+const dot  = document.getElementById('cur-dot');
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function tickCursor() {
+  rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
+  requestAnimationFrame(tickCursor);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+//  MATH
+// ═══════════════════════════════════════════════════════════════
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const lerp    = (a, b, t) => a + (b - a) * t;
+const clamp   = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+const inv     = (a, b, v) => clamp((v - a) / (b - a), 0, 1);
+
+// ═══════════════════════════════════════════════════════════════
+//  STARS
+// ═══════════════════════════════════════════════════════════════
+const GLYPHS = 'aeiothnsrld'.split('');
+let stars = [];
+
+function buildStars() {
+  stars = Array.from({ length: 520 }, () => ({
+    x:     Math.random() * W,
+    y:     Math.random() * H,
+    r:     Math.random() * 1.5 + 0.2,
+    base:  Math.random() * 0.75 + 0.15,
+    phase: Math.random() * Math.PI * 2,
+    freq:  (Math.random() * 0.4 + 0.15) * 0.02,
+    depth: Math.random(),
+    glyph: Math.random() < 0.055,
+    ch:    GLYPHS[Math.random() * GLYPHS.length | 0],
+  }));
+}
+buildStars();
+
+// ═══════════════════════════════════════════════════════════════
+//  CONSTELLATIONS  ("DEPTH" hidden in stars)
+// ═══════════════════════════════════════════════════════════════
+const CONST_CLUSTERS = [
+  [[0.12,0.22],[0.15,0.18],[0.18,0.23],[0.15,0.28]],
+  [[0.24,0.18],[0.30,0.18],[0.24,0.23],[0.30,0.23],[0.24,0.28],[0.30,0.28]],
+  [[0.36,0.18],[0.36,0.23],[0.36,0.28],[0.40,0.18],[0.42,0.21],[0.40,0.23]],
+  [[0.48,0.18],[0.56,0.18],[0.52,0.18],[0.52,0.28]],
+  [[0.62,0.18],[0.62,0.28],[0.68,0.18],[0.68,0.28],[0.62,0.23],[0.68,0.23]],
+];
+const CONST_LINES = [
+  [[0.12,0.22],[0.15,0.18]],[[0.15,0.18],[0.18,0.23]],
+  [[0.18,0.23],[0.15,0.28]],[[0.15,0.28],[0.12,0.22]],
+  [[0.24,0.18],[0.30,0.18]],[[0.24,0.18],[0.24,0.28]],
+  [[0.24,0.23],[0.30,0.23]],[[0.24,0.28],[0.30,0.28]],
+  [[0.36,0.18],[0.40,0.18]],[[0.36,0.18],[0.36,0.28]],
+  [[0.40,0.18],[0.42,0.21]],[[0.42,0.21],[0.40,0.23]],[[0.40,0.23],[0.36,0.23]],
+  [[0.48,0.18],[0.56,0.18]],[[0.52,0.18],[0.52,0.28]],
+  [[0.62,0.18],[0.62,0.28]],[[0.68,0.18],[0.68,0.28]],
+  [[0.62,0.23],[0.68,0.23]],
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  INK PARTICLES
+// ═══════════════════════════════════════════════════════════════
+let inkParts = [];
+
+function spawnInk() {
+  const cx = W/2, cy = H/2;
+  for (let i = 0; i < 340; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const d = 60 + Math.random() * Math.min(W, H) * 0.46;
+    inkParts.push({
+      ox: cx + (Math.random()-0.5)*320, oy: cy + (Math.random()-0.5)*200,
+      tx: cx + Math.cos(a)*d,           ty: cy + Math.sin(a)*d,
+      r: Math.random()*1.6+0.3, prog:0,
+      spd:  (Math.random()*0.25+0.08)*0.005,
+      delay: Math.random()*0.7,
+      maxA:  Math.random()*0.65+0.2,
+      warm: [245, Math.random()*30+180, Math.random()*60+100],
+      cool: [210+Math.random()*30, 215+Math.random()*20, 245+Math.random()*10],
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  TIMELINE
+// ═══════════════════════════════════════════════════════════════
+const TL = {
+  blackEnd:      0.4,
+  paperIn:       1.8,
+  dissolveStart: 3.0,
+  dissolveEnd:   7.0,
+  cosmicFull:    8.5,
+  textStart:     7.8,
+  scrollShow:   11.5,
+};
+
+let t0 = null, inkSpawned = false, uiTriggered = false;
+let px = 0, py = 0; // parallax
+
+// ═══════════════════════════════════════════════════════════════
+//  EARTH TEXTURE  (built once on load)
+// ═══════════════════════════════════════════════════════════════
+const TEX_W    = 2160;
+const TEX_H    = 1080;
+const VIEW_LON = -15;
+const VIEW_LAT =  10;
+const VIEW_DEG = 140;
+const PXDEG    = TEX_W / 360;                                   // 6
+const VIEW_PX  = VIEW_DEG * PXDEG;                              // 840
+const TEX_SX   = (VIEW_LON + 180) / 360 * TEX_W - VIEW_PX / 2; // 570
+const TEX_SY   = (90 - VIEW_LAT) / 180 * TEX_H - VIEW_PX / 2;  // 60
+
+const earthTex = document.createElement('canvas');
+earthTex.width = TEX_W; earthTex.height = TEX_H;
+const etx = earthTex.getContext('2d');
+
+function ll(lon, lat) {
+  return [(lon + 180) / 360 * TEX_W, (90 - lat) / 180 * TEX_H];
+}
+
+function cPoly(pts) {
+  const [x0, y0] = ll(pts[0][0], pts[0][1]);
+  etx.moveTo(x0, y0);
+  for (let i = 1; i < pts.length; i++) {
+    const [x, y] = ll(pts[i][0], pts[i][1]);
+    etx.lineTo(x, y);
+  }
+  etx.closePath();
+}
+
+function buildEarthTex() {
+  // ── Ocean ────────────────────────────────────────────────
+  const og = etx.createLinearGradient(0, 0, 0, TEX_H);
+  og.addColorStop(0,    '#0b1a35');
+  og.addColorStop(0.22, '#0e2d5c');
+  og.addColorStop(0.40, '#134888');
+  og.addColorStop(0.50, '#185290');
+  og.addColorStop(0.60, '#134888');
+  og.addColorStop(0.78, '#0e2d5c');
+  og.addColorStop(1,    '#0b1a35');
+  etx.fillStyle = og;
+  etx.fillRect(0, 0, TEX_W, TEX_H);
+
+  // ── Landmasses ───────────────────────────────────────────
+  const cg = etx.createLinearGradient(0, 0, 0, TEX_H);
+  cg.addColorStop(0,    '#b0c0a8');
+  cg.addColorStop(0.07, '#788f58');
+  cg.addColorStop(0.18, '#487828');
+  cg.addColorStop(0.35, '#2c6018');
+  cg.addColorStop(0.50, '#347020');
+  cg.addColorStop(0.65, '#487828');
+  cg.addColorStop(0.80, '#688558');
+  cg.addColorStop(0.93, '#8aa888');
+  cg.addColorStop(1,    '#d8e8dc');
+
+  etx.beginPath();
+
+  // North America
+  cPoly([[-168,60],[-150,62],[-140,58],[-132,54],[-126,48],
+    [-124,45],[-120,38],[-117,32],[-110,23],[-92,16],
+    [-83,9],[-78,8],[-80,10],[-82,22],[-80,26],[-80,31],
+    [-76,35],[-72,41],[-70,42],[-67,44],[-60,46],[-60,50],
+    [-65,52],[-68,56],[-72,58],[-78,60],[-82,65],[-86,68],
+    [-94,70],[-100,72],[-110,73],[-120,72],[-130,68],
+    [-138,63],[-152,60],[-160,60],[-168,60]]);
+
+  // Greenland
+  cPoly([[-46,60],[-42,62],[-30,68],[-22,76],[-32,84],
+    [-40,84],[-52,82],[-60,78],[-68,72],[-72,68],[-46,60]]);
+
+  // South America
+  cPoly([[-80,10],[-76,2],[-72,-5],[-80,-5],[-76,-14],
+    [-70,-18],[-68,-25],[-68,-33],[-70,-38],[-72,-48],
+    [-74,-54],[-68,-55],[-64,-52],[-58,-46],[-52,-38],
+    [-48,-28],[-40,-22],[-38,-12],[-35,-5],[-40,3],
+    [-50,4],[-52,4],[-58,3],[-62,2],[-65,2],[-73,6],[-76,8],[-80,10]]);
+
+  // Europe
+  cPoly([[-9,36],[0,36],[5,43],[14,38],[18,40],[20,37],
+    [28,38],[32,41],[30,44],[28,46],[23,52],[18,56],
+    [15,56],[8,58],[5,58],[5,62],[-5,57],[-8,52],
+    [-10,48],[-8,44],[-9,38],[-9,36]]);
+
+  // Scandinavia
+  cPoly([[5,58],[8,57],[14,56],[14,58],[16,62],[18,70],
+    [20,72],[28,70],[30,68],[26,64],[30,62],[22,60],
+    [22,56],[18,56],[15,56],[12,56],[8,57]]);
+
+  // British Isles
+  cPoly([[-6,50],[-3,49],[2,51],[2,53],[0,55],[-2,58],[-5,58],[-5,52],[-6,50]]);
+  cPoly([[-10,52],[-6,52],[-8,54],[-10,54],[-10,52]]);
+
+  // Africa
+  cPoly([[-6,36],[0,36],[5,37],[10,37],[15,36],[22,33],
+    [28,30],[32,30],[36,26],[40,20],[42,12],[44,12],
+    [50,12],[44,8],[42,-2],[36,-18],[32,-28],[28,-34],
+    [26,-35],[18,-34],[16,-28],[12,-22],[12,-18],[12,-5],
+    [9,3],[5,5],[0,5],[-14,4],[-15,5],[-15,10],
+    [-17,12],[-18,16],[-18,22],[-14,30],[-6,36]]);
+
+  // Madagascar
+  cPoly([[44,-12],[50,-14],[50,-25],[44,-24],[42,-18],[44,-12]]);
+
+  // Eurasia main body
+  cPoly([[28,40],[35,36],[36,36],[34,32],[36,28],[38,22],
+    [44,12],[54,22],[60,22],[68,22],[72,20],[80,8],
+    [80,14],[88,22],[92,22],[98,18],[104,2],[110,2],
+    [118,24],[120,28],[121,32],[122,37],[122,40],
+    [129,42],[130,43],[132,46],[138,55],[140,55],
+    [141,60],[143,65],[162,63],[168,60],[168,70],
+    [160,72],[150,72],[140,73],[130,72],[120,73],
+    [110,74],[100,74],[90,74],[80,72],[70,70],
+    [60,68],[50,65],[40,62],[33,60],[30,58],[28,58],
+    [25,55],[22,52],[24,48],[28,46],[28,43],[28,40]]);
+
+  // Arabian Peninsula
+  cPoly([[36,30],[38,22],[44,12],[50,14],[56,20],[58,22],
+    [56,24],[52,26],[48,26],[44,22],[40,20],[38,18],[36,16],[36,30]]);
+
+  // India
+  cPoly([[68,22],[72,22],[78,10],[80,8],[80,14],[86,20],
+    [88,22],[82,18],[80,22],[78,24],[76,28],[72,30],[68,28],[66,24],[68,22]]);
+
+  // Indochina
+  cPoly([[98,18],[102,4],[100,2],[104,2],[106,10],
+    [100,14],[98,18]]);
+  cPoly([[100,2],[104,1],[108,-3],[106,3],[100,2]]);
+
+  // Japan
+  cPoly([[130,32],[134,34],[138,38],[141,40],[141,44],
+    [143,44],[145,44],[143,43],[141,43],[140,42],
+    [141,40],[138,38],[136,35],[134,33],[130,32]]);
+
+  // Australia
+  cPoly([[114,-22],[122,-18],[128,-14],[136,-12],[140,-12],
+    [145,-16],[146,-22],[150,-25],[152,-28],[152,-32],
+    [150,-38],[148,-40],[145,-40],[140,-38],[135,-36],
+    [130,-34],[126,-34],[118,-36],[115,-34],[113,-26],[114,-22]]);
+
+  // Antarctica
+  cPoly([[-180,-66],[-160,-65],[-120,-62],[-80,-66],
+    [-40,-68],[0,-68],[40,-70],[80,-68],[120,-62],
+    [160,-66],[180,-66],[180,-90],[-180,-90]]);
+
+  etx.fillStyle = cg;
+  etx.fill('nonzero');
+
+  // ── Deserts ──────────────────────────────────────────────
+  etx.beginPath();
+  cPoly([[-16,28],[-10,22],[-5,18],[0,18],[10,18],[20,18],
+    [28,22],[32,26],[28,28],[25,32],[20,35],[15,35],
+    [10,35],[5,33],[0,33],[-5,33],[-10,33],[-16,28]]);
+  cPoly([[36,16],[38,12],[44,12],[50,14],[56,20],[58,22],
+    [56,24],[52,26],[48,24],[44,22],[40,20],[38,18],[36,16]]);
+  cPoly([[118,-20],[135,-16],[138,-24],[136,-28],[130,-30],[118,-26],[118,-20]]);
+  cPoly([[-74,-18],[-68,-24],[-68,-30],[-74,-28],[-74,-18]]);
+  cPoly([[48,38],[64,42],[70,38],[64,34],[54,36],[48,38]]);
+  cPoly([[14,-18],[22,-18],[24,-28],[18,-32],[14,-28],[14,-18]]);
+  etx.fillStyle = '#c49a3c';
+  etx.fill('nonzero');
+
+  // Himalayas tint
+  etx.beginPath();
+  cPoly([[68,28],[72,26],[80,28],[88,30],[90,26],[82,24],[72,26],[68,28]]);
+  etx.fillStyle = 'rgba(135,115,86,0.5)';
+  etx.fill();
+
+  // ── Ice caps ─────────────────────────────────────────────
+  const arcG = etx.createLinearGradient(0, 0, 0, TEX_H * 0.13);
+  arcG.addColorStop(0, 'rgba(225,238,252,0.96)');
+  arcG.addColorStop(1, 'rgba(225,238,252,0)');
+  etx.fillStyle = arcG;
+  etx.fillRect(0, 0, TEX_W, TEX_H * 0.13);
+
+  const antG = etx.createLinearGradient(0, TEX_H * 0.86, 0, TEX_H);
+  antG.addColorStop(0, 'rgba(232,244,255,0)');
+  antG.addColorStop(1, 'rgba(232,244,255,0.97)');
+  etx.fillStyle = antG;
+  etx.fillRect(0, TEX_H * 0.80, TEX_W, TEX_H * 0.20);
+
+  // Greenland ice
+  etx.beginPath();
+  cPoly([[-56,62],[-42,64],[-32,72],[-40,84],[-52,84],[-62,78],[-56,68],[-56,62]]);
+  etx.fillStyle = 'rgba(225,238,252,0.88)';
+  etx.fill();
+
+  // ── Clouds (blurred ellipses) ─────────────────────────────
+  etx.save();
+  etx.globalAlpha = 0.52;
+  etx.shadowBlur  = 38;
+  etx.shadowColor = 'rgba(255,255,255,0.55)';
+  etx.fillStyle   = 'rgba(255,255,255,0.62)';
+  const CD = PXDEG; // pixels per degree
+  [
+    [-40, 52, 18, 8],  // N Atlantic cyclone
+    [-60, 46, 15, 6],
+    [-26,  4, 14, 7],  // ITCZ Atlantic
+    [ 18,  5, 15, 7],
+    [ 80, 14, 12, 6],  // Indian Ocean
+    [-120,50, 16, 7],  // N Pacific
+    [-170,55, 13, 6],
+    [-50,-54, 20, 8],  // Southern Ocean
+    [  0,-57, 22, 8],
+    [ 30,-52, 18, 7],
+    [-70, 25, 10, 4],  // Caribbean
+    [-15, 30, 10, 5],  // Saharan edge
+  ].forEach(([lon, lat, lonR, latR]) => {
+    const [cx2, cy2] = ll(lon, lat);
+    etx.beginPath();
+    etx.ellipse(cx2, cy2, lonR * CD, latR * CD, 0, 0, Math.PI * 2);
+    etx.fill();
+  });
+  etx.restore();
+}
+
+// City lights array
+const CITIES = [
+  [-74,40.7,0.90],[-87,41.8,0.75],[-118,34,0.75],[-122,37.8,0.65],
+  [-79,43.7,0.65],[-73.6,45.5,0.58],[-123,49.3,0.55],[-71,42.4,0.60],
+  [-77,38.9,0.65],[-80,25.8,0.58],[-95,29.7,0.60],[-84,33.7,0.58],
+  [-90,30,0.52],[-112,33.5,0.52],[-104,39.7,0.52],[-122,47.6,0.52],
+  [0,51.5,0.88],[2.3,48.9,0.88],[13.4,52.5,0.82],[4.9,52.4,0.74],
+  [2.2,41.4,0.70],[-3.7,40.4,0.70],[12.5,41.9,0.74],[18.9,47.5,0.64],
+  [21,52.2,0.64],[37.6,55.8,0.80],[24.9,60.2,0.60],[10.8,59.9,0.60],
+  [18.1,59.3,0.60],[14.5,46.1,0.58],
+  [139.7,35.7,1.0],[126.8,37.6,0.84],[121,31.2,0.87],[116.4,39.9,0.87],
+  [114.2,22.3,0.82],[103.8,1.3,0.74],[77,28.6,0.74],[72.9,19,0.74],
+  [88.4,22.6,0.70],[106.7,10.8,0.64],[100.5,13.8,0.67],
+  [55.3,25.2,0.70],[44.4,33.3,0.64],[35.2,31.8,0.64],
+  [28,-26,0.70],[31.2,30,0.70],[3.4,6.5,0.60],[36.8,-1.3,0.58],
+  [-46.6,-23.6,0.80],[-43.2,-22.9,0.70],[-58.4,-34.6,0.70],[-70.7,-33.5,0.65],
+  [151.2,-33.9,0.74],[144.9,-37.8,0.70],
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — EARTH
+// ═══════════════════════════════════════════════════════════════
+function drawEarth(cp) {
+  if (cp <= 0) return;
+
+  const ecx = W / 2;
+  const ecy = H * 0.72;
+  const er  = Math.min(W * 0.45, H * 0.46);
+
+  // Sun is lower-right → upper area of Earth = night (dark, readable text)
+  const sunX = ecx + er * 0.30;
+  const sunY = ecy + er * 0.26;
+
+  ctx.save();
+  ctx.globalAlpha = easeOut(cp);
+
+  // ── Outer atmosphere haze
+  let ag = ctx.createRadialGradient(ecx, ecy, er * 0.92, ecx, ecy, er * 1.07);
+  ag.addColorStop(0,    'rgba(30,80,200,0)');
+  ag.addColorStop(0.45, 'rgba(55,120,240,0.13)');
+  ag.addColorStop(0.75, 'rgba(80,150,255,0.21)');
+  ag.addColorStop(1,    'rgba(40,90,180,0)');
+  ctx.fillStyle = ag;
+  ctx.beginPath(); ctx.arc(ecx, ecy, er * 1.07, 0, Math.PI * 2); ctx.fill();
+
+  // Brighter atmospheric glow on the lit limb (lower-right)
+  ag = ctx.createRadialGradient(sunX, sunY, er * 0.55, sunX, sunY, er * 1.30);
+  ag.addColorStop(0,    'rgba(80,160,255,0)');
+  ag.addColorStop(0.65, 'rgba(80,160,255,0.10)');
+  ag.addColorStop(0.86, 'rgba(110,185,255,0.20)');
+  ag.addColorStop(1,    'rgba(60,120,220,0)');
+  ctx.fillStyle = ag;
+  ctx.beginPath(); ctx.arc(ecx, ecy, er * 1.30, 0, Math.PI * 2); ctx.fill();
+
+  // ── Earth sphere (clip) ───────────────────────────────────
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(ecx, ecy, er, 0, Math.PI * 2);
+  ctx.clip();
+
+  // Texture
+  ctx.drawImage(earthTex,
+    TEX_SX, TEX_SY, VIEW_PX, VIEW_PX,
+    ecx - er, ecy - er, er * 2, er * 2);
+
+  // Day/night shadow (dark away from sunX/sunY)
+  const nightG = ctx.createRadialGradient(sunX, sunY, er * 0.18, sunX, sunY, er * 2.1);
+  nightG.addColorStop(0,    'rgba(0,0,0,0)');
+  nightG.addColorStop(0.38, 'rgba(0,0,4,0)');
+  nightG.addColorStop(0.56, 'rgba(0,0,8,0.28)');
+  nightG.addColorStop(0.72, 'rgba(0,0,12,0.68)');
+  nightG.addColorStop(1,    'rgba(0,2,16,0.95)');
+  ctx.fillStyle = nightG;
+  ctx.fillRect(ecx - er, ecy - er, er*2, er*2);
+
+  // City lights — screen blend (only visible on dark side)
+  ctx.globalCompositeOperation = 'screen';
+  CITIES.forEach(([lon, lat, b]) => {
+    const tx = (lon + 180) / 360 * TEX_W;
+    const ty = (90 - lat) / 180 * TEX_H;
+    const nx = (tx - TEX_SX) / VIEW_PX;
+    const ny = (ty - TEX_SY) / VIEW_PX;
+    const sx = ecx - er + nx * er * 2;
+    const sy = ecy - er + ny * er * 2;
+    const dx = sx - ecx, dy = sy - ecy;
+    if (dx*dx + dy*dy > er*er * 0.97) return;
+
+    const gr = Math.max(4, er * 0.034) * b;
+    const cg2 = ctx.createRadialGradient(sx, sy, 0, sx, sy, gr);
+    cg2.addColorStop(0,   `rgba(255,215,110,${b})`);
+    cg2.addColorStop(0.4, `rgba(255,185,65,${b * 0.44})`);
+    cg2.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = cg2;
+    ctx.fillRect(sx - gr, sy - gr, gr*2, gr*2);
+  });
+  ctx.globalCompositeOperation = 'source-over';
+
+  // Limb darkening (edge of sphere gets dark)
+  const limbG = ctx.createRadialGradient(ecx, ecy, er * 0.60, ecx, ecy, er);
+  limbG.addColorStop(0,    'rgba(0,0,0,0)');
+  limbG.addColorStop(0.76, 'rgba(0,0,0,0)');
+  limbG.addColorStop(0.88, 'rgba(0,0,8,0.16)');
+  limbG.addColorStop(1,    'rgba(0,0,10,0.58)');
+  ctx.fillStyle = limbG;
+  ctx.fillRect(ecx - er, ecy - er, er*2, er*2);
+
+  // Specular ocean glint
+  const specG = ctx.createRadialGradient(sunX - er*0.05, sunY - er*0.08, 0, sunX, sunY, er * 0.40);
+  specG.addColorStop(0,   'rgba(255,255,242,0.22)');
+  specG.addColorStop(0.4, 'rgba(200,225,255,0.07)');
+  specG.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = specG;
+  ctx.fillRect(ecx - er, ecy - er, er*2, er*2);
+
+  ctx.restore(); // end clip
+
+  // ── Thin atmosphere rim ring (outside sphere)
+  const rimG = ctx.createRadialGradient(ecx, ecy, er * 0.88, ecx, ecy, er * 1.015);
+  rimG.addColorStop(0,    'rgba(60,130,255,0)');
+  rimG.addColorStop(0.45, 'rgba(80,155,255,0.16)');
+  rimG.addColorStop(0.82, 'rgba(105,175,255,0.25)');
+  rimG.addColorStop(1,    'rgba(50,100,210,0)');
+  ctx.fillStyle = rimG;
+  ctx.beginPath();
+  ctx.arc(ecx, ecy, er * 1.015, 0, Math.PI*2);
+  ctx.arc(ecx, ecy, er * 0.88,  0, Math.PI*2, true);
+  ctx.fill();
+
+  ctx.restore(); // end globalAlpha
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — NEBULAE
+// ═══════════════════════════════════════════════════════════════
+function drawNebulae(cp) {
+  if (cp <= 0) return;
+  ctx.save();
+
+  let g = ctx.createRadialGradient(W*0.18, H*0.30, 0, W*0.18, H*0.30, W*0.40);
+  g.addColorStop(0, `rgba(90,52,152,${0.40*cp})`);
+  g.addColorStop(0.5,`rgba(50,24,100,${0.11*cp})`);
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  g = ctx.createRadialGradient(W*0.82, H*0.55, 0, W*0.82, H*0.55, W*0.42);
+  g.addColorStop(0, `rgba(24,42,122,${0.35*cp})`);
+  g.addColorStop(0.5,`rgba(12,20,75,${0.09*cp})`);
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  g = ctx.createRadialGradient(W*0.50, H*0.88, 0, W*0.50, H*0.88, W*0.28);
+  g.addColorStop(0, `rgba(18,75,85,${0.20*cp})`);
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — STARS
+// ═══════════════════════════════════════════════════════════════
+function drawStars(cp) {
+  if (cp <= 0) return;
+  ctx.save();
+  stars.forEach(s => {
+    s.phase += s.freq;
+    const a  = s.base * (0.65 + 0.35 * Math.sin(s.phase)) * cp;
+    const sx = s.x + px * s.depth * 0.4;
+    const sy = s.y + py * s.depth * 0.4;
+
+    if (s.glyph && cp > 0.72) {
+      ctx.globalAlpha = a * 0.38 * inv(0.72, 1, cp);
+      ctx.fillStyle = '#dde8ff';
+      ctx.font = `${s.r * 3.5}px monospace`;
+      ctx.fillText(s.ch, sx, sy);
+    } else {
+      ctx.globalAlpha = a * 0.12;
+      const h = ctx.createRadialGradient(sx, sy, 0, sx, sy, s.r * 5);
+      h.addColorStop(0, '#fff'); h.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = h;
+      ctx.fillRect(sx - s.r*5, sy - s.r*5, s.r*10, s.r*10);
+      ctx.globalAlpha = a;
+      ctx.beginPath();
+      ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.depth > 0.7 ? '#c8d8f8' : '#eef2ff';
+      ctx.fill();
+    }
+  });
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — CONSTELLATIONS
+// ═══════════════════════════════════════════════════════════════
+function drawConstellations(cp) {
+  if (cp < 0.55) return;
+  const a = inv(0.55, 0.9, cp) * 0.09;
+  ctx.save();
+  ctx.strokeStyle = `rgba(175,155,235,${a})`;
+  ctx.lineWidth = 0.6;
+  ctx.setLineDash([2, 4]);
+  CONST_LINES.forEach(([p1, p2]) => {
+    ctx.beginPath();
+    ctx.moveTo(p1[0]*W + px*0.1, p1[1]*H + py*0.1);
+    ctx.lineTo(p2[0]*W + px*0.1, p2[1]*H + py*0.1);
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  CONST_CLUSTERS.flat().forEach(([fx, fy]) => {
+    ctx.beginPath();
+    ctx.arc(fx*W + px*0.1, fy*H + py*0.1, 1.4, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(196,180,252,${a * 2.5})`;
+    ctx.fill();
+  });
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — PAPER PAGE
+// ═══════════════════════════════════════════════════════════════
+function rRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y,   x+w, y+r,   r); ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r); ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x,   y+h, x,   y+h-r, r); ctx.lineTo(x, y+r);
+  ctx.arcTo(x,   y,   x+r, y,     r); ctx.closePath();
+}
+
+function drawPaper(pa, inkA) {
+  if (pa <= 0) return;
+  const cx = W/2, cy = H/2;
+  const pw = Math.min(340, W * 0.44);
+  const ph = pw * 1.35;
+  const px2 = cx - pw/2, py2 = cy - ph/2;
+
+  ctx.save();
+  ctx.globalAlpha = pa;
+  ctx.shadowBlur = 80; ctx.shadowColor = 'rgba(210,170,100,0.28)';
+  ctx.shadowOffsetX = 6; ctx.shadowOffsetY = 12;
+
+  const pg = ctx.createLinearGradient(px2, py2, px2+pw, py2+ph);
+  pg.addColorStop(0,'#f6eed8'); pg.addColorStop(0.45,'#ede5cc'); pg.addColorStop(1,'#e5d9be');
+  ctx.fillStyle = pg; rRect(px2, py2, pw, ph, 4); ctx.fill();
+  ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+
+  const lamp = ctx.createRadialGradient(cx-pw*0.12,cy-ph*0.18,0,cx-pw*0.12,cy-ph*0.18,pw*0.9);
+  lamp.addColorStop(0,'rgba(255,228,148,0.22)'); lamp.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = lamp; rRect(px2, py2, pw, ph, 4); ctx.fill();
+
+  ctx.globalAlpha = pa * clamp(inkA, 0, 1);
+  const fs = pw * 0.052, lh = pw * 0.078;
+  const tx = px2 + pw * 0.1;
+  let ty   = py2 + ph * 0.10;
+
+  ctx.font = `italic ${fs}px Georgia, 'Times New Roman', serif`;
+  ctx.fillStyle = 'rgba(50,35,20,0.82)';
+  ctx.fillText('"The limits of my language', tx, ty); ty += lh;
+  ctx.fillText('mean the limits of my world."', tx, ty); ty += lh * 1.2;
+  ctx.font = `${fs * 0.84}px Georgia, serif`;
+  ctx.fillStyle = 'rgba(50,35,20,0.48)';
+  ctx.fillText('— Ludwig Wittgenstein', tx, ty); ty += lh * 1.6;
+  ctx.font = `${fs * 0.9}px Georgia, serif`;
+  ctx.fillStyle = 'rgba(50,35,20,0.68)';
+  ['To read is to inhabit another mind.',
+   'To analyze is to find the architecture',
+   'of that mind. To understand is to',
+   'expand your own — beyond what you',
+   'thought possible, beyond the surface',
+   'of every word, every silence, every',
+   'space between the lines.'
+  ].forEach(line => { ctx.fillText(line, tx, ty); ty += lh * 0.92; });
+
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — INK PARTICLES
+// ═══════════════════════════════════════════════════════════════
+function drawInk(elapsed) {
+  if (!inkParts.length) return;
+  ctx.save();
+  inkParts.forEach(p => {
+    if (elapsed - p.delay <= 0) return;
+    p.prog = Math.min(1, p.prog + p.spd * 16.67);
+    const ep = easeOut(p.prog);
+    const x  = lerp(p.ox, p.tx, ep);
+    const y  = lerp(p.oy, p.ty, ep);
+    let a;
+    if (ep < 0.25)      a = (ep / 0.25) * p.maxA;
+    else if (ep < 0.65) a = p.maxA;
+    else                a = (1 - (ep - 0.65) / 0.35) * p.maxA;
+    const r = Math.round(lerp(p.warm[0], p.cool[0], ep));
+    const g = Math.round(lerp(p.warm[1], p.cool[1], ep));
+    const b = Math.round(lerp(p.warm[2], p.cool[2], ep));
+    ctx.globalAlpha = a;
+    ctx.beginPath();
+    ctx.arc(x, y, p.r * (1 - ep * 0.45), 0, Math.PI * 2);
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
+    ctx.fill();
+  });
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DRAW — CURSOR LENS
+// ═══════════════════════════════════════════════════════════════
+function drawLens(cp) {
+  if (cp < 0.45) return;
+  const a  = inv(0.45, 0.85, cp) * 0.075;
+  const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 90);
+  lg.addColorStop(0,   `rgba(165,140,255,${a})`);
+  lg.addColorStop(0.55,`rgba(80,60,180,${a*0.3})`);
+  lg.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = lg;
+  ctx.fillRect(0, 0, W, H);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  MAIN LOOP
+// ═══════════════════════════════════════════════════════════════
+function frame(ts) {
+  if (!t0) t0 = ts;
+  const t = (ts - t0) / 1000;
+
+  px += ((mx / W - 0.5) * 28 - px) * 0.028;
+  py += ((my / H - 0.5) * 18 - py) * 0.028;
+
+  const warmGlow   = easeOut(inv(TL.blackEnd,         TL.paperIn,           t));
+  const paperAlpha = easeOut(inv(TL.blackEnd,         TL.paperIn,           t));
+  const paperFade  = 1 - easeOut(inv(TL.dissolveStart + 0.5, TL.dissolveEnd, t));
+  const inkAlpha   = 1 - easeOut(inv(TL.dissolveStart, TL.dissolveEnd - 1.2, t));
+  const cosmicProg = easeOut(inv(TL.dissolveStart,    TL.cosmicFull,        t));
+
+  if (t >= TL.dissolveStart && !inkSpawned) { spawnInk(); inkSpawned = true; }
+
+  if (t >= TL.textStart && !uiTriggered) {
+    uiTriggered = true;
+    document.getElementById('nav').classList.add('show');
+    revealHero();
+  }
+
+  if (t >= TL.scrollShow) document.getElementById('scroll-cue').classList.add('show');
+
+  // Clear
+  ctx.fillStyle = '#06060f';
+  ctx.fillRect(0, 0, W, H);
+
+  // Warm paper glow (fades as cosmic takes over)
+  if (warmGlow > 0) {
+    const wa = Math.max(0, warmGlow - cosmicProg * warmGlow) * 0.55;
+    const wg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, H*0.6);
+    wg.addColorStop(0,  `rgba(185,140,70,${wa})`);
+    wg.addColorStop(0.4,`rgba(120,80,40,${wa*0.4})`);
+    wg.addColorStop(1,  'rgba(0,0,0,0)');
+    ctx.fillStyle = wg; ctx.fillRect(0,0,W,H);
+  }
+
+  // Vignette
+  const vig = ctx.createRadialGradient(W/2,H/2,H*0.28,W/2,H/2,H*0.92);
+  vig.addColorStop(0,'rgba(0,0,0,0)');
+  vig.addColorStop(1,`rgba(3,3,10,${0.55 + cosmicProg*0.25})`);
+  ctx.fillStyle = vig; ctx.fillRect(0,0,W,H);
+
+  drawNebulae(cosmicProg);
+  drawStars(cosmicProg);
+  drawConstellations(cosmicProg);
+
+  // ── EARTH ────────────────────────────────────────────────
+  drawEarth(cosmicProg);
+
+  drawInk(t - TL.dissolveStart);
+  drawPaper(paperAlpha * paperFade, inkAlpha);
+
+  // Remnant bloom
+  if (cosmicProg > 0.25) {
+    const ba = inv(0.25, 0.7, cosmicProg) * 0.09;
+    const bg = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,100);
+    bg.addColorStop(0,`rgba(188,172,255,${ba})`);
+    bg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+  }
+
+  drawLens(cosmicProg);
+  requestAnimationFrame(frame);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  TEXT REVEAL
+// ═══════════════════════════════════════════════════════════════
+function revealHero() {
+  [['el-eyebrow',0],['el-title',380],['el-sub',900],['el-author',1500]]
+    .forEach(([id, d]) => setTimeout(() => document.getElementById(id).classList.add('show'), d));
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════
+buildEarthTex();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

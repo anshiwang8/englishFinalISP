@@ -1,0 +1,828 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "cosmic_reveal_sequence",
+        "label": "Cosmic Reveal Sequence",
+        "nodes": [
+          "index_animation_timeline",
+          "index_paper_dissolve_transition",
+          "index_draw_earth"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "index.html"
+      },
+      {
+        "id": "canvas_draw_pipeline",
+        "label": "Canvas Draw Pipeline",
+        "nodes": [
+          "index_main_loop",
+          "index_draw_nebulae",
+          "index_draw_stars",
+          "index_draw_constellations",
+          "index_draw_earth",
+          "index_draw_ink",
+          "index_draw_paper",
+          "index_draw_lens"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "index.html"
+      },
+      {
+        "id": "depth_theme_trinity",
+        "label": "Depth Theme \u2014 Language, Stars, Earth",
+        "nodes": [
+          "index_wittgenstein_quote",
+          "index_constellations_depth",
+          "index_eng4u_isp"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.75,
+        "source_file": "index.html"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "ENG4U ISP Landing Page",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "1-913",
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "index_html_page",
+      "community": 3,
+      "norm_label": "eng4u isp landing page"
+    },
+    {
+      "label": "Canvas Rendering Engine",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "179-910",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_canvas_engine",
+      "community": 3,
+      "norm_label": "canvas rendering engine"
+    },
+    {
+      "label": "Animation Timeline (TL)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "282-290",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_animation_timeline",
+      "community": 2,
+      "norm_label": "animation timeline (tl)"
+    },
+    {
+      "label": "Earth Texture Builder",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "297-509",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_earth_texture",
+      "community": 1,
+      "norm_label": "earth texture builder"
+    },
+    {
+      "label": "drawEarth Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "533-640",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_earth",
+      "community": 1,
+      "norm_label": "drawearth function"
+    },
+    {
+      "label": "drawNebulae Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "645-667",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_nebulae",
+      "community": 0,
+      "norm_label": "drawnebulae function"
+    },
+    {
+      "label": "drawStars Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "672-700",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_stars",
+      "community": 0,
+      "norm_label": "drawstars function"
+    },
+    {
+      "label": "drawConstellations Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "705-726",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_constellations",
+      "community": 0,
+      "norm_label": "drawconstellations function"
+    },
+    {
+      "label": "drawPaper Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "740-785",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_paper",
+      "community": 1,
+      "norm_label": "drawpaper function"
+    },
+    {
+      "label": "Ink Particles System",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "259-277",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_ink_particles",
+      "community": 2,
+      "norm_label": "ink particles system"
+    },
+    {
+      "label": "drawInk Function",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "790-813",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_ink",
+      "community": 0,
+      "norm_label": "drawink function"
+    },
+    {
+      "label": "Custom Cursor System",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "192-203",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_cursor_system",
+      "community": 4,
+      "norm_label": "custom cursor system"
+    },
+    {
+      "label": "drawLens (Cursor Lens Effect)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "818-827",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_draw_lens",
+      "community": 4,
+      "norm_label": "drawlens (cursor lens effect)"
+    },
+    {
+      "label": "Star Field with Glyphs",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "216-231",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_star_field",
+      "community": 0,
+      "norm_label": "star field with glyphs"
+    },
+    {
+      "label": "DEPTH Constellation Spelling",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "237-254",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_constellations_depth",
+      "community": 0,
+      "norm_label": "depth constellation spelling"
+    },
+    {
+      "label": "Main Animation Loop (frame)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "832-896",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_main_loop",
+      "community": 0,
+      "norm_label": "main animation loop (frame)"
+    },
+    {
+      "label": "Hero Section (Title/Author Text)",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "163-168",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_hero_section",
+      "community": 2,
+      "norm_label": "hero section (title/author text)"
+    },
+    {
+      "label": "revealHero Text Animation",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "901-904",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_reveal_hero",
+      "community": 2,
+      "norm_label": "revealhero text animation"
+    },
+    {
+      "label": "Navigation Bar",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "151-161",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_nav",
+      "community": 3,
+      "norm_label": "navigation bar"
+    },
+    {
+      "label": "Scroll Cue Indicator",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "170-173",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_scroll_cue",
+      "community": 2,
+      "norm_label": "scroll cue indicator"
+    },
+    {
+      "label": "City Lights Array",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "512-528",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_city_lights",
+      "community": 1,
+      "norm_label": "city lights array"
+    },
+    {
+      "label": "Wittgenstein Quote on Language",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "768-770",
+      "source_url": null,
+      "captured_at": null,
+      "author": "Ludwig Wittgenstein",
+      "contributor": null,
+      "id": "index_wittgenstein_quote",
+      "community": 1,
+      "norm_label": "wittgenstein quote on language"
+    },
+    {
+      "label": "Math Utility Functions (easeOut, lerp, clamp, inv)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": "208-211",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_math_utils",
+      "community": 0,
+      "norm_label": "math utility functions (easeout, lerp, clamp, inv)"
+    },
+    {
+      "label": "Paper-to-Cosmos Dissolve Transition",
+      "file_type": "rationale",
+      "source_file": "index.html",
+      "source_location": "841-844",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "The paper page fades and ink particles scatter outward as the animation progresses, symbolising the transition from written/surface-level reading to a vast cosmic perspective \u2014 mirroring the course theme of looking beyond the surface.",
+      "id": "index_paper_dissolve_transition",
+      "community": 1,
+      "norm_label": "paper-to-cosmos dissolve transition"
+    },
+    {
+      "label": "ENG4U Independent Study Project",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "164",
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "index_eng4u_isp",
+      "community": 3,
+      "norm_label": "eng4u independent study project"
+    }
+  ],
+  "links": [
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "147",
+      "weight": 1.0,
+      "source": "index_html_page",
+      "target": "index_canvas_engine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "164",
+      "weight": 1.0,
+      "source": "index_html_page",
+      "target": "index_eng4u_isp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "163-168",
+      "weight": 1.0,
+      "source": "index_html_page",
+      "target": "index_hero_section"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "151-161",
+      "weight": 1.0,
+      "source": "index_html_page",
+      "target": "index_nav"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "index.html",
+      "source_location": "179-910",
+      "weight": 0.9,
+      "source": "index_canvas_engine",
+      "target": "index_main_loop"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "845",
+      "weight": 1.0,
+      "source": "index_animation_timeline",
+      "target": "index_ink_particles"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "847-851",
+      "weight": 1.0,
+      "source": "index_animation_timeline",
+      "target": "index_reveal_hero"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "853",
+      "weight": 1.0,
+      "source": "index_animation_timeline",
+      "target": "index_scroll_cue"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "839-844",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_animation_timeline"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "572-574",
+      "weight": 1.0,
+      "source": "index_draw_earth",
+      "target": "index_earth_texture"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "588",
+      "weight": 1.0,
+      "source": "index_draw_earth",
+      "target": "index_city_lights"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "545",
+      "weight": 1.0,
+      "source": "index_draw_earth",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "880",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_earth"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "841-844",
+      "weight": 0.8,
+      "source": "index_paper_dissolve_transition",
+      "target": "index_draw_earth"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "index.html",
+      "source_location": "645-667",
+      "weight": 0.7,
+      "source": "index_draw_nebulae",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "875",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_nebulae"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "677",
+      "weight": 1.0,
+      "source": "index_draw_stars",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "675",
+      "weight": 1.0,
+      "source": "index_draw_stars",
+      "target": "index_star_field"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "876",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_stars"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "237-254",
+      "weight": 1.0,
+      "source": "index_draw_constellations",
+      "target": "index_constellations_depth"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "707",
+      "weight": 1.0,
+      "source": "index_draw_constellations",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "877",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_constellations"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "761",
+      "weight": 1.0,
+      "source": "index_draw_paper",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "768-770",
+      "weight": 1.0,
+      "source": "index_draw_paper",
+      "target": "index_wittgenstein_quote"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "884",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_paper"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "index.html",
+      "source_location": "841-844",
+      "weight": 0.9,
+      "source": "index_paper_dissolve_transition",
+      "target": "index_draw_paper"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "793",
+      "weight": 1.0,
+      "source": "index_draw_ink",
+      "target": "index_ink_particles"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "index.html",
+      "source_location": "841-844",
+      "weight": 0.9,
+      "source": "index_paper_dissolve_transition",
+      "target": "index_ink_particles"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "797-806",
+      "weight": 1.0,
+      "source": "index_draw_ink",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "882",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_ink"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "821",
+      "weight": 1.0,
+      "source": "index_cursor_system",
+      "target": "index_draw_lens"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "894",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_draw_lens"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "219-231",
+      "weight": 0.8,
+      "source": "index_star_field",
+      "target": "index_constellations_depth"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "index.html",
+      "source_location": "235-236",
+      "weight": 0.7,
+      "source": "index_constellations_depth",
+      "target": "index_eng4u_isp"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.6,
+      "source": "index_wittgenstein_quote",
+      "target": "index_constellations_depth"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "839-843",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_math_utils"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "851",
+      "weight": 1.0,
+      "source": "index_main_loop",
+      "target": "index_reveal_hero"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "902-903",
+      "weight": 1.0,
+      "source": "index_reveal_hero",
+      "target": "index_hero_section"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "152-160",
+      "weight": 1.0,
+      "source": "index_nav",
+      "target": "index_eng4u_isp"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "768-770",
+      "weight": 0.8,
+      "source": "index_wittgenstein_quote",
+      "target": "index_eng4u_isp"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "cosmic_reveal_sequence",
+      "label": "Cosmic Reveal Sequence",
+      "nodes": [
+        "index_animation_timeline",
+        "index_paper_dissolve_transition",
+        "index_draw_earth"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html"
+    },
+    {
+      "id": "canvas_draw_pipeline",
+      "label": "Canvas Draw Pipeline",
+      "nodes": [
+        "index_main_loop",
+        "index_draw_nebulae",
+        "index_draw_stars",
+        "index_draw_constellations",
+        "index_draw_earth",
+        "index_draw_ink",
+        "index_draw_paper",
+        "index_draw_lens"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html"
+    },
+    {
+      "id": "depth_theme_trinity",
+      "label": "Depth Theme \u2014 Language, Stars, Earth",
+      "nodes": [
+        "index_wittgenstein_quote",
+        "index_constellations_depth",
+        "index_eng4u_isp"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "index.html"
+    }
+  ]
+}
