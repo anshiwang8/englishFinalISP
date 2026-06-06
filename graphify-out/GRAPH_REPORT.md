@@ -1,89 +1,105 @@
 # Graph Report - .  (2026-06-06)
 
 ## Corpus Check
-- Corpus is ~11,305 words - fits in a single context window. You may not need a graph.
+- Corpus is ~13,997 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 25 nodes · 40 edges · 5 communities
-- Extraction: 62% EXTRACTED · 38% INFERRED · 0% AMBIGUOUS · INFERRED: 15 edges (avg confidence: 0.85)
-- Token cost: 49,595 input · 0 output
+- 39 nodes · 69 edges · 9 communities (8 shown, 1 thin omitted)
+- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.77)
+- Token cost: 106,235 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Lenses & Interpretation|Lenses & Interpretation]]
-- [[_COMMUNITY_Converging Skills (Conclusion)|Converging Skills (Conclusion)]]
-- [[_COMMUNITY_Argumentation & Persuasion|Argumentation & Persuasion]]
-- [[_COMMUNITY_Site Shell & Bookends|Site Shell & Bookends]]
-- [[_COMMUNITY_Drama & Motive|Drama & Motive]]
+- [[_COMMUNITY_WebGL Earth Rendering|WebGL Earth Rendering]]
+- [[_COMMUNITY_Lens & Prism Optics Scenes|Lens & Prism Optics Scenes]]
+- [[_COMMUNITY_Argumentation Auditorium|Argumentation Auditorium]]
+- [[_COMMUNITY_Central Thesis & Conclusion|Central Thesis & Conclusion]]
+- [[_COMMUNITY_Cosmic Intro Background|Cosmic Intro Background]]
+- [[_COMMUNITY_Literary Criticism & Navigation|Literary Criticism & Navigation]]
+- [[_COMMUNITY_Argumentation Theme & Echoes|Argumentation Theme & Echoes]]
+- [[_COMMUNITY_Drama Investigation Room|Drama Investigation Room]]
+- [[_COMMUNITY_Custom Cursor|Custom Cursor]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Thesis: Look Beyond the Surface` - 10 edges
-2. `ENG4U English ISP Portfolio Site` - 7 edges
-3. `Argumentation Page` - 6 edges
-4. `Literary Criticism Page` - 6 edges
-5. `Book Club Page` - 6 edges
-6. `Drama / Hamilton Page` - 6 edges
-7. `Conclusion Scene: Cosmic Convergence Lens` - 6 edges
-8. `Conclusion Page` - 3 edges
-9. `Perspective` - 3 edges
-10. `Understanding` - 3 edges
+1. `Unit Echo Nodes / Glyphs (CONC_NODES)` - 9 edges
+2. `Canvas Main Render Loop (frame)` - 8 edges
+3. `ENG4U Independent Study Project (Presentation)` - 7 edges
+4. `Look Beyond the Surface (Central Thesis)` - 7 edges
+5. `Navigation / Page-Switching System` - 7 edges
+6. `Intro Scene (Cosmic Starfield Hero)` - 7 edges
+7. `Argumentation Scene (Cinematic Auditorium)` - 6 edges
+8. `Literary Criticism Scene (Lens-Space)` - 6 edges
+9. `Book Club Scene (Prism of Interpretation)` - 6 edges
+10. `Drama / Hamilton Scene (Investigation Room)` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Argumentation Page` --conceptually_related_to--> `Thesis: Look Beyond the Surface`  [INFERRED]
-  index.html → index.html  _Bridges community 0 → community 2_
-- `Drama / Hamilton Page` --conceptually_related_to--> `Thesis: Look Beyond the Surface`  [INFERRED]
-  index.html → index.html  _Bridges community 0 → community 4_
-- `Literary Criticism Scene: Floating Circular Glass Lenses` --semantically_similar_to--> `Conclusion Scene: Cosmic Convergence Lens`  [INFERRED] [semantically similar]
-  index.html → index.html  _Bridges community 0 → community 1_
-- `Argumentation Page` --references--> `ENG4U English ISP Portfolio Site`  [EXTRACTED]
-  index.html → index.html  _Bridges community 3 → community 2_
-- `Book Club Page` --references--> `ENG4U English ISP Portfolio Site`  [EXTRACTED]
-  index.html → index.html  _Bridges community 3 → community 0_
+- `Prism / Spectrum Dispersion (drawPrism)` --conceptually_related_to--> `Critical Lenses (Marxist / Feminist / Psychoanalytic)`  [INFERRED]
+  index.html → index.html  _Bridges community 5 → community 1_
+- `Unit Echo Nodes / Glyphs (CONC_NODES)` --semantically_similar_to--> `Floating Persuasion Words (drawArgFragments)`  [INFERRED] [semantically similar]
+  index.html → index.html  _Bridges community 2 → community 6_
+- `Unit Echo Nodes / Glyphs (CONC_NODES)` --semantically_similar_to--> `Glass Lens Cards (drawLensCard)`  [INFERRED] [semantically similar]
+  index.html → index.html  _Bridges community 1 → community 6_
+- `Unit Echo Nodes / Glyphs (CONC_NODES)` --semantically_similar_to--> `Red String Connections (drawRedStrings)`  [INFERRED] [semantically similar]
+  index.html → index.html  _Bridges community 7 → community 6_
+- `ENG4U Independent Study Project (Presentation)` --references--> `Argumentation Scene (Cinematic Auditorium)`  [EXTRACTED]
+  index.html → index.html  _Bridges community 3 → community 6_
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **Four Unit Takeaways Forming the Thesis** — englsihisp_index_look_beyond_the_words, englsihisp_index_look_beyond_a_single_interpretation, englsihisp_index_look_beyond_my_first_understanding, englsihisp_index_look_beyond_actions_and_dialogue, englsihisp_index_look_beyond_the_surface [INFERRED 0.85]
-- **Four Conclusion Keywords Converging on the Central Lens** — englsihisp_index_persuasion, englsihisp_index_perspective, englsihisp_index_understanding, englsihisp_index_motivation, englsihisp_index_scene_convergence_lens [EXTRACTED 0.95]
+- **WebGL Earth Rendering Pipeline** — englsihisp_index_rotating_earth, englsihisp_index_earthgen, englsihisp_index_daynight_shader, englsihisp_index_atmosphere_glow, englsihisp_index_cloud_layer, englsihisp_index_perlin_noise [EXTRACTED 1.00]
+- **Five Unit Scenes Embodying the Central Thesis** — englsihisp_index_argumentation_scene, englsihisp_index_literary_scene, englsihisp_index_bookclub_scene, englsihisp_index_drama_scene, englsihisp_index_conclusion_scene, englsihisp_index_central_thesis [EXTRACTED 1.00]
+- **Conclusion Converges the Four Unit Echoes** — englsihisp_index_conc_lens, englsihisp_index_conc_nodes, englsihisp_index_argumentation_scene, englsihisp_index_literary_scene, englsihisp_index_bookclub_scene, englsihisp_index_drama_scene [EXTRACTED 1.00]
 
-## Communities (5 total, 0 thin omitted)
+## Communities (9 total, 1 thin omitted)
 
-### Community 0 - "Lenses & Interpretation"
-Cohesion: 0.36
-Nodes (8): Book Club Page, Critical Lenses (Marxist, Feminist, Psychoanalytic), Literary Criticism Page, Look Beyond a Single Interpretation, Look Beyond My First Understanding, Thesis: Look Beyond the Surface, Literary Criticism Scene: Floating Circular Glass Lenses, Book Club Scene: Prism Dispersing White Light into a Spectrum
+### Community 0 - "WebGL Earth Rendering"
+Cohesion: 0.38
+Nodes (7): Fresnel Atmosphere Glow, Static 2D Canvas Earth (drawEarth, deprecated), Cloud Shell Layer, Day/Night Earth Shader, Procedural Earth Texture Generator (EarthGen), Perlin Noise / fBm Generator, Rotating WebGL Earth
 
-### Community 1 - "Converging Skills (Conclusion)"
-Cohesion: 0.50
-Nodes (5): Motivation, Perspective, Persuasion, Conclusion Scene: Cosmic Convergence Lens, Understanding
+### Community 1 - "Lens & Prism Optics Scenes"
+Cohesion: 0.33
+Nodes (6): Prism-Space Renderer (drawBookSpace), Central Convergence Lens (drawConcLens), Glass Lens Cards (drawLensCard), Lens-Space Renderer (drawLensSpace), Prism / Spectrum Dispersion (drawPrism), Refracted Central Orb (drawRefractedOrb)
 
-### Community 2 - "Argumentation & Persuasion"
-Cohesion: 0.50
-Nodes (4): Argumentation Page, Look Beyond the Words, Persuasive Techniques (TED Talks, Rick Mercer Rants), Argumentation Scene: Cinematic Auditorium with Backlit Speaker and Ripples of Influence
+### Community 2 - "Argumentation Auditorium"
+Cohesion: 0.40
+Nodes (5): Rim-Lit Audience (drawArgAudience), Floating Persuasion Words (drawArgFragments), Ripples of Influence (drawArgRipples), Backlit Speaker Silhouette (drawArgSpeaker), Auditorium Renderer (drawAuditorium)
 
-### Community 3 - "Site Shell & Bookends"
-Cohesion: 0.50
-Nodes (4): Conclusion Page, Intro Page, Intro Scene: Rotating Earth in Space, ENG4U English ISP Portfolio Site
+### Community 3 - "Central Thesis & Conclusion"
+Cohesion: 0.60
+Nodes (5): Look Beyond the Surface (Central Thesis), Conclusion Scene (Cosmic Convergence), Drama / Hamilton Scene (Investigation Room), ENG4U Independent Study Project (Presentation), Theatrical Devices (Drama Theme)
 
-### Community 4 - "Drama & Motive"
-Cohesion: 0.50
-Nodes (4): Drama / Hamilton Page, Look Beyond Actions and Dialogue, Drama Scene: Cork Investigation Board with Red Strings, Subtext, Motive and Theatrical Devices
+### Community 4 - "Cosmic Intro Background"
+Cohesion: 0.60
+Nodes (5): Constellations (drawConstellations), Intro Scene (Cosmic Starfield Hero), Nebulae Background (drawNebulae), Canvas Main Render Loop (frame), 2D Starfield (buildStars / drawStars)
+
+### Community 5 - "Literary Criticism & Navigation"
+Cohesion: 0.67
+Nodes (4): Book Club Scene (Prism of Interpretation), Critical Lenses (Marxist / Feminist / Psychoanalytic), Literary Criticism Scene (Lens-Space), Navigation / Page-Switching System
+
+### Community 6 - "Argumentation Theme & Echoes"
+Cohesion: 0.67
+Nodes (3): Argumentation Scene (Cinematic Auditorium), Unit Echo Nodes / Glyphs (CONC_NODES), Persuasive Techniques (Argumentation Theme)
+
+### Community 7 - "Drama Investigation Room"
+Cohesion: 0.67
+Nodes (3): Cork Investigation Board (drawCorkBoard), Investigation Room Renderer (drawDramaRoom), Red String Connections (drawRedStrings)
 
 ## Knowledge Gaps
-- **6 isolated node(s):** `Persuasive Techniques (TED Talks, Rick Mercer Rants)`, `Subtext, Motive and Theatrical Devices`, `Intro Scene: Rotating Earth in Space`, `Argumentation Scene: Cinematic Auditorium with Backlit Speaker and Ripples of Influence`, `Book Club Scene: Prism Dispersing White Light into a Spectrum` (+1 more)
+- **10 isolated node(s):** `Custom Cursor (ring + dot)`, `Persuasive Techniques (Argumentation Theme)`, `Theatrical Devices (Drama Theme)`, `Fresnel Atmosphere Glow`, `Perlin Noise / fBm Generator` (+5 more)
   These have ≤1 connection - possible missing edges or undocumented components.
+- **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Thesis: Look Beyond the Surface` connect `Lenses & Interpretation` to `Argumentation & Persuasion`, `Site Shell & Bookends`, `Drama & Motive`?**
-  _High betweenness centrality (0.340) - this node is a cross-community bridge._
-- **Why does `ENG4U English ISP Portfolio Site` connect `Site Shell & Bookends` to `Lenses & Interpretation`, `Argumentation & Persuasion`, `Drama & Motive`?**
-  _High betweenness centrality (0.279) - this node is a cross-community bridge._
-- **Why does `Argumentation Page` connect `Argumentation & Persuasion` to `Lenses & Interpretation`, `Converging Skills (Conclusion)`, `Site Shell & Bookends`?**
-  _High betweenness centrality (0.215) - this node is a cross-community bridge._
-- **Are the 8 inferred relationships involving `Thesis: Look Beyond the Surface` (e.g. with `Argumentation Page` and `Book Club Page`) actually correct?**
-  _`Thesis: Look Beyond the Surface` has 8 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `Book Club Page` (e.g. with `Thesis: Look Beyond the Surface` and `Critical Lenses (Marxist, Feminist, Psychoanalytic)`) actually correct?**
-  _`Book Club Page` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Persuasive Techniques (TED Talks, Rick Mercer Rants)`, `Subtext, Motive and Theatrical Devices`, `Intro Scene: Rotating Earth in Space` to the rest of the system?**
-  _6 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `Intro Scene (Cosmic Starfield Hero)` connect `Cosmic Intro Background` to `WebGL Earth Rendering`, `Central Thesis & Conclusion`, `Literary Criticism & Navigation`?**
+  _High betweenness centrality (0.339) - this node is a cross-community bridge._
+- **Why does `Rotating WebGL Earth` connect `WebGL Earth Rendering` to `Cosmic Intro Background`?**
+  _High betweenness centrality (0.278) - this node is a cross-community bridge._
+- **Why does `Canvas Main Render Loop (frame)` connect `Cosmic Intro Background` to `Lens & Prism Optics Scenes`, `Argumentation Auditorium`, `Literary Criticism & Navigation`, `Drama Investigation Room`?**
+  _High betweenness centrality (0.220) - this node is a cross-community bridge._
+- **Are the 4 inferred relationships involving `Unit Echo Nodes / Glyphs (CONC_NODES)` (e.g. with `Floating Persuasion Words (drawArgFragments)` and `Glass Lens Cards (drawLensCard)`) actually correct?**
+  _`Unit Echo Nodes / Glyphs (CONC_NODES)` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `Custom Cursor (ring + dot)`, `Persuasive Techniques (Argumentation Theme)`, `Theatrical Devices (Drama Theme)` to the rest of the system?**
+  _10 weakly-connected nodes found - possible documentation gaps or missing edges._

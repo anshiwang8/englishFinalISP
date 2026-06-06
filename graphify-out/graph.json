@@ -4,40 +4,58 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "englsihisp_index_thesis_convergence",
-        "label": "Four Unit Takeaways Forming the Thesis",
+        "id": "earth_rendering_pipeline",
+        "label": "WebGL Earth Rendering Pipeline",
         "nodes": [
-          "englsihisp_index_look_beyond_the_words",
-          "englsihisp_index_look_beyond_a_single_interpretation",
-          "englsihisp_index_look_beyond_my_first_understanding",
-          "englsihisp_index_look_beyond_actions_and_dialogue",
-          "englsihisp_index_look_beyond_the_surface"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "index.html"
-      },
-      {
-        "id": "englsihisp_index_keywords_converge_on_lens",
-        "label": "Four Conclusion Keywords Converging on the Central Lens",
-        "nodes": [
-          "englsihisp_index_persuasion",
-          "englsihisp_index_perspective",
-          "englsihisp_index_understanding",
-          "englsihisp_index_motivation",
-          "englsihisp_index_scene_convergence_lens"
+          "englsihisp_index_rotating_earth",
+          "englsihisp_index_earthgen",
+          "englsihisp_index_daynight_shader",
+          "englsihisp_index_atmosphere_glow",
+          "englsihisp_index_cloud_layer",
+          "englsihisp_index_perlin_noise"
         ],
         "relation": "participate_in",
         "confidence": "EXTRACTED",
-        "confidence_score": 0.95,
+        "confidence_score": 1.0,
+        "source_file": "index.html"
+      },
+      {
+        "id": "unit_scenes_thesis_chain",
+        "label": "Five Unit Scenes Embodying the Central Thesis",
+        "nodes": [
+          "englsihisp_index_argumentation_scene",
+          "englsihisp_index_literary_scene",
+          "englsihisp_index_bookclub_scene",
+          "englsihisp_index_drama_scene",
+          "englsihisp_index_conclusion_scene",
+          "englsihisp_index_central_thesis"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "index.html"
+      },
+      {
+        "id": "conclusion_convergence",
+        "label": "Conclusion Converges the Four Unit Echoes",
+        "nodes": [
+          "englsihisp_index_conc_lens",
+          "englsihisp_index_conc_nodes",
+          "englsihisp_index_argumentation_scene",
+          "englsihisp_index_literary_scene",
+          "englsihisp_index_bookclub_scene",
+          "englsihisp_index_drama_scene"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
         "source_file": "index.html"
       }
     ]
   },
   "nodes": [
     {
-      "label": "ENG4U English ISP Portfolio Site",
+      "label": "ENG4U Independent Study Project (Presentation)",
       "file_type": "document",
       "source_file": "index.html",
       "source_location": null,
@@ -45,321 +63,503 @@
       "captured_at": null,
       "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_site",
+      "id": "englsihisp_index_presentation",
       "community": 3,
-      "norm_label": "eng4u english isp portfolio site"
+      "norm_label": "eng4u independent study project (presentation)"
     },
     {
-      "label": "Thesis: Look Beyond the Surface",
+      "label": "Look Beyond the Surface (Central Thesis)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_look_beyond_the_surface",
-      "community": 0,
-      "norm_label": "thesis: look beyond the surface"
-    },
-    {
-      "label": "Intro Page",
-      "file_type": "document",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_intro",
+      "id": "englsihisp_index_central_thesis",
       "community": 3,
-      "norm_label": "intro page"
+      "norm_label": "look beyond the surface (central thesis)"
     },
     {
-      "label": "Argumentation Page",
-      "file_type": "document",
+      "label": "Navigation / Page-Switching System",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_argumentation",
-      "community": 2,
-      "norm_label": "argumentation page"
+      "id": "englsihisp_index_nav_system",
+      "community": 5,
+      "norm_label": "navigation / page-switching system"
     },
     {
-      "label": "Literary Criticism Page",
-      "file_type": "document",
+      "label": "Canvas Main Render Loop (frame)",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_literary_criticism",
-      "community": 0,
-      "norm_label": "literary criticism page"
-    },
-    {
-      "label": "Book Club Page",
-      "file_type": "document",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_book_club",
-      "community": 0,
-      "norm_label": "book club page"
-    },
-    {
-      "label": "Drama / Hamilton Page",
-      "file_type": "document",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_drama_hamilton",
+      "id": "englsihisp_index_render_loop",
       "community": 4,
-      "norm_label": "drama / hamilton page"
+      "norm_label": "canvas main render loop (frame)"
     },
     {
-      "label": "Conclusion Page",
-      "file_type": "document",
+      "label": "Custom Cursor (ring + dot)",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_conclusion",
-      "community": 3,
-      "norm_label": "conclusion page"
+      "id": "englsihisp_index_custom_cursor",
+      "community": 8,
+      "norm_label": "custom cursor (ring + dot)"
     },
     {
-      "label": "Look Beyond the Words",
+      "label": "Intro Scene (Cosmic Starfield Hero)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_look_beyond_the_words",
-      "community": 2,
-      "norm_label": "look beyond the words"
-    },
-    {
-      "label": "Look Beyond a Single Interpretation",
-      "file_type": "concept",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_look_beyond_a_single_interpretation",
-      "community": 0,
-      "norm_label": "look beyond a single interpretation"
-    },
-    {
-      "label": "Look Beyond My First Understanding",
-      "file_type": "concept",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_look_beyond_my_first_understanding",
-      "community": 0,
-      "norm_label": "look beyond my first understanding"
-    },
-    {
-      "label": "Look Beyond Actions and Dialogue",
-      "file_type": "concept",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_look_beyond_actions_and_dialogue",
+      "id": "englsihisp_index_intro_scene",
       "community": 4,
-      "norm_label": "look beyond actions and dialogue"
+      "norm_label": "intro scene (cosmic starfield hero)"
     },
     {
-      "label": "Persuasion",
+      "label": "Argumentation Scene (Cinematic Auditorium)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_persuasion",
-      "community": 1,
-      "norm_label": "persuasion"
+      "id": "englsihisp_index_argumentation_scene",
+      "community": 6,
+      "norm_label": "argumentation scene (cinematic auditorium)"
     },
     {
-      "label": "Perspective",
+      "label": "Literary Criticism Scene (Lens-Space)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_perspective",
-      "community": 1,
-      "norm_label": "perspective"
+      "id": "englsihisp_index_literary_scene",
+      "community": 5,
+      "norm_label": "literary criticism scene (lens-space)"
     },
     {
-      "label": "Understanding",
+      "label": "Book Club Scene (Prism of Interpretation)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_understanding",
-      "community": 1,
-      "norm_label": "understanding"
+      "id": "englsihisp_index_bookclub_scene",
+      "community": 5,
+      "norm_label": "book club scene (prism of interpretation)"
     },
     {
-      "label": "Motivation",
+      "label": "Drama / Hamilton Scene (Investigation Room)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_motivation",
-      "community": 1,
-      "norm_label": "motivation"
+      "id": "englsihisp_index_drama_scene",
+      "community": 3,
+      "norm_label": "drama / hamilton scene (investigation room)"
     },
     {
-      "label": "Critical Lenses (Marxist, Feminist, Psychoanalytic)",
+      "label": "Conclusion Scene (Cosmic Convergence)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_critical_lenses",
-      "community": 0,
-      "norm_label": "critical lenses (marxist, feminist, psychoanalytic)"
+      "id": "englsihisp_index_conclusion_scene",
+      "community": 3,
+      "norm_label": "conclusion scene (cosmic convergence)"
     },
     {
-      "label": "Persuasive Techniques (TED Talks, Rick Mercer Rants)",
+      "label": "Persuasive Techniques (Argumentation Theme)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
       "id": "englsihisp_index_persuasive_techniques",
-      "community": 2,
-      "norm_label": "persuasive techniques (ted talks, rick mercer rants)"
+      "community": 6,
+      "norm_label": "persuasive techniques (argumentation theme)"
     },
     {
-      "label": "Subtext, Motive and Theatrical Devices",
+      "label": "Critical Lenses (Marxist / Feminist / Psychoanalytic)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_subtext_and_motive",
-      "community": 4,
-      "norm_label": "subtext, motive and theatrical devices"
+      "id": "englsihisp_index_critical_lenses",
+      "community": 5,
+      "norm_label": "critical lenses (marxist / feminist / psychoanalytic)"
     },
     {
-      "label": "Intro Scene: Rotating Earth in Space",
+      "label": "Theatrical Devices (Drama Theme)",
       "file_type": "concept",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_scene_earth",
+      "id": "englsihisp_index_theatrical_devices",
       "community": 3,
-      "norm_label": "intro scene: rotating earth in space"
+      "norm_label": "theatrical devices (drama theme)"
     },
     {
-      "label": "Argumentation Scene: Cinematic Auditorium with Backlit Speaker and Ripples of Influence",
-      "file_type": "concept",
+      "label": "Rotating WebGL Earth",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_scene_auditorium",
-      "community": 2,
-      "norm_label": "argumentation scene: cinematic auditorium with backlit speaker and ripples of influence"
-    },
-    {
-      "label": "Literary Criticism Scene: Floating Circular Glass Lenses",
-      "file_type": "concept",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "englsihisp_index_scene_glass_lenses",
+      "id": "englsihisp_index_rotating_earth",
       "community": 0,
-      "norm_label": "literary criticism scene: floating circular glass lenses"
+      "norm_label": "rotating webgl earth"
     },
     {
-      "label": "Book Club Scene: Prism Dispersing White Light into a Spectrum",
-      "file_type": "concept",
+      "label": "Procedural Earth Texture Generator (EarthGen)",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_scene_prism",
+      "id": "englsihisp_index_earthgen",
       "community": 0,
-      "norm_label": "book club scene: prism dispersing white light into a spectrum"
+      "norm_label": "procedural earth texture generator (earthgen)"
     },
     {
-      "label": "Drama Scene: Cork Investigation Board with Red Strings",
-      "file_type": "concept",
+      "label": "Day/Night Earth Shader",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_scene_investigation_board",
+      "id": "englsihisp_index_daynight_shader",
+      "community": 0,
+      "norm_label": "day/night earth shader"
+    },
+    {
+      "label": "Fresnel Atmosphere Glow",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_atmosphere_glow",
+      "community": 0,
+      "norm_label": "fresnel atmosphere glow"
+    },
+    {
+      "label": "Cloud Shell Layer",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_cloud_layer",
+      "community": 0,
+      "norm_label": "cloud shell layer"
+    },
+    {
+      "label": "Perlin Noise / fBm Generator",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_perlin_noise",
+      "community": 0,
+      "norm_label": "perlin noise / fbm generator"
+    },
+    {
+      "label": "2D Starfield (buildStars / drawStars)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_starfield_2d",
       "community": 4,
-      "norm_label": "drama scene: cork investigation board with red strings"
+      "norm_label": "2d starfield (buildstars / drawstars)"
     },
     {
-      "label": "Conclusion Scene: Cosmic Convergence Lens",
-      "file_type": "concept",
+      "label": "Nebulae Background (drawNebulae)",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
-      "author": null,
+      "author": "An Shi Wang",
       "contributor": null,
-      "id": "englsihisp_index_scene_convergence_lens",
+      "id": "englsihisp_index_nebulae",
+      "community": 4,
+      "norm_label": "nebulae background (drawnebulae)"
+    },
+    {
+      "label": "Constellations (drawConstellations)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_constellations",
+      "community": 4,
+      "norm_label": "constellations (drawconstellations)"
+    },
+    {
+      "label": "Static 2D Canvas Earth (drawEarth, deprecated)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_canvas_earth_2d",
+      "community": 0,
+      "norm_label": "static 2d canvas earth (drawearth, deprecated)"
+    },
+    {
+      "label": "Auditorium Renderer (drawAuditorium)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_auditorium",
+      "community": 2,
+      "norm_label": "auditorium renderer (drawauditorium)"
+    },
+    {
+      "label": "Backlit Speaker Silhouette (drawArgSpeaker)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_arg_speaker",
+      "community": 2,
+      "norm_label": "backlit speaker silhouette (drawargspeaker)"
+    },
+    {
+      "label": "Rim-Lit Audience (drawArgAudience)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_arg_audience",
+      "community": 2,
+      "norm_label": "rim-lit audience (drawargaudience)"
+    },
+    {
+      "label": "Ripples of Influence (drawArgRipples)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_arg_ripples",
+      "community": 2,
+      "norm_label": "ripples of influence (drawargripples)"
+    },
+    {
+      "label": "Floating Persuasion Words (drawArgFragments)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_arg_fragments",
+      "community": 2,
+      "norm_label": "floating persuasion words (drawargfragments)"
+    },
+    {
+      "label": "Lens-Space Renderer (drawLensSpace)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_lens_space",
       "community": 1,
-      "norm_label": "conclusion scene: cosmic convergence lens"
+      "norm_label": "lens-space renderer (drawlensspace)"
+    },
+    {
+      "label": "Glass Lens Cards (drawLensCard)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_lens_card",
+      "community": 1,
+      "norm_label": "glass lens cards (drawlenscard)"
+    },
+    {
+      "label": "Refracted Central Orb (drawRefractedOrb)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_refracted_orb",
+      "community": 1,
+      "norm_label": "refracted central orb (drawrefractedorb)"
+    },
+    {
+      "label": "Prism-Space Renderer (drawBookSpace)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_book_space",
+      "community": 1,
+      "norm_label": "prism-space renderer (drawbookspace)"
+    },
+    {
+      "label": "Prism / Spectrum Dispersion (drawPrism)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_prism",
+      "community": 1,
+      "norm_label": "prism / spectrum dispersion (drawprism)"
+    },
+    {
+      "label": "Investigation Room Renderer (drawDramaRoom)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_drama_room",
+      "community": 7,
+      "norm_label": "investigation room renderer (drawdramaroom)"
+    },
+    {
+      "label": "Cork Investigation Board (drawCorkBoard)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_cork_board",
+      "community": 7,
+      "norm_label": "cork investigation board (drawcorkboard)"
+    },
+    {
+      "label": "Red String Connections (drawRedStrings)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_red_strings",
+      "community": 7,
+      "norm_label": "red string connections (drawredstrings)"
+    },
+    {
+      "label": "Central Convergence Lens (drawConcLens)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_conc_lens",
+      "community": 1,
+      "norm_label": "central convergence lens (drawconclens)"
+    },
+    {
+      "label": "Unit Echo Nodes / Glyphs (CONC_NODES)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null,
+      "id": "englsihisp_index_conc_nodes",
+      "community": 6,
+      "norm_label": "unit echo nodes / glyphs (conc_nodes)"
     }
   ],
   "links": [
@@ -368,70 +568,380 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_argumentation",
-      "target": "englsihisp_index_site"
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_argumentation_scene"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_book_club",
-      "target": "englsihisp_index_site"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
-      "weight": 1.0,
-      "source": "englsihisp_index_conclusion",
-      "target": "englsihisp_index_site"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
-      "weight": 1.0,
-      "source": "englsihisp_index_drama_hamilton",
-      "target": "englsihisp_index_site"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
-      "weight": 1.0,
-      "source": "englsihisp_index_intro",
-      "target": "englsihisp_index_site"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "nav#nav-tabs",
-      "weight": 1.0,
-      "source": "englsihisp_index_literary_criticism",
-      "target": "englsihisp_index_site"
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_bookclub_scene"
     },
     {
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "#el-sub Learning to look beyond the surface",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_site",
-      "target": "englsihisp_index_look_beyond_the_surface"
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_conclusion_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_drama_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_intro_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_presentation",
+      "target": "englsihisp_index_literary_scene"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_argumentation_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_bookclub_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_conclusion_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_drama_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_intro_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_literary_scene",
+      "target": "englsihisp_index_central_thesis"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_argumentation_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_bookclub_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_conclusion_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_drama_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_intro_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_nav_system",
+      "target": "englsihisp_index_literary_scene"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_nav_system"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_auditorium"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_book_space"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_constellations"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_drama_room"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_lens_space"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_nebulae"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_render_loop",
+      "target": "englsihisp_index_starfield_2d"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_intro_scene",
+      "target": "englsihisp_index_constellations"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_intro_scene",
+      "target": "englsihisp_index_nebulae"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_intro_scene",
+      "target": "englsihisp_index_rotating_earth"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_intro_scene",
+      "target": "englsihisp_index_starfield_2d"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_argumentation_scene",
+      "target": "englsihisp_index_auditorium"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_argumentation_scene",
+      "target": "englsihisp_index_persuasive_techniques"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_argumentation_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_literary_scene"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_literary_scene",
+      "target": "englsihisp_index_critical_lenses"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_literary_scene",
+      "target": "englsihisp_index_lens_space"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_bookclub_scene",
+      "target": "englsihisp_index_book_space"
     },
     {
       "relation": "conceptually_related_to",
@@ -439,179 +949,69 @@
       "confidence_score": 0.85,
       "source_file": "index.html",
       "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_argumentation",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_book_club",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#conc-title ENG4U taught me to look deeper.",
-      "weight": 1.0,
-      "source": "englsihisp_index_conclusion",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_drama_hamilton",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_literary_criticism",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_a_single_interpretation",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_actions_and_dialogue",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_my_first_understanding",
-      "target": "englsihisp_index_look_beyond_the_surface"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_the_words",
-      "target": "englsihisp_index_look_beyond_the_surface"
+      "weight": 0.85,
+      "source": "englsihisp_index_bookclub_scene",
+      "target": "englsihisp_index_critical_lenses"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "drawEarth",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_scene_earth",
-      "target": "englsihisp_index_intro"
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_bookclub_scene"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "#arg-takeaway",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_the_words",
-      "target": "englsihisp_index_argumentation"
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_drama_scene"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_drama_scene",
+      "target": "englsihisp_index_drama_room"
     },
     {
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "CONC_NODES Persuasion -> Argumentation",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_persuasion",
-      "target": "englsihisp_index_argumentation"
+      "source": "englsihisp_index_drama_scene",
+      "target": "englsihisp_index_theatrical_devices"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_conclusion_scene",
+      "target": "englsihisp_index_conc_lens"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html",
-      "source_location": "#arg-bullets",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_persuasive_techniques",
-      "target": "englsihisp_index_argumentation"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "ARGUMENTATION CINEMATIC AUDITORIUM",
-      "weight": 1.0,
-      "source": "englsihisp_index_scene_auditorium",
-      "target": "englsihisp_index_argumentation"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#lit-bullets",
-      "weight": 1.0,
-      "source": "englsihisp_index_critical_lenses",
-      "target": "englsihisp_index_literary_criticism"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#lit-takeaway",
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_a_single_interpretation",
-      "target": "englsihisp_index_literary_criticism"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "CONC_NODES Perspective -> Literary Criticism",
-      "weight": 1.0,
-      "source": "englsihisp_index_perspective",
-      "target": "englsihisp_index_literary_criticism"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "LITERARY CRITICISM LENS-SPACE",
-      "weight": 1.0,
-      "source": "englsihisp_index_scene_glass_lenses",
-      "target": "englsihisp_index_literary_criticism"
+      "source": "englsihisp_index_conclusion_scene",
+      "target": "englsihisp_index_conc_nodes"
     },
     {
       "relation": "conceptually_related_to",
@@ -619,109 +1019,129 @@
       "confidence_score": 0.75,
       "source_file": "index.html",
       "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_critical_lenses",
-      "target": "englsihisp_index_book_club"
+      "weight": 0.75,
+      "source": "englsihisp_index_prism",
+      "target": "englsihisp_index_critical_lenses"
     },
     {
-      "relation": "rationale_for",
+      "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#book-takeaway",
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_my_first_understanding",
-      "target": "englsihisp_index_book_club"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "BOOK CLUB PRISM OF INTERPRETATION",
-      "weight": 1.0,
-      "source": "englsihisp_index_scene_prism",
-      "target": "englsihisp_index_book_club"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "CONC_NODES Understanding -> Book Club",
-      "weight": 1.0,
-      "source": "englsihisp_index_understanding",
-      "target": "englsihisp_index_book_club"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#drama-takeaway",
-      "weight": 1.0,
-      "source": "englsihisp_index_look_beyond_actions_and_dialogue",
-      "target": "englsihisp_index_drama_hamilton"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "CONC_NODES Motivation -> Drama",
-      "weight": 1.0,
-      "source": "englsihisp_index_motivation",
-      "target": "englsihisp_index_drama_hamilton"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "DRAMA / HAMILTON INVESTIGATION ROOM",
-      "weight": 1.0,
-      "source": "englsihisp_index_scene_investigation_board",
-      "target": "englsihisp_index_drama_hamilton"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "#drama-bullets",
-      "weight": 1.0,
-      "source": "englsihisp_index_subtext_and_motive",
-      "target": "englsihisp_index_drama_hamilton"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": "CONCLUSION COSMIC CONVERGENCE",
-      "weight": 1.0,
-      "source": "englsihisp_index_scene_convergence_lens",
-      "target": "englsihisp_index_conclusion"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
       "source_file": "index.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_persuasion",
-      "target": "englsihisp_index_scene_convergence_lens"
+      "source": "englsihisp_index_rotating_earth",
+      "target": "englsihisp_index_atmosphere_glow"
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "semantically_similar_to",
       "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "englsihisp_index_rotating_earth",
+      "target": "englsihisp_index_canvas_earth_2d"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "index.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_perspective",
-      "target": "englsihisp_index_scene_convergence_lens"
+      "source": "englsihisp_index_rotating_earth",
+      "target": "englsihisp_index_cloud_layer"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_rotating_earth",
+      "target": "englsihisp_index_daynight_shader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_rotating_earth",
+      "target": "englsihisp_index_earthgen"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_cloud_layer",
+      "target": "englsihisp_index_earthgen"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_daynight_shader",
+      "target": "englsihisp_index_earthgen"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_earthgen",
+      "target": "englsihisp_index_perlin_noise"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_auditorium",
+      "target": "englsihisp_index_arg_audience"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_auditorium",
+      "target": "englsihisp_index_arg_fragments"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_auditorium",
+      "target": "englsihisp_index_arg_ripples"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_auditorium",
+      "target": "englsihisp_index_arg_speaker"
     },
     {
       "relation": "semantically_similar_to",
@@ -729,29 +1149,39 @@
       "confidence_score": 0.65,
       "source_file": "index.html",
       "source_location": null,
-      "weight": 1.0,
-      "source": "englsihisp_index_perspective",
-      "target": "englsihisp_index_understanding"
+      "weight": 0.65,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_arg_fragments"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "index.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_understanding",
-      "target": "englsihisp_index_scene_convergence_lens"
+      "source": "englsihisp_index_lens_space",
+      "target": "englsihisp_index_lens_card"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "index.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_motivation",
-      "target": "englsihisp_index_scene_convergence_lens"
+      "source": "englsihisp_index_lens_space",
+      "target": "englsihisp_index_refracted_orb"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "englsihisp_index_conc_lens",
+      "target": "englsihisp_index_lens_card"
     },
     {
       "relation": "semantically_similar_to",
@@ -759,42 +1189,120 @@
       "confidence_score": 0.75,
       "source_file": "index.html",
       "source_location": null,
+      "weight": 0.75,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_lens_card"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "englsihisp_index_prism",
+      "target": "englsihisp_index_refracted_orb"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
       "weight": 1.0,
-      "source": "englsihisp_index_scene_glass_lenses",
-      "target": "englsihisp_index_scene_convergence_lens"
+      "source": "englsihisp_index_book_space",
+      "target": "englsihisp_index_prism"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.75,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_prism"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_drama_room",
+      "target": "englsihisp_index_cork_board"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "englsihisp_index_drama_room",
+      "target": "englsihisp_index_red_strings"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 0.65,
+      "source": "englsihisp_index_conc_nodes",
+      "target": "englsihisp_index_red_strings"
     }
   ],
   "hyperedges": [
     {
-      "id": "englsihisp_index_thesis_convergence",
-      "label": "Four Unit Takeaways Forming the Thesis",
+      "id": "earth_rendering_pipeline",
+      "label": "WebGL Earth Rendering Pipeline",
       "nodes": [
-        "englsihisp_index_look_beyond_the_words",
-        "englsihisp_index_look_beyond_a_single_interpretation",
-        "englsihisp_index_look_beyond_my_first_understanding",
-        "englsihisp_index_look_beyond_actions_and_dialogue",
-        "englsihisp_index_look_beyond_the_surface"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html"
-    },
-    {
-      "id": "englsihisp_index_keywords_converge_on_lens",
-      "label": "Four Conclusion Keywords Converging on the Central Lens",
-      "nodes": [
-        "englsihisp_index_persuasion",
-        "englsihisp_index_perspective",
-        "englsihisp_index_understanding",
-        "englsihisp_index_motivation",
-        "englsihisp_index_scene_convergence_lens"
+        "englsihisp_index_rotating_earth",
+        "englsihisp_index_earthgen",
+        "englsihisp_index_daynight_shader",
+        "englsihisp_index_atmosphere_glow",
+        "englsihisp_index_cloud_layer",
+        "englsihisp_index_perlin_noise"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",
-      "confidence_score": 0.95,
+      "confidence_score": 1.0,
+      "source_file": "index.html"
+    },
+    {
+      "id": "unit_scenes_thesis_chain",
+      "label": "Five Unit Scenes Embodying the Central Thesis",
+      "nodes": [
+        "englsihisp_index_argumentation_scene",
+        "englsihisp_index_literary_scene",
+        "englsihisp_index_bookclub_scene",
+        "englsihisp_index_drama_scene",
+        "englsihisp_index_conclusion_scene",
+        "englsihisp_index_central_thesis"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html"
+    },
+    {
+      "id": "conclusion_convergence",
+      "label": "Conclusion Converges the Four Unit Echoes",
+      "nodes": [
+        "englsihisp_index_conc_lens",
+        "englsihisp_index_conc_nodes",
+        "englsihisp_index_argumentation_scene",
+        "englsihisp_index_literary_scene",
+        "englsihisp_index_bookclub_scene",
+        "englsihisp_index_drama_scene"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "index.html"
     }
   ],
-  "built_at_commit": "7dbc0ee03e44ec7dd994add29e7447a99ad57197"
+  "built_at_commit": "6666343c5f9198913e70539cf6270ea4e35e21fa"
 }

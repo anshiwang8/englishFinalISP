@@ -158,11 +158,16 @@
       content: '•'; color: rgba(150,170,255,0.85); margin-right: 10px;
     }
 
-    /* ── Book Club hero ─────────────────────────────────── */
+    /* ── Book Club hero (left-aligned: text on the left, prism on the
+          centre-right of the canvas behind it) ─────────────────── */
     #hero-book {
-      justify-content: flex-start;
-      padding-top: 64px; align-items: center;
+      justify-content: center;          /* vertically centred copy */
+      align-items: flex-start;          /* pinned to the left */
+      text-align: left;
+      padding: 0 clamp(24px, 6vw, 120px);
     }
+    #hero-book > * { max-width: min(34ch, 34vw); text-align: left; }
+    #hero-book .book-bullets li { text-align: left; }
     .book-eyebrow {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.26em; text-transform: uppercase;
@@ -1446,6 +1451,7 @@ const BOOK_SPECTRUM = [
   { col: [176,116,255], label: null             },  // violet
 ];
 let bookStars = [], bookParticles = [], bookT0 = null;
+const bookReduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 function initBookScene() {
   bookT0 = null;
@@ -1470,17 +1476,19 @@ function initBookScene() {
 
 function bookPrismGeom() {
   const parX = (mx/W - 0.5), parY = (my/H - 0.5);
-  const cx = W*0.5 + parX*18;
-  const cy = H*0.52 + parY*12;
-  const h2 = H*0.27;
-  const w2 = h2*0.92;
+  // Large glass prism on the centre-right; left ~42% of the slide is kept
+  // clear for the title + explanatory copy (text overlay #hero-book).
+  const h2 = H*0.345;
+  const w2 = h2*0.95;
+  const cx = W*0.645 + parX*14;
+  const cy = H*0.50  + parY*10;
   const top = { x: cx,    y: cy-h2 };
   const bl  = { x: cx-w2, y: cy+h2 };
   const br  = { x: cx+w2, y: cy+h2 };
   return {
     cx, cy, h2, w2, top, bl, br,
-    entry: { x: (top.x+bl.x)/2, y: (top.y+bl.y)/2 },  // left face midpoint
-    exit:  { x: (top.x+br.x)/2, y: (top.y+br.y)/2 },  // right face midpoint
+    entry: { x: (top.x+bl.x)/2, y: (top.y+bl.y)/2 },  // left face midpoint — beam hits here
+    exit:  { x: (top.x+br.x)/2, y: (top.y+br.y)/2 },  // right face midpoint — spectrum leaves here
   };
 }
 
@@ -1509,8 +1517,9 @@ function drawBookBackground(t) {
     [0.50, 0.50, 0.55, '120,140,255', 0.06, 0.05],
   ];
   clouds.forEach(([fx, fy, fr, col, a, sp], i) => {
-    const dx = Math.sin(t*sp + i) * W*0.012;
-    const dy = Math.cos(t*sp*0.8 + i) * H*0.012;
+    const m = bookReduce ? 0 : 1;
+    const dx = Math.sin(t*sp + i) * W*0.012 * m;
+    const dy = Math.cos(t*sp*0.8 + i) * H*0.012 * m;
     const g = ctx.createRadialGradient(fx*W+dx, fy*H+dy, 0, fx*W+dx, fy*H+dy, fr*W);
     g.addColorStop(0,   `rgba(${col},${a})`);
     g.addColorStop(0.5, `rgba(${col},${a*0.3})`);
@@ -1522,7 +1531,7 @@ function drawBookBackground(t) {
 function drawBookStars(t) {
   ctx.save();
   bookStars.forEach(s => {
-    s.phase += s.freq;
+    if (!bookReduce) s.phase += s.freq;
     const a = s.base * (0.6 + 0.4*Math.sin(s.phase));
     ctx.globalAlpha = a*0.14;
     const h = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*5);
@@ -1539,7 +1548,7 @@ function drawBookFog(t) {
   ctx.save();
   for (let i = 0; i < 3; i++) {
     const fy = 0.3 + i*0.22;
-    const dx = Math.sin(t*0.1 + i*1.7) * W*0.05;
+    const dx = bookReduce ? 0 : Math.sin(t*0.1 + i*1.7) * W*0.05;
     const g = ctx.createRadialGradient(W*0.5+dx, H*fy, 0, W*0.5+dx, H*fy, W*0.4);
     g.addColorStop(0, 'rgba(150,170,255,0.05)');
     g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -1551,7 +1560,7 @@ function drawBookFog(t) {
 function drawBookParticles(t, front) {
   ctx.save();
   bookParticles.forEach(p => {
-    p.x += p.vx; p.y += p.vy; p.phase += p.freq;
+    if (!bookReduce) { p.x += p.vx; p.y += p.vy; p.phase += p.freq; }
     if (p.y < -10) { p.y = H + 10; p.x = Math.random()*W; }
     if (p.x < -10) p.x = W + 10;
     if (p.x > W+10) p.x = -10;
@@ -1567,95 +1576,154 @@ function drawBookParticles(t, front) {
 }
 
 // ── White beam (initial interpretation) ────────────────────────
+// Horizontal beam arriving from the left. Starts to the RIGHT of the text
+// column so it never crosses the title/copy; its tail fades to nothing so
+// there is no hard cut. The head animates in toward the entry point.
 function drawWhiteBeam(t, g) {
-  const start = { x: 0, y: g.entry.y - H*0.02 };
+  const start = { x: W*0.42, y: g.entry.y };
   const end   = g.entry;
-  const pulse = 0.85 + 0.15*Math.sin(t*2.2);
+  const head  = { x: lerp(start.x, end.x, g.introBeam), y: lerp(start.y, end.y, g.introBeam) };
+  const pulse = g.reduce ? 1 : (0.85 + 0.15*Math.sin(t*2.2));
   ctx.save();
   ctx.globalCompositeOperation = 'screen';
   ctx.lineCap = 'round';
-  [[26,0.10],[12,0.22],[5,0.7]].forEach(([wd, al]) => {
-    const grad = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
-    grad.addColorStop(0,   `rgba(255,255,255,${al*0.3*pulse})`);
-    grad.addColorStop(0.7, `rgba(245,248,255,${al*pulse})`);
-    grad.addColorStop(1,   `rgba(255,255,255,${al*pulse})`);
+  [[24,0.10],[11,0.22],[4.5,0.75]].forEach(([wd, al]) => {
+    const grad = ctx.createLinearGradient(start.x, start.y, head.x, head.y);
+    grad.addColorStop(0,    'rgba(255,255,255,0)');
+    grad.addColorStop(0.35, `rgba(236,243,255,${al*0.5*pulse})`);
+    grad.addColorStop(1,    `rgba(255,255,255,${al*pulse})`);
     ctx.strokeStyle = grad; ctx.lineWidth = wd;
-    ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(head.x, head.y); ctx.stroke();
   });
-  const fl = ctx.createRadialGradient(end.x, end.y, 0, end.x, end.y, 42);
-  fl.addColorStop(0, `rgba(255,255,255,${0.5*pulse})`); fl.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = fl; ctx.beginPath(); ctx.arc(end.x, end.y, 42, 0, Math.PI*2); ctx.fill();
+  // travelling spark at the head of the beam
+  const fl = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 30);
+  fl.addColorStop(0, `rgba(255,255,255,${0.7*pulse})`); fl.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = fl; ctx.beginPath(); ctx.arc(head.x, head.y, 30, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+// ── Entry / exit blooms (bright pulse where light enters & exits) ───
+function drawBookBlooms(t, g) {
+  const p = g.reduce ? 1 : (0.82 + 0.18*Math.sin(t*2.4));
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  // entry — intense white core fading to blue, ignites as the beam arrives
+  ctx.globalAlpha = g.introBeam;
+  [[150,'rgba(255,255,255,0.95)'],[420,'rgba(150,190,255,0.55)'],[820,'rgba(70,120,255,0.28)']]
+    .forEach(([rad, col]) => {
+      const r = rad*p;
+      const gr = ctx.createRadialGradient(g.entry.x, g.entry.y, 0, g.entry.x, g.entry.y, r);
+      gr.addColorStop(0, col); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = gr; ctx.fillRect(g.entry.x-r, g.entry.y-r, r*2, r*2);
+    });
+  // exit — white igniting into the spectrum, appears with the rainbow
+  ctx.globalAlpha = g.introRays;
+  [[130,'rgba(255,255,255,0.95)'],[360,'rgba(205,185,255,0.6)']]
+    .forEach(([rad, col]) => {
+      const r = rad*p;
+      const gr = ctx.createRadialGradient(g.exit.x, g.exit.y, 0, g.exit.x, g.exit.y, r);
+      gr.addColorStop(0, col); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = gr; ctx.fillRect(g.exit.x-r, g.exit.y-r, r*2, r*2);
+    });
+  ctx.globalAlpha = 1;
   ctx.restore();
 }
 
 // ── Dispersed colour beams (deeper understandings) ──────────────
-const BOOK_BASE_ANG = 0.02;
+// Rainbow fan leaving the right face: red least-bent (near-horizontal),
+// violet most-bent (angled down) — like a real prism's dispersion.
+const BOOK_FAN_BASE = 0.03;     // red ray angle (rad, +down)
+const BOOK_FAN_SPREAD = 0.60;   // ~34° total angular spread, fanning downward
 function bookBeamAngle(i) {
   const frac = i / (BOOK_SPECTRUM.length - 1);
-  return BOOK_BASE_ANG + lerp(-0.26, 0.30, frac);
+  return BOOK_FAN_BASE + frac*BOOK_FAN_SPREAD;
 }
 
 function drawSpectrumBeams(t, g) {
   const E = g.exit;
-  const L = W*0.66;
+  const baseL = W*0.50;
+  const grow  = g.introRays;          // rays extend outward after the beam enters
+  if (grow <= 0.001) return;
   ctx.save();
   ctx.globalCompositeOperation = 'screen';
   ctx.lineCap = 'round';
   BOOK_SPECTRUM.forEach((b, i) => {
     const ang     = bookBeamAngle(i);
     const main    = !!b.label;
-    const shimmer = 0.8 + 0.2*Math.sin(t*1.6 + i*0.7);
-    const wob     = Math.sin(t*0.7 + i) * 8;
+    const shimmer = g.reduce ? 1 : (0.84 + 0.16*Math.sin(t*1.4 + i*0.7));
+    const wob     = g.reduce ? 0 : Math.sin(t*0.6 + i) * 5;
     const dir     = { x: Math.cos(ang), y: Math.sin(ang) };
+    const L       = baseL * grow;
     const F       = { x: E.x + dir.x*L, y: E.y + dir.y*L + wob };
     const [r, gg, bb] = b.col;
-    const layers = main ? [[40,0.06],[16,0.16],[5,0.55]] : [[18,0.04],[7,0.12]];
+    // wide soft glow ray + bright distinct core; white at the exit blooming
+    // into colour — keeps the rainbow reading as refracted light, not a flat gradient.
+    const layers = main ? [[50,0.06],[22,0.16],[7,0.74]] : [[30,0.045],[10,0.14]];
     layers.forEach(([wd, al]) => {
       const grad = ctx.createLinearGradient(E.x, E.y, F.x, F.y);
-      grad.addColorStop(0,   `rgba(${r},${gg},${bb},${al*shimmer})`);
-      grad.addColorStop(0.5, `rgba(${r},${gg},${bb},${al*0.7*shimmer})`);
-      grad.addColorStop(1,   `rgba(${r},${gg},${bb},0)`);
-      ctx.strokeStyle = grad; ctx.lineWidth = wd;
+      grad.addColorStop(0,    `rgba(255,255,255,${al*0.55*shimmer})`);
+      grad.addColorStop(0.12, `rgba(${r},${gg},${bb},${al*shimmer})`);
+      grad.addColorStop(0.55, `rgba(${r},${gg},${bb},${al*0.8*shimmer})`);
+      grad.addColorStop(0.82, `rgba(${r},${gg},${bb},${al*0.45*shimmer})`);
+      grad.addColorStop(1,    `rgba(${r},${gg},${bb},0)`);
+      ctx.strokeStyle = grad; ctx.lineWidth = wd*(0.6 + 0.4*grow);
       ctx.beginPath(); ctx.moveTo(E.x, E.y); ctx.lineTo(F.x, F.y); ctx.stroke();
     });
   });
   ctx.restore();
 }
 
+// The three critical-lens labels sit beside their own coloured ray:
+// a colour-matched dot on the ray + a readable white label, kept on-screen.
 function drawBeamLabels(t, g) {
   const E = g.exit;
-  const targetX = W*0.80;
+  if (g.introRays <= 0.05) return;
   ctx.save();
-  ctx.textAlign = 'left';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  const fs = clamp(W*0.0135, 15, 22);
+  ctx.font = `600 ${fs}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
+  ctx.globalAlpha = g.introRays;
   BOOK_SPECTRUM.forEach((b, i) => {
     if (!b.label) return;
     const ang = bookBeamAngle(i);
     const dir = { x: Math.cos(ang), y: Math.sin(ang) };
+    const tw  = ctx.measureText(b.label).width;
+    // anchor the label where the ray reaches ~85% width, but never let the
+    // text run off the right edge
+    let targetX = W*0.84;
+    if (targetX + 16 + tw > W*0.985) targetX = W*0.985 - 16 - tw;
     const d   = (targetX - E.x) / dir.x;
-    const lx  = targetX, ly = E.y + dir.y*d;
+    const px  = targetX, py = E.y + dir.y*d;
     const [r, gg, bb] = b.col;
-    ctx.fillStyle = `rgba(${r},${gg},${bb},0.96)`;
-    ctx.font = `600 ${clamp(W*0.0145,16,24)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-    ctx.shadowBlur = 14; ctx.shadowColor = `rgba(${r},${gg},${bb},0.85)`;
-    ctx.fillText(b.label, lx + 8, ly + 5);
+    // dot on the ray (connection point)
+    ctx.fillStyle = `rgba(${r},${gg},${bb},0.98)`;
+    ctx.shadowBlur = 12; ctx.shadowColor = `rgba(${r},${gg},${bb},0.95)`;
+    ctx.beginPath(); ctx.arc(px, py, 3.4, 0, Math.PI*2); ctx.fill();
+    // label — white for readability, colour glow ties it to the ray
+    ctx.fillStyle = 'rgba(255,255,255,0.98)';
+    ctx.shadowBlur = 16; ctx.shadowColor = `rgba(${r},${gg},${bb},0.95)`;
+    ctx.fillText(b.label, px + 14, py - fs*0.55);
     ctx.shadowBlur = 0;
   });
+  ctx.globalAlpha = 1;
   ctx.restore();
 }
 
-// ── The prism (the text) ───────────────────────────────────────
+// ── The glass prism — transparent body, facet shading, bevelled edges,
+//    chromatic fringe, internal blue/purple glow + dispersion ─────────
 function drawPrism(t, g) {
   const { top, bl, br, cx, cy, h2, w2 } = g;
+  const C = { x:(top.x+bl.x+br.x)/3, y:(top.y+bl.y+br.y)/3 };
   ctx.save();
 
   // faint mirrored reflection beneath the base
   ctx.save();
-  ctx.globalAlpha = 0.16;
+  ctx.globalAlpha = 0.14;
   ctx.translate(0, (cy + h2) * 2);
   ctx.scale(1, -1);
   tracePrismPath(top, bl, br);
   const rgl = ctx.createLinearGradient(0, cy-h2, 0, cy+h2);
-  rgl.addColorStop(0, 'rgba(150,180,255,0.35)');
+  rgl.addColorStop(0, 'rgba(150,180,255,0.30)');
   rgl.addColorStop(1, 'rgba(80,90,160,0)');
   ctx.fillStyle = rgl; ctx.fill();
   ctx.restore();
@@ -1665,66 +1733,101 @@ function drawPrism(t, g) {
   ctx.save();
   ctx.clip();
 
-  const gb = ctx.createLinearGradient(cx, cy-h2, cx, cy+h2);
-  gb.addColorStop(0,   'rgba(180,205,255,0.30)');
-  gb.addColorStop(0.4, 'rgba(120,140,220,0.16)');
-  gb.addColorStop(1,   'rgba(70,80,150,0.22)');
-  ctx.fillStyle = gb;
-  ctx.fillRect(cx-w2-20, cy-h2-20, w2*2+40, h2*2+40);
+  // facet tint: bright glass top-left → deep navy bottom-right (gives weight)
+  const fb = ctx.createLinearGradient(cx-w2, cy-h2, cx+w2, cy+h2);
+  fb.addColorStop(0,    'rgba(212,230,255,0.34)');
+  fb.addColorStop(0.18, 'rgba(150,185,255,0.16)');
+  fb.addColorStop(0.5,  'rgba(40,70,150,0.05)');
+  fb.addColorStop(0.78, 'rgba(45,75,160,0.14)');
+  fb.addColorStop(1,    'rgba(172,202,255,0.26)');
+  ctx.fillStyle = fb; ctx.fillRect(cx-w2-20, cy-h2-20, w2*2+40, h2*2+40);
 
-  // internal glow (sacred core)
-  const ig = ctx.createRadialGradient(cx, cy, 0, cx, cy, h2*1.1);
-  ig.addColorStop(0,   'rgba(220,230,255,0.32)');
-  ig.addColorStop(0.6, 'rgba(150,170,255,0.08)');
+  // top-left highlight pool
+  let rg = ctx.createRadialGradient(lerp(top.x,bl.x,0.32), lerp(top.y,bl.y,0.26), 0,
+                                    lerp(top.x,bl.x,0.32), lerp(top.y,bl.y,0.26), h2*1.05);
+  rg.addColorStop(0,'rgba(205,228,255,0.34)'); rg.addColorStop(0.6,'rgba(150,180,255,0.05)'); rg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = rg; ctx.fillRect(cx-w2,cy-h2,w2*2,h2*2);
+  // bottom-right deep-blue pool
+  rg = ctx.createRadialGradient(lerp(top.x,br.x,0.7), cy+h2*0.55, 0, lerp(top.x,br.x,0.7), cy+h2*0.55, h2*1.2);
+  rg.addColorStop(0,'rgba(26,46,120,0.42)'); rg.addColorStop(0.7,'rgba(20,34,96,0.10)'); rg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = rg; ctx.fillRect(cx-w2,cy-h2,w2*2,h2*2);
+
+  // internal blue/purple core glow
+  const ig = ctx.createRadialGradient(cx, cy+h2*0.12, 0, cx, cy+h2*0.12, h2*1.05);
+  ig.addColorStop(0,   'rgba(150,150,255,0.20)');
+  ig.addColorStop(0.5, 'rgba(120,90,220,0.10)');
   ig.addColorStop(1,   'rgba(0,0,0,0)');
-  ctx.fillStyle = ig;
-  ctx.fillRect(cx-w2, cy-h2, w2*2, h2*2);
+  ctx.fillStyle = ig; ctx.fillRect(cx-w2, cy-h2, w2*2, h2*2);
 
-  // internal white beam segment (entering)
   ctx.globalCompositeOperation = 'screen';
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = 'rgba(255,255,255,0.85)';
-  ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.moveTo(g.entry.x, g.entry.y); ctx.lineTo(cx, cy); ctx.stroke();
 
-  // internal dispersion — the split happening inside the glass
+  // specular hotspot streak crossing the front facet
+  const sp = ctx.createLinearGradient(cx-w2, cy-h2, cx+w2, cy+h2);
+  sp.addColorStop(0.30,'rgba(255,255,255,0)');
+  sp.addColorStop(0.37,'rgba(255,255,255,0.5)');
+  sp.addColorStop(0.41,'rgba(255,255,255,0)');
+  ctx.fillStyle = sp; ctx.fillRect(cx-w2,cy-h2,w2*2,h2*2);
+
+  // internal white beam (entry → dispersion point), animates in
+  ctx.lineCap = 'round';
+  const disp  = { x: lerp(g.entry.x, g.exit.x, 0.5), y: lerp(g.entry.y, g.exit.y, 0.5) + h2*0.10 };
+  const ihead = { x: lerp(g.entry.x, disp.x, g.introBeam), y: lerp(g.entry.y, disp.y, g.introBeam) };
+  ctx.strokeStyle = 'rgba(255,255,255,0.85)'; ctx.lineWidth = 4.5;
+  ctx.beginPath(); ctx.moveTo(g.entry.x, g.entry.y); ctx.lineTo(ihead.x, ihead.y); ctx.stroke();
+
+  // internal dispersion — white splitting into the spectrum toward the exit
   for (let i = 0; i < BOOK_SPECTRUM.length; i++) {
     const [r, gg, bb] = BOOK_SPECTRUM[i].col;
-    const oy = (i - 3) * 6;
-    const grad = ctx.createLinearGradient(cx, cy, g.exit.x, g.exit.y + oy);
-    grad.addColorStop(0,    'rgba(255,255,255,0)');
-    grad.addColorStop(0.35, 'rgba(255,255,255,0)');
-    grad.addColorStop(1,    `rgba(${r},${gg},${bb},0.55)`);
-    ctx.strokeStyle = grad; ctx.lineWidth = 4;
-    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(g.exit.x, g.exit.y + oy); ctx.stroke();
+    const oy = (i - 3) * 5;
+    const ex = lerp(disp.x, g.exit.x, g.introRays), ey = lerp(disp.y, g.exit.y + oy, g.introRays);
+    const grad = ctx.createLinearGradient(disp.x, disp.y, g.exit.x, g.exit.y + oy);
+    grad.addColorStop(0,   'rgba(255,255,255,0.5)');
+    grad.addColorStop(0.4, `rgba(${r},${gg},${bb},0.25)`);
+    grad.addColorStop(1,   `rgba(${r},${gg},${bb},0.6)`);
+    ctx.strokeStyle = grad; ctx.lineWidth = 3.5;
+    ctx.beginPath(); ctx.moveTo(disp.x, disp.y); ctx.lineTo(ex, ey); ctx.stroke();
   }
   ctx.globalCompositeOperation = 'source-over';
-
   ctx.restore(); // end clip
 
-  // ── edges + highlights ───────────────────────────────────────
+  // ── edges, bevels, chromatic fringe ──────────────────────────
+  function insetTri(s){ return [top,bl,br].map(p=>({x:p.x+(C.x-p.x)*s, y:p.y+(C.y-p.y)*s})); }
+  function strokeTri(pts, style, lw){
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x,pts[0].y); ctx.lineTo(pts[1].x,pts[1].y); ctx.lineTo(pts[2].x,pts[2].y); ctx.closePath();
+    ctx.strokeStyle = style; ctx.lineWidth = lw; ctx.stroke();
+  }
+  // chromatic dispersion fringe (red just outside, cyan just inside)
+  ctx.globalCompositeOperation = 'screen';
+  strokeTri(insetTri(-0.012), 'rgba(255,70,110,0.5)', 2);
+  strokeTri(insetTri( 0.020), 'rgba(60,220,255,0.5)', 2);
+  ctx.globalCompositeOperation = 'source-over';
+
+  // inner thickness rims → visible glass wall depth
+  strokeTri(insetTri(0.05), 'rgba(190,215,255,0.5)', 6);
+  strokeTri(insetTri(0.11), 'rgba(150,190,255,0.28)', 3);
+
+  // main bright illuminated edge with glow
+  ctx.save();
+  ctx.shadowBlur = 16; ctx.shadowColor = 'rgba(150,190,255,0.9)';
   tracePrismPath(top, bl, br);
-  ctx.strokeStyle = 'rgba(220,235,255,0.85)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
+  ctx.strokeStyle = 'rgba(225,238,255,0.9)'; ctx.lineWidth = 2.4; ctx.stroke();
+  ctx.restore();
+  // crisp white core edge
+  tracePrismPath(top, bl, br);
+  ctx.strokeStyle = 'rgba(255,255,255,0.95)'; ctx.lineWidth = 1; ctx.stroke();
 
-  // bright lit edges (apex)
-  ctx.strokeStyle = 'rgba(255,255,255,0.92)';
-  ctx.lineWidth = 1.4;
-  ctx.beginPath();
-  ctx.moveTo(bl.x, bl.y); ctx.lineTo(top.x, top.y); ctx.lineTo(br.x, br.y);
-  ctx.stroke();
-
-  // specular sparkle highlights
+  // specular sparkles
   ctx.fillStyle = 'rgba(255,255,255,0.95)';
-  ctx.beginPath(); ctx.arc(lerp(top.x, bl.x, 0.28), lerp(top.y, bl.y, 0.28), 2.6, 0, Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(top.x, top.y + 7, 2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(top.x, top.y + 6, 2.4, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(lerp(top.x, bl.x, 0.3), lerp(top.y, bl.y, 0.3), 2.2, 0, Math.PI*2); ctx.fill();
 
   // outer aura
-  const aura = ctx.createRadialGradient(cx, cy, h2*0.9, cx, cy, h2*1.5);
-  aura.addColorStop(0, 'rgba(150,175,255,0.12)');
+  const aura = ctx.createRadialGradient(cx, cy, h2*0.9, cx, cy, h2*1.6);
+  aura.addColorStop(0, 'rgba(140,170,255,0.10)');
   aura.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = aura; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.globalCompositeOperation = 'screen';
+  ctx.fillStyle = aura; ctx.fillRect(0, 0, W, H); ctx.restore();
 
   ctx.restore();
 }
@@ -1733,15 +1836,22 @@ function drawPrism(t, g) {
 function drawBookSpace(t) {
   if (!bookStars.length) initBookScene();
 
+  const g = bookPrismGeom();
+  g.reduce    = bookReduce;
+  // intro choreography: beam travels in (0→~0.9s), then the rainbow
+  // extends outward (~0.7→2.0s). Reduced motion → fully formed instantly.
+  g.introBeam = bookReduce ? 1 : easeOut(clamp(t/0.9, 0, 1));
+  g.introRays = bookReduce ? 1 : easeOut(clamp((t-0.7)/1.3, 0, 1));
+
   drawBookBackground(t);
   drawBookStars(t);
   drawBookFog(t);
   drawBookParticles(t, false);
 
-  const g = bookPrismGeom();
   drawSpectrumBeams(t, g);
   drawWhiteBeam(t, g);
   drawPrism(t, g);
+  drawBookBlooms(t, g);
 
   drawBookParticles(t, true);
   drawBeamLabels(t, g);
