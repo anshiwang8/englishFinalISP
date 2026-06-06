@@ -14,6 +14,17 @@
     }
     #canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
 
+    /* ── Rotating Earth (WebGL) — from "Rotating Earth.html" design ──
+       Transparent overlay that sits ABOVE the 2D star/nebula background
+       (z-0) but BELOW the hero text (z-10) and nav (z-100), so the title
+       stays fully readable and the navigation is untouched. */
+    #earth-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: 5; pointer-events: none;
+      opacity: 0; transition: opacity 1.6s ease;
+    }
+    #earth-canvas.show { opacity: 1; }
+
     #page-fade {
       position: fixed; inset: 0; z-index: 50;
       background: #000; opacity: 0; pointer-events: none;
@@ -279,6 +290,7 @@
 <body>
 
 <canvas id="canvas"></canvas>
+<canvas id="earth-canvas"></canvas>
 <div id="page-fade"></div>
 <div id="cur-ring"></div>
 <div id="cur-dot"></div>
@@ -2562,7 +2574,8 @@ function frame(ts) {
     drawNebulae(cp);
     drawStars(cp);
     drawConstellations(cp);
-    drawEarth(cp);
+    // The static 2D earth (drawEarth) is replaced by the WebGL rotating
+    // Earth rendered on #earth-canvas — see the Earth scene script below.
 
     if (cp > 0.4) {
       const ba = inv(0.4, 0.8, cp) * 0.09;
@@ -2694,10 +2707,415 @@ function resetConcHeroReveal() {
 // ═══════════════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════════════
-buildEarthTex();
 resize();
 revealIntroHero();
 requestAnimationFrame(frame);
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ROTATING EARTH  (integrated from the "Rotating Earth.html" design)
+     ─────────────────────────────────────────────────────────────────
+     Imported ONLY the Earth-rendering core: procedural day/night/cloud
+     textures, the day–night shader, the cloud shell, and the fresnel
+     atmosphere glow. Deliberately NOT imported: the design's own
+     starfield & nebula haze (the intro already has its own), the loader
+     veil, the glass control panel, the hint text, and the drag/zoom
+     interaction. The Earth is positioned to match the old 2D earth
+     (centred, lower third) and auto-rotates. It only renders on the
+     intro page and stays out of the way of the title and nav.
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+// ── Procedural Earth texture generator (from earthgen.js, verbatim) ──
+// All canvas-based so it uploads reliably to WebGL.
+(function () {
+  "use strict";
+  function makePerlin(seed) {
+    const perm = new Uint8Array(512);
+    const src = new Uint8Array(256);
+    for (let i = 0; i < 256; i++) src[i] = i;
+    let s = (seed >>> 0) || 1;
+    const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+    for (let i = 255; i > 0; i--) {
+      const j = Math.floor(rnd() * (i + 1));
+      const t = src[i]; src[i] = src[j]; src[j] = t;
+    }
+    for (let i = 0; i < 512; i++) perm[i] = src[i & 255];
+    const fade = (t) => t * t * t * (t * (t * 6 - 15) + 10);
+    const lerp = (a, b, t) => a + t * (b - a);
+    function grad(h, x, y, z) {
+      h &= 15;
+      const u = h < 8 ? x : y;
+      const v = h < 4 ? y : (h === 12 || h === 14 ? x : z);
+      return ((h & 1) ? -u : u) + ((h & 2) ? -v : v);
+    }
+    return function (x, y, z) {
+      const X = Math.floor(x) & 255, Y = Math.floor(y) & 255, Z = Math.floor(z) & 255;
+      x -= Math.floor(x); y -= Math.floor(y); z -= Math.floor(z);
+      const u = fade(x), v = fade(y), w = fade(z);
+      const A = perm[X] + Y, AA = perm[A] + Z, AB = perm[A + 1] + Z;
+      const B = perm[X + 1] + Y, BA = perm[B] + Z, BB = perm[B + 1] + Z;
+      return lerp(
+        lerp(lerp(grad(perm[AA], x, y, z), grad(perm[BA], x - 1, y, z), u),
+             lerp(grad(perm[AB], x, y - 1, z), grad(perm[BB], x - 1, y - 1, z), u), v),
+        lerp(lerp(grad(perm[AA + 1], x, y, z - 1), grad(perm[BA + 1], x - 1, y, z - 1), u),
+             lerp(grad(perm[AB + 1], x, y - 1, z - 1), grad(perm[BB + 1], x - 1, y - 1, z - 1), u), v),
+        w);
+    };
+  }
+  function fbm(noise, x, y, z, oct, freq, pers) {
+    let amp = 1, f = freq, sum = 0, norm = 0;
+    for (let i = 0; i < oct; i++) {
+      sum += amp * noise(x * f, y * f, z * f);
+      norm += amp; amp *= pers; f *= 2;
+    }
+    return sum / norm;
+  }
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  const smooth = (e0, e1, x) => { const t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); };
+  const mix = (a, b, t) => a + (b - a) * t;
+  function mixCol(a, b, t) { return [mix(a[0], b[0], t), mix(a[1], b[1], t), mix(a[2], b[2], t)]; }
+
+  function build(opts) {
+    opts = opts || {};
+    const W = opts.size || 1024, H = W >> 1;
+    const seed = opts.seed || 1337;
+
+    const nElev = makePerlin(seed);
+    const nCont = makePerlin(seed + 101);
+    const nMois = makePerlin(seed + 202);
+    const nDetl = makePerlin(seed + 303);
+    const nCity = makePerlin(seed + 404);
+    const nCloud = makePerlin(seed + 505);
+    const nWarp = makePerlin(seed + 606);
+
+    const day = document.createElement("canvas"); day.width = W; day.height = H;
+    const night = document.createElement("canvas"); night.width = W; night.height = H;
+    const spec = document.createElement("canvas"); spec.width = W; spec.height = H;
+    const clouds = document.createElement("canvas"); clouds.width = W; clouds.height = H;
+
+    const dCtx = day.getContext("2d"), nCtx = night.getContext("2d"),
+          sCtx = spec.getContext("2d"), cCtx = clouds.getContext("2d");
+    const dImg = dCtx.createImageData(W, H);
+    const nImg = nCtx.createImageData(W, H);
+    const sImg = sCtx.createImageData(W, H);
+    const cImg = cCtx.createImageData(W, H);
+    const dp = dImg.data, np = nImg.data, sp = sImg.data, cp = cImg.data;
+
+    const DEEP = [6, 24, 64], SEA = [14, 58, 112], SHAL = [26, 110, 150];
+    const SAND = [196, 182, 132], GRASS = [62, 124, 50], FOREST = [28, 84, 38];
+    const DRY = [156, 150, 92], DESERT = [198, 172, 116], ROCK = [120, 104, 86];
+    const SNOW = [238, 242, 248], ICE = [206, 222, 236];
+
+    const FREEZE = 0.78;
+
+    for (let j = 0; j < H; j++) {
+      const lat = Math.PI / 2 - (j / H) * Math.PI;
+      const cl = Math.cos(lat), sl = Math.sin(lat);
+      const latAbs = Math.abs(lat) / (Math.PI / 2);
+      for (let i = 0; i < W; i++) {
+        const lon = (i / W) * 2 * Math.PI - Math.PI;
+        const x = cl * Math.cos(lon), y = sl, z = cl * Math.sin(lon);
+
+        const wx = x + 0.18 * fbm(nWarp, x, y, z, 3, 1.6, 0.5);
+        const wy = y + 0.18 * fbm(nWarp, x + 5.2, y + 1.3, z, 3, 1.6, 0.5);
+        const wz = z + 0.18 * fbm(nWarp, x, y + 3.7, z + 2.1, 3, 1.6, 0.5);
+
+        const elev = fbm(nElev, wx, wy, wz, 6, 1.5, 0.55) * 0.5 + 0.5;
+        const cont = fbm(nCont, x, y, z, 3, 0.85, 0.5) * 0.5 + 0.5;
+        let h = elev * 0.62 + cont * 0.38;
+
+        const idx = (j * W + i) * 4;
+        const SEA_LEVEL = 0.5;
+        let isLand = h > SEA_LEVEL;
+        let col, oceanMask = 0;
+
+        const iceEdge = FREEZE - 0.06 * (fbm(nDetl, x, y, z, 3, 2.2, 0.5));
+        const polar = latAbs > iceEdge;
+
+        if (!isLand) {
+          const depth = (SEA_LEVEL - h) / SEA_LEVEL;
+          col = mixCol(SHAL, SEA, smooth(0.0, 0.55, depth));
+          col = mixCol(col, DEEP, smooth(0.55, 1.0, depth));
+          oceanMask = 1;
+          if (polar) {
+            const t = smooth(iceEdge, iceEdge + 0.12, latAbs);
+            col = mixCol(col, ICE, t);
+            if (t > 0.5) oceanMask = 0;
+          }
+        } else {
+          const t = (h - SEA_LEVEL) / (1 - SEA_LEVEL);
+          const mois = fbm(nMois, x + 11.0, y, z, 4, 1.1, 0.5) * 0.5 + 0.5;
+          let land = mixCol(SAND, GRASS, smooth(0.015, 0.09, t));
+          land = mixCol(land, FOREST, smooth(0.08, 0.45, t) * (0.45 + 0.55 * mois));
+          const desertBand = smooth(0.42, 0.16, Math.abs(latAbs - 0.27));
+          const dry = clamp(desertBand * (1 - mois) * 1.5, 0, 1);
+          land = mixCol(land, DESERT, dry * smooth(0.0, 0.22, t));
+          land = mixCol(land, DRY, (1 - mois) * 0.14);
+          land = mixCol(land, ROCK, smooth(0.58, 0.82, t));
+          land = mixCol(land, SNOW, smooth(0.84, 0.96, t));
+          land = mixCol(land, FOREST, smooth(0.3, 0.0, latAbs) * mois * 0.45);
+          col = land;
+          if (polar) {
+            const ti = smooth(iceEdge, iceEdge + 0.1, latAbs);
+            col = mixCol(col, SNOW, ti);
+          }
+          const micro = fbm(nDetl, x, y, z, 4, 6.0, 0.55) * 18;
+          col = [col[0] + micro, col[1] + micro, col[2] + micro];
+        }
+
+        dp[idx] = clamp(col[0], 0, 255);
+        dp[idx + 1] = clamp(col[1], 0, 255);
+        dp[idx + 2] = clamp(col[2], 0, 255);
+        dp[idx + 3] = 255;
+
+        const ov = oceanMask ? 255 : 0;
+        sp[idx] = ov; sp[idx + 1] = ov; sp[idx + 2] = ov; sp[idx + 3] = 255;
+
+        let lr = 0, lg = 0, lb = 0;
+        if (isLand && !polar) {
+          const clu = fbm(nCity, x, y, z, 5, 2.2, 0.55) * 0.5 + 0.5;
+          const tempBias = smooth(0.78, 0.2, latAbs);
+          const coastBias = smooth(0.5, 0.56, h);
+          const dens = clu * tempBias * (0.6 + 0.4 * coastBias);
+          if (dens > 0.62) {
+            const v = smooth(0.62, 0.95, dens);
+            const tw = 0.6 + 0.4 * (fbm(nDetl, x * 1.3, y, z, 2, 12.0, 0.5) * 0.5 + 0.5);
+            const b = v * tw;
+            lr = 255 * b; lg = 210 * b; lb = 120 * b;
+          }
+        }
+        np[idx] = clamp(lr, 0, 255);
+        np[idx + 1] = clamp(lg, 0, 255);
+        np[idx + 2] = clamp(lb, 0, 255);
+        np[idx + 3] = 255;
+
+        const cwx = x + 0.25 * fbm(nWarp, x + 2.0, y, z, 2, 1.2, 0.5);
+        const cwz = z + 0.25 * fbm(nWarp, x, y, z + 2.0, 2, 1.2, 0.5);
+        let cv = fbm(nCloud, cwx, y * 1.1, cwz, 6, 1.7, 0.55) * 0.5 + 0.5;
+        const band = 0.5 + 0.5 * Math.cos((latAbs - 0.27) * Math.PI * 3.2);
+        cv *= mix(0.7, 1.12, band);
+        const a = smooth(0.46, 0.72, cv);   // lower threshold -> more cloud detail/wisps
+        cp[idx] = 255; cp[idx + 1] = 255; cp[idx + 2] = 255;
+        cp[idx + 3] = clamp(a * 255, 0, 255);
+      }
+    }
+
+    dCtx.putImageData(dImg, 0, 0);
+    nCtx.putImageData(nImg, 0, 0);
+    sCtx.putImageData(sImg, 0, 0);
+    cCtx.putImageData(cImg, 0, 0);
+
+    return { day, night, spec, clouds };
+  }
+  window.EarthGen = { build };
+})();
+</script>
+<script>
+// ── Earth scene: only the globe, clouds and atmosphere from the design ──
+(function () {
+  // Gracefully no-op if the Three.js CDN failed to load — the rest of the
+  // intro (and every other page) keeps working exactly as before.
+  if (!window.THREE || !window.EarthGen) return;
+
+  const canvas = document.getElementById('earth-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const scene = new THREE.Scene();
+  const FOV = 46;   // wider than the design's 38° for dramatic from-orbit curvature
+  const camera = new THREE.PerspectiveCamera(FOV, window.innerWidth / window.innerHeight, 0.1, 2000);
+
+  // Sun direction (also fed to the shaders) — matches the design.
+  const sunDir = new THREE.Vector3(-0.6, 0.25, 0.9).normalize();
+  const sun = new THREE.DirectionalLight(0xfff5e8, 2.7);
+  sun.position.copy(sunDir).multiplyScalar(10);
+  scene.add(sun);
+  scene.add(new THREE.AmbientLight(0x223355, 0.68));   // slightly brighter fill
+
+  // The globe lives in a group so we can offset it toward the lower third
+  // of the screen (mirroring the original 2D earth) and give it a tilt.
+  const earthGroup = new THREE.Group();
+  earthGroup.rotation.z = 0.20;     // gentle axial tilt for a cinematic look
+  scene.add(earthGroup);
+
+  function canvasTex(c, srgb) {
+    const t = new THREE.CanvasTexture(c);
+    if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    t.wrapS = THREE.RepeatWrapping;
+    return t;
+  }
+  const gen = EarthGen.build({ size: 1024, seed: 7 });
+  const dayMap   = canvasTex(gen.day, true);
+  const nightMap = canvasTex(gen.night, true);
+  const specMap  = canvasTex(gen.spec, false);
+  const cloudMap = canvasTex(gen.clouds, true);
+
+  const EARTH_R = 1;
+  const uniforms = {
+    dayTexture:   { value: dayMap },
+    nightTexture: { value: nightMap },
+    specTexture:  { value: specMap },
+    sunDirection: { value: sunDir.clone() },
+    nightStrength:{ value: 1.0 },
+  };
+
+  // Day/night shader — verbatim from the design.
+  const earthMat = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader: `
+      varying vec2 vUv;
+      varying vec3 vWorldNormal;
+      varying vec3 vWorldPos;
+      void main() {
+        vUv = uv;
+        vWorldNormal = normalize(mat3(modelMatrix) * normal);
+        vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform sampler2D dayTexture;
+      uniform sampler2D nightTexture;
+      uniform sampler2D specTexture;
+      uniform vec3 sunDirection;
+      uniform float nightStrength;
+      varying vec2 vUv;
+      varying vec3 vWorldNormal;
+      varying vec3 vWorldPos;
+      void main() {
+        vec3 N = normalize(vWorldNormal);
+        float sun = dot(N, normalize(sunDirection));
+        float dayAmt = smoothstep(-0.18, 0.32, sun);
+
+        vec3 dayCol = texture2D(dayTexture, vUv).rgb;
+        vec3 nightCol = texture2D(nightTexture, vUv).rgb;
+
+        vec3 lights = nightCol * vec3(1.25, 1.05, 0.7) * nightStrength;
+        float nightMask = 1.0 - smoothstep(-0.05, 0.12, sun);
+
+        float ocean = 1.0 - texture2D(specTexture, vUv).r;
+        vec3 V = normalize(cameraPosition - vWorldPos);
+        vec3 H = normalize(normalize(sunDirection) + V);
+        float spec = pow(max(dot(N, H), 0.0), 55.0) * ocean * dayAmt;
+
+        vec3 col = dayCol * (0.24 + 1.05 * dayAmt);   // slightly brighter Earth
+        col += lights * nightMask;
+        col += vec3(0.55, 0.72, 1.0) * spec * 0.5;
+
+        float rim = pow(1.0 - max(dot(N, V), 0.0), 2.5);
+        col += vec3(0.18, 0.34, 0.62) * rim * (0.35 + 0.65 * dayAmt);
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  });
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 96, 96), earthMat);
+  earthGroup.add(earth);
+
+  // Cloud shell.
+  const cloudMat = new THREE.MeshStandardMaterial({
+    map: cloudMap, alphaMap: cloudMap, transparent: true, opacity: 0.88,
+    depthWrite: false, roughness: 1, metalness: 0,
+  });
+  const clouds = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R * 1.012, 80, 80), cloudMat);
+  earthGroup.add(clouds);
+
+  // Fresnel atmosphere glow — blends over the existing cosmic background.
+  const atmoUniforms = {
+    glowColor: { value: new THREE.Color(0x3d7bff) },
+    sunDirection: { value: sunDir.clone() },
+    intensity: { value: 0.9 },
+  };
+  const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(EARTH_R * 1.16, 80, 80),
+    new THREE.ShaderMaterial({
+      uniforms: atmoUniforms,
+      transparent: true, blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false,
+      vertexShader: `
+        varying vec3 vWorldNormal;
+        varying vec3 vWorldPos;
+        void main() {
+          vWorldNormal = normalize(mat3(modelMatrix) * normal);
+          vWorldPos = (modelMatrix * vec4(position,1.0)).xyz;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 glowColor; uniform vec3 sunDirection; uniform float intensity;
+        varying vec3 vWorldNormal; varying vec3 vWorldPos;
+        void main() {
+          vec3 N = normalize(vWorldNormal);
+          vec3 V = normalize(cameraPosition - vWorldPos);
+          float fres = pow(1.0 - abs(dot(N, V)), 3.2);
+          float lit = clamp(dot(-N, normalize(sunDirection)) * 0.5 + 0.6, 0.0, 1.0);
+          gl_FragColor = vec4(glowColor, fres * lit * intensity * 1.8);
+        }
+      `,
+    })
+  );
+  earthGroup.add(atmosphere);
+
+  // ── Layout: the Earth as a massive centrepiece ──
+  // RADIUS_FRAC = the globe's on-screen radius as a fraction of the half
+  // viewport height (unchanged from before — we are NOT shrinking it).
+  // CENTRE_FRAC = where the globe's centre/equator sits, measured
+  // top(0)→bottom(1). At ~1.00 the equator sits right at the bottom edge,
+  // so the entire upper hemisphere (~50% of the globe) fills the lower
+  // half of the frame with its top arc just below the title (~0.54H) — a
+  // planet seen from orbit, not a horizon — and the lower half stays below
+  // the fold. Relationship: top_arc ≈ (1 - (1 - 2*CENTRE_FRAC + RADIUS_FRAC))/2.
+  const RADIUS_FRAC = 0.92;   // huge — same size as before, feels like a planet
+  const CENTRE_FRAC = 1.00;   // equator at the bottom edge; upper hemisphere in view
+  function layout() {
+    const w = window.innerWidth, h = window.innerHeight;
+    camera.aspect = w / h;
+    const tanHalf = Math.tan(THREE.MathUtils.degToRad(FOV) / 2);
+    // Distance so the sphere's true (perspective) silhouette spans RADIUS_FRAC
+    // of the half-viewport-height — accurate even at this wide FOV.
+    const tanAlpha = RADIUS_FRAC * tanHalf;
+    const sinAlpha = tanAlpha / Math.sqrt(1 + tanAlpha * tanAlpha);
+    const dist = 1 / sinAlpha;                            // EARTH_R = 1
+    camera.position.set(0, 0, dist);
+    camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
+    const halfH = dist * tanHalf;                         // world half-height at the centre plane
+    earthGroup.position.y = (1 - 2 * CENTRE_FRAC) * halfH; // raise/lower the globe's centre
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(w, h);
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  // Cinematic fade-in, in step with the title reveal.
+  setTimeout(() => canvas.classList.add('show'), 200);
+
+  // ── Animate: smooth auto-rotation, render only on the intro page ──
+  const SPIN = 0.12;            // radians/sec — slow, majestic
+  const clock = new THREE.Clock();
+  let visible = null;
+  function animate() {
+    requestAnimationFrame(animate);
+    const dt = Math.min(clock.getDelta(), 0.05);   // clamp to avoid jumps after a tab/page switch
+    const t = clock.elapsedTime;
+
+    // `currentPage` is the global set by the existing nav/switchPage logic.
+    const onIntro = (typeof currentPage === 'undefined') || currentPage === 'intro';
+    if (onIntro !== visible) {
+      visible = onIntro;
+      canvas.style.display = onIntro ? 'block' : 'none';
+    }
+    if (!onIntro) return;       // pause GPU work on every other tab
+
+    earth.rotation.y += SPIN * dt;
+    clouds.rotation.y = earth.rotation.y + t * 0.01;   // clouds drift slightly faster
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 </script>
 </body>
 </html>
