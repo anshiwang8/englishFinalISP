@@ -207,6 +207,52 @@
       content: '•'; color: rgba(200,70,55,0.95); margin-right: 10px;
     }
 
+    /* ── Conclusion hero ────────────────────────────────── */
+    #hero-conclusion {
+      justify-content: flex-start;
+      padding-top: 66px; align-items: center;
+    }
+    .conc-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.30em; text-transform: uppercase;
+      color: rgba(212,206,236,0.72); margin-bottom: 20px;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.95);
+    }
+    .conc-title {
+      font-size: clamp(40px, 5.8vw, 82px); font-weight: 600;
+      letter-spacing: -0.028em; line-height: 1.05;
+      /* blended palette of every unit — gold · red · violet · blue */
+      background: linear-gradient(100deg,
+        #ffd089 0%, #f4b2bd 25%, #cbb6ff 50%, #a9c4ff 73%, #ffd089 100%);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 60px rgba(150,140,255,0.45))
+              drop-shadow(0 0 22px rgba(255,190,90,0.25))
+              drop-shadow(0 2px 14px rgba(0,0,0,0.9));
+    }
+    .conc-sentence {
+      position: absolute; bottom: clamp(46px, 8.5vh, 104px);
+      left: 0; right: 0; margin: 0 auto;
+      max-width: min(680px, 82vw); padding: 0 24px;
+      text-align: center;
+      font-size: clamp(13px, 1.4vw, 17px); font-weight: 300;
+      line-height: 1.7; letter-spacing: 0.02em;
+      color: rgba(206,210,236,0.62);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+    }
+
+    /* ── Unit takeaway taglines (thesis line) ───────────── */
+    .arg-takeaway, .lit-takeaway, .book-takeaway, .drama-takeaway {
+      font-size: clamp(15px, 1.9vw, 23px);
+      font-weight: 500; letter-spacing: 0.005em;
+      margin-bottom: 22px;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.95);
+    }
+    .arg-takeaway   { color: rgba(255,206,120,0.92); }
+    .lit-takeaway   { color: rgba(186,198,255,0.92); }
+    .book-takeaway  { color: rgba(206,216,255,0.94); }
+    .drama-takeaway { color: rgba(232,170,110,0.92); }
+
     /* ── Reveal animation ───────────────────────────────── */
     .reveal {
       opacity: 0; transform: translateY(18px);
@@ -259,45 +305,50 @@
 
 <!-- Argumentation overlay -->
 <div id="hero-arg" class="hero hidden">
-  <p  class="arg-eyebrow reveal" id="arg-eyebrow">ENG4U · Unit Two</p>
   <h1 class="arg-title  reveal" id="arg-title">Argumentation</h1>
+  <p  class="arg-takeaway reveal" id="arg-takeaway">Look beyond the words.</p>
   <ul class="arg-bullets reveal" id="arg-bullets">
+    <li>Persuasive techniques in TED Talks and Rick Mercer rants</li>
     <li>Stylistic devices and methods of development</li>
-    <li>Pacing myself and adjusting my voice</li>
-    <li>Engaging the audience</li>
+    <li>How a speaker shapes the way an audience thinks and responds</li>
   </ul>
 </div>
 
 <!-- Literary Criticism overlay -->
 <div id="hero-lit" class="hero hidden">
-  <p  class="lit-eyebrow reveal" id="lit-eyebrow">ENG4U · Unit Two</p>
   <h1 class="lit-title  reveal" id="lit-title">Literary Criticism</h1>
+  <p  class="lit-takeaway reveal" id="lit-takeaway">Look beyond a single interpretation.</p>
   <ul class="lit-bullets reveal" id="lit-bullets">
-    <li>Viewing scenarios through varying lenses</li>
-    <li>Understanding different perspectives</li>
-    <li>Fully engaging with scenarios</li>
+    <li>Reading through Marxist, feminist, and psychoanalytic lenses</li>
+    <li>How different lenses reveal different meanings</li>
+    <li>Uncovering values and assumptions that aren't obvious</li>
   </ul>
 </div>
 
 <!-- Book Club overlay -->
 <div id="hero-book" class="hero hidden">
-  <p  class="book-eyebrow reveal" id="book-eyebrow">Discussion · Reflection · Discovery</p>
   <h1 class="book-title  reveal" id="book-title">Book Club</h1>
+  <p  class="book-takeaway reveal" id="book-takeaway">Look beyond my first understanding.</p>
   <ul class="book-bullets reveal" id="book-bullets">
-    <li>Analyzing texts through varying lenses</li>
-    <li>Entering new levels of understanding</li>
-    <li>Listening to and understanding the insights of others</li>
+    <li>Refining first impressions through discussion</li>
+    <li>Using evidence and research to deepen understanding</li>
+    <li>Learning from the insights of others</li>
   </ul>
 </div>
 
 <!-- Drama / Hamilton overlay -->
 <div id="hero-drama" class="hero hidden">
-  <p  class="drama-eyebrow reveal" id="drama-eyebrow">Motive · Staging · Subtext</p>
   <h1 class="drama-title  reveal" id="drama-title">Drama / Hamilton</h1>
+  <p  class="drama-takeaway reveal" id="drama-takeaway">Look beyond actions and dialogue.</p>
   <ul class="drama-bullets reveal" id="drama-bullets">
-    <li>Understanding the use of theatrical devices</li>
-    <li>Identifying motives through body language, voice control, and themes</li>
+    <li>Reading theatrical devices, staging, body language, and voice</li>
+    <li>Finding the motivations and conflicts driving each character</li>
   </ul>
+</div>
+
+<!-- Conclusion overlay -->
+<div id="hero-conclusion" class="hero hidden">
+  <h1 class="conc-title    reveal" id="conc-title">ENG4U taught me to look deeper.</h1>
 </div>
 
 <script>
@@ -312,7 +363,7 @@ function resize() {
   W = canvas.width  = window.innerWidth;
   H = canvas.height = window.innerHeight;
   buildStars();
-  buildAudienceTex();
+  buildArgScene();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -355,10 +406,12 @@ function switchPage(page) {
     document.getElementById('hero-lit').classList.toggle('hidden',   page !== 'literary');
     document.getElementById('hero-book').classList.toggle('hidden',  page !== 'bookclub');
     document.getElementById('hero-drama').classList.toggle('hidden', page !== 'drama');
+    document.getElementById('hero-conclusion').classList.toggle('hidden', page !== 'conclusion');
     if (page === 'argumentation') { initArgScene(); resetArgHeroReveal(); revealArgHero(); }
     if (page === 'literary')      { initLitScene(); resetLitHeroReveal(); revealLitHero(); }
     if (page === 'bookclub')      { initBookScene(); resetBookHeroReveal(); revealBookHero(); }
     if (page === 'drama')         { initDramaScene(); resetDramaHeroReveal(); revealDramaHero(); }
+    if (page === 'conclusion')    { initConcScene(); resetConcHeroReveal(); revealConcHero(); }
     pageFade.classList.remove('active');
   }, 380);
 }
@@ -646,455 +699,393 @@ function drawLens(cp) {
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — AUDIENCE TEXTURE
+//  ARGUMENTATION — CINEMATIC AUDITORIUM
 // ═══════════════════════════════════════════════════════════════
-const audienceCvs = document.createElement('canvas');
+//  A keynote / TED-style stage: converging volumetric beams, drifting
+//  haze, a warm stage pool, ripples of influence that light up a vast
+//  rim-lit crowd fading into darkness, and a lone backlit speaker.
+const ARG_STAGE_Y = 0.62;   // stage lip / speaker feet
+const ARG_PIT_CY  = 0.66;   // ripple + audience origin
+const ARG_FOCUS_Y = 0.45;   // warm key-light centre
+const ARG_COL = {
+  gold:  [248, 201, 116],
+  amber: [231, 146, 38],
+  warm:  [255, 243, 222],
+  deep:  [11, 18, 36],
+  navy:  [13, 22, 44],
+  black: [4, 6, 13],
+};
+const argRGBA    = (c, a) => `rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
+const argMix     = (a, b, t) => [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t, a[2]+(b[2]-a[2])*t];
+const argEaseOut = p => 1 - Math.pow(1 - p, 2.2);
 
-function drawPersonBehind(atx, x, y, s) {
-  atx.beginPath();
-  atx.arc(x, y - 11*s, 4.5*s, 0, Math.PI*2);
-  atx.fill();
-  atx.beginPath();
-  atx.moveTo(x - 8*s, y);
-  atx.bezierCurveTo(x - 8*s, y - 7*s, x - 4*s, y - 12*s, x, y - 14*s);
-  atx.bezierCurveTo(x + 4*s, y - 12*s, x + 8*s, y - 7*s, x + 8*s, y);
-  atx.lineTo(x + 6*s, y + 9*s);
-  atx.lineTo(x - 6*s, y + 9*s);
-  atx.closePath();
-  atx.fill();
+let argHaze = [], argAudience = [], argRipples = [], argMaxD = 1;
+let argLastRipple = -2.0, argPrevT = 0;
+
+// ── Drifting atmospheric haze ──────────────────────────────────
+function spawnArgHaze(init) {
+  return {
+    x: Math.random() * W,
+    y: init ? Math.random() * H : H * 0.45 + Math.random() * H * 0.6,
+    r: 55 + Math.random() * 140,
+    vx: (Math.random() - 0.5) * 0.14,
+    vy: -0.04 - Math.random() * 0.13,
+    a: 0.012 + Math.random() * 0.045,
+    ph: Math.random() * Math.PI * 2,
+  };
+}
+function buildArgHaze() {
+  argHaze = [];
+  const n = Math.round(Math.max(45, W / 24));
+  for (let i = 0; i < n; i++) argHaze.push(spawnArgHaze(true));
 }
 
-function buildAudienceTex() {
-  audienceCvs.width = W; audienceCvs.height = H;
-  const atx = audienceCvs.getContext('2d');
-  atx.clearRect(0, 0, W, H);
-
-  const stageFloorY = H * 0.615;
-  const NUM_ROWS = 18;
-
-  for (let row = 0; row < NUM_ROWS; row++) {
-    const t     = row / (NUM_ROWS - 1);
-    const y     = stageFloorY + 8 + t * (H * 0.87 - stageFloorY);
-    const rw    = W * 0.18 + t * W * 0.72;
-    const rx0   = W/2 - rw/2;
-    const sp    = 17 + t * 5;
-    const count = Math.floor(rw / sp);
-    const s     = 0.28 + t * 0.68;
-
-    // Silhouette color: near stage rows catch slight warm spillage
-    const warmTint = Math.max(0, (1 - t) * 0.18);
-    const r = Math.round(14 + warmTint * 28);
-    const g2 = Math.round(10 + warmTint * 14);
-    const b  = Math.round(20 + warmTint * 6);
-    atx.fillStyle = `rgb(${r},${g2},${b})`;
-
+// ── The grand audience (rows receding into darkness) ───────────
+const ARG_ROWS = 11;
+function buildArgAudience() {
+  argAudience = [];
+  const cx = W * 0.5;
+  const frontY = H * 1.02, backY = H * 0.625;
+  const frontHead = Math.max(15, W * 0.0145), backHead = Math.max(4, W * 0.0038);
+  argMaxD = 1;
+  for (let r = 0; r < ARG_ROWS; r++) {
+    const t = r / (ARG_ROWS - 1);
+    const y = frontY + (backY - frontY) * t;
+    const headR = frontHead + (backHead - frontHead) * t;
+    const count = Math.max(7, Math.round((W / (headR * 2.7)) * (0.7 + t * 0.85)));
+    // front rows: dark foreground silhouettes; rows near the stage catch more rim light
+    const baseB = 0.04 + 0.13 * Math.pow(1 - t, 1.5);
+    const rim   = 0.14 + 0.46 * Math.pow(Math.max(0, 1 - Math.abs(t - 0.42) * 1.7), 2);
+    const spread = W * 1.08;
     for (let i = 0; i < count; i++) {
-      const x = rx0 + (i + 0.5) * (rw / count);
-      drawPersonBehind(atx, x, y, s);
+      const jx = (Math.random() - 0.5) * headR * 1.5;
+      const x  = (i + 0.5) / count * spread - (spread - W) / 2 + jx;
+      const jy = (Math.random() - 0.5) * headR * 0.7;
+      const my = y + jy;
+      const d  = Math.hypot(x - cx, (my - H * ARG_PIT_CY) * 1.7);
+      if (d > argMaxD) argMaxD = d;
+      argAudience.push({ x, y: my, headR: headR * (0.82 + Math.random() * 0.36), row: r, t, baseB, rim: Math.max(0.08, rim), glow: 0, d, ph: Math.random() * 6.28 });
     }
   }
-
-  // Stage-spill gradient over front rows (warm amber glow on backs of heads)
-  const spill = atx.createLinearGradient(W/2, stageFloorY, W/2, stageFloorY + H*0.20);
-  spill.addColorStop(0, 'rgba(255,160,40,0.10)');
-  spill.addColorStop(1, 'rgba(0,0,0,0)');
-  atx.fillStyle = spill; atx.fillRect(0, stageFloorY, W, H*0.25);
+  argAudience.sort((a, b) => b.row - a.row); // back rows drawn first
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — BALCONIES
-// ═══════════════════════════════════════════════════════════════
-function drawBalconies() {
-  const tiers = [
-    { y: H*0.295, w: W*0.175, s: 0.22 },
-    { y: H*0.380, w: W*0.145, s: 0.19 },
-    { y: H*0.460, w: W*0.115, s: 0.16 },
+// rebuilt on resize and on entering the page (depends on W,H)
+function buildArgScene() { buildArgHaze(); buildArgAudience(); }
+
+// ── Simulation step (haze drift, influence ripples, crowd glow) ─
+function argStep(t, dt) {
+  for (const h of argHaze) {
+    h.x += h.vx * 60 * dt; h.y += h.vy * 60 * dt;
+    if (h.y < -h.r || h.x < -h.r * 1.5 || h.x > W + h.r * 1.5) Object.assign(h, spawnArgHaze(false));
+  }
+  if (t - argLastRipple > 2.5) { argLastRipple = t; argRipples.push({ t0: t, dur: 4.4, prev: 0, cur: 0, p: 0 }); }
+  for (let i = argRipples.length - 1; i >= 0; i--) {
+    const rp = argRipples[i];
+    rp.p = (t - rp.t0) / rp.dur;
+    if (rp.p >= 1) { argRipples.splice(i, 1); continue; }
+    const rr = argEaseOut(rp.p) * argMaxD * 1.04;
+    for (const m of argAudience) if (m.d > rp.prev && m.d <= rr) m.glow = 1;
+    rp.prev = rr; rp.cur = rr;
+  }
+  for (const m of argAudience) m.glow *= Math.exp(-dt * 1.7);
+}
+
+// ── Volumetric spotlight beams from the rafters ────────────────
+function drawArgBeams(t) {
+  const beams = [
+    { x: 0.12, sx: 0.40, inten: 0.26 },
+    { x: 0.28, sx: 0.44, inten: 0.42 },
+    { x: 0.50, sx: 0.50, inten: 0.66 },
+    { x: 0.72, sx: 0.56, inten: 0.42 },
+    { x: 0.88, sx: 0.60, inten: 0.26 },
   ];
-
-  tiers.forEach(({ y, w, s }) => {
-    const sp = 13;
-    const count = Math.floor(w / sp);
-    ctx.fillStyle = `rgb(12,10,18)`;
-
-    // Left balcony
-    for (let i = 0; i < count; i++) {
-      const x = W*0.01 + (i + 0.5) * (w / count);
-      drawPersonBehind(ctx, x, y, s);
-    }
-    // Right balcony (mirror)
-    for (let i = 0; i < count; i++) {
-      const x = W*0.99 - w + (i + 0.5) * (w / count);
-      drawPersonBehind(ctx, x, y, s);
-    }
-
-    // Thin ledge line for balcony tier
-    ctx.fillStyle = 'rgba(60,40,20,0.35)';
-    ctx.fillRect(0, y + 10*s, w + W*0.01, 1.5);
-    ctx.fillRect(W - w - W*0.01, y + 10*s, w + W*0.01, 1.5);
-  });
-
-  // Upper rear balcony (full width, tiny)
-  const rearY = H * 0.215;
-  const rearSp = 11;
-  const rearCount = Math.floor(W * 0.88 / rearSp);
-  ctx.fillStyle = 'rgb(10,8,16)';
-  for (let i = 0; i < rearCount; i++) {
-    const x = W*0.06 + (i + 0.5) * (W*0.88 / rearCount);
-    drawPersonBehind(ctx, x, rearY, 0.15);
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — SPOTLIGHTS
-// ═══════════════════════════════════════════════════════════════
-const SPOTLIGHT_DEFS = [
-  { sx: 0.12, tx: 0.465, ty: 0.545, hw: 0.024, alpha: 0.11 },
-  { sx: 0.30, tx: 0.490, ty: 0.525, hw: 0.018, alpha: 0.14 },
-  { sx: 0.50, tx: 0.500, ty: 0.515, hw: 0.015, alpha: 0.16 },
-  { sx: 0.70, tx: 0.510, ty: 0.525, hw: 0.018, alpha: 0.14 },
-  { sx: 0.88, tx: 0.535, ty: 0.545, hw: 0.024, alpha: 0.11 },
-];
-
-function drawSpotlights(t) {
-  ctx.save();
-  SPOTLIGHT_DEFS.forEach(({ sx, tx, ty, hw, alpha }) => {
-    const srcX = sx * W, srcY = -H * 0.05;
-    const tgtX = tx * W, tgtY = ty * H;
-    const bw   = hw * W;
-    const wobble = Math.sin(t * 0.4 + sx * 10) * 2;
-
-    const pts = [
-      [srcX - 3,           srcY],
-      [srcX + 3,           srcY],
-      [tgtX + bw + wobble, tgtY],
-      [tgtX - bw + wobble, tgtY],
-    ];
-
-    const grad = ctx.createLinearGradient(srcX, srcY, tgtX, tgtY);
-    grad.addColorStop(0,   `rgba(255,220,120,${alpha * 0.3})`);
-    grad.addColorStop(0.35,`rgba(255,200,80,${alpha * 0.7})`);
-    grad.addColorStop(0.75,`rgba(255,185,60,${alpha})`);
-    grad.addColorStop(1,   `rgba(255,160,40,${alpha * 0.5})`);
-
-    ctx.globalCompositeOperation = 'screen';
-    ctx.fillStyle = grad;
+  for (let i = 0; i < beams.length; i++) {
+    const b = beams[i];
+    const topX = W * b.x, topY = -H * 0.07;
+    const sway = Math.sin(t * 0.45 + i * 1.7) * W * 0.012;
+    const baseX = W * b.sx + sway, baseY = H * (ARG_STAGE_Y - 0.02);
+    const hTop = W * 0.011, hBase = W * 0.115;
+    const dx = baseX - topX, dy = baseY - topY, len = Math.hypot(dx, dy);
+    const nx = -dy / len, ny = dx / len;
     ctx.beginPath();
-    ctx.moveTo(pts[0][0], pts[0][1]);
-    pts.slice(1).forEach(([px2, py2]) => ctx.lineTo(px2, py2));
+    ctx.moveTo(topX - nx * hTop, topY - ny * hTop);
+    ctx.lineTo(topX + nx * hTop, topY + ny * hTop);
+    ctx.lineTo(baseX + nx * hBase, baseY + ny * hBase);
+    ctx.lineTo(baseX - nx * hBase, baseY + ny * hBase);
     ctx.closePath();
-    ctx.fill();
-  });
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.restore();
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — STAGE
-// ═══════════════════════════════════════════════════════════════
-function drawStage(t) {
-  const floorY = H * 0.615;
-  const stageL = W * 0.03, stageR = W * 0.97;
-
-  ctx.save();
-
-  // Stage floor glow (warm pool of light)
-  const poolGrad = ctx.createRadialGradient(W/2, floorY - H*0.05, 0, W/2, floorY - H*0.05, W*0.38);
-  poolGrad.addColorStop(0,   'rgba(255,195,80,0.13)');
-  poolGrad.addColorStop(0.4, 'rgba(220,150,40,0.07)');
-  poolGrad.addColorStop(0.75,'rgba(180,110,20,0.03)');
-  poolGrad.addColorStop(1,   'rgba(0,0,0,0)');
-  ctx.fillStyle = poolGrad; ctx.fillRect(0, 0, W, H);
-
-  // Stage floor surface
-  const floorGrad = ctx.createLinearGradient(W/2, floorY - 30, W/2, floorY + 18);
-  floorGrad.addColorStop(0,   'rgba(38,20,6,0.95)');
-  floorGrad.addColorStop(0.55,'rgba(22,11,3,0.92)');
-  floorGrad.addColorStop(1,   'rgba(8,4,2,0.88)');
-  ctx.fillStyle = floorGrad;
-  ctx.fillRect(stageL, floorY - 10, stageR - stageL, 28);
-
-  // Stage lip — thin bright highlight at front edge
-  const lipGrad = ctx.createLinearGradient(stageL, floorY, stageR, floorY);
-  lipGrad.addColorStop(0,    'rgba(255,180,60,0)');
-  lipGrad.addColorStop(0.08, 'rgba(255,200,80,0.22)');
-  lipGrad.addColorStop(0.5,  'rgba(255,215,100,0.30)');
-  lipGrad.addColorStop(0.92, 'rgba(255,200,80,0.22)');
-  lipGrad.addColorStop(1,    'rgba(255,180,60,0)');
-  ctx.fillStyle = lipGrad;
-  ctx.fillRect(stageL, floorY - 2, stageR - stageL, 3);
-
-  // Stage haze — ground fog
-  const hazeGrad = ctx.createLinearGradient(W/2, floorY - H*0.12, W/2, floorY + 15);
-  hazeGrad.addColorStop(0,    'rgba(255,200,100,0)');
-  hazeGrad.addColorStop(0.55, 'rgba(255,180,70,0.04)');
-  hazeGrad.addColorStop(0.85, 'rgba(255,160,50,0.09)');
-  hazeGrad.addColorStop(1,    'rgba(255,140,40,0.06)');
-  ctx.fillStyle = hazeGrad; ctx.fillRect(0, floorY - H*0.12, W, H*0.14);
-
-  // Subtle horizontal haze stripes (drifting fog bands)
-  const drift = (t * 8) % (H * 0.08);
-  for (let i = 0; i < 4; i++) {
-    const hy = floorY - H*0.09 + i * H*0.022 + drift * 0.3;
-    const hg = ctx.createLinearGradient(W*0.2, hy, W*0.8, hy);
-    hg.addColorStop(0,   'rgba(255,200,100,0)');
-    hg.addColorStop(0.3, 'rgba(255,200,100,0.025)');
-    hg.addColorStop(0.7, 'rgba(255,200,100,0.025)');
-    hg.addColorStop(1,   'rgba(255,200,100,0)');
-    ctx.fillStyle = hg; ctx.fillRect(W*0.2, hy - 4, W*0.6, 8);
+    const lg = ctx.createLinearGradient(topX, topY, baseX, baseY);
+    lg.addColorStop(0, argRGBA(ARG_COL.gold, b.inten));
+    lg.addColorStop(0.45, argRGBA(ARG_COL.amber, b.inten * 0.42));
+    lg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = lg; ctx.fill();
   }
+}
 
+function drawArgHaze(t) {
+  for (const h of argHaze) {
+    const pulse = 0.55 + 0.45 * Math.sin(t * 0.6 + h.ph);
+    const rg = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, h.r);
+    rg.addColorStop(0, argRGBA(ARG_COL.warm, h.a * pulse));
+    rg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = rg;
+    ctx.beginPath(); ctx.arc(h.x, h.y, h.r, 0, 6.2832); ctx.fill();
+  }
+}
+
+// ── Warm pool of light on the stage floor (elevated platform) ──
+function drawArgStagePool(t) {
+  const cx = W * 0.5, cy = H * ARG_STAGE_Y;
+  const breathe = 0.85 + 0.15 * Math.sin(t * 0.9);
+  ctx.save();
+  ctx.translate(cx, cy); ctx.scale(1, 0.34); ctx.translate(-cx, -cy);
+  const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.24);
+  rg.addColorStop(0, argRGBA(ARG_COL.warm, 0.42 * breathe));
+  rg.addColorStop(0.45, argRGBA(ARG_COL.amber, 0.16 * breathe));
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(cx, cy, W * 0.24, 0, 6.2832); ctx.fill();
   ctx.restore();
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — SPEAKER + MIC
-// ═══════════════════════════════════════════════════════════════
-function drawSpeaker() {
-  const floorY  = H * 0.615;
-  const spX     = W / 2;
-  const spFoot  = floorY - 2;
-  const s       = Math.max(1, H * 0.018); // scale relative to screen
-
+// ── Ripples of influence spreading out over the crowd ──────────
+function drawArgRipples() {
+  const cx = W * 0.5, cy = H * ARG_PIT_CY;
   ctx.save();
-
-  // Speaker glow (tiny warm halo)
-  const halo = ctx.createRadialGradient(spX, spFoot - s*7, 0, spX, spFoot - s*7, s*22);
-  halo.addColorStop(0,   'rgba(255,210,120,0.18)');
-  halo.addColorStop(0.5, 'rgba(255,170,60,0.06)');
-  halo.addColorStop(1,   'rgba(0,0,0,0)');
-  ctx.fillStyle = halo; ctx.fillRect(spX - s*22, spFoot - s*30, s*44, s*44);
-
-  ctx.fillStyle = '#1a0f08';
-
-  // Legs
-  ctx.beginPath();
-  ctx.moveTo(spX, spFoot - s*3.5);
-  ctx.lineTo(spX - s*2.5, spFoot);
-  ctx.lineTo(spX - s*1.5, spFoot);
-  ctx.lineTo(spX, spFoot - s*2.2);
-  ctx.lineTo(spX + s*1.5, spFoot);
-  ctx.lineTo(spX + s*2.5, spFoot);
-  ctx.closePath(); ctx.fill();
-
-  // Body / torso
-  ctx.beginPath();
-  ctx.moveTo(spX - s*2.8, spFoot - s*3.5);
-  ctx.bezierCurveTo(spX - s*2.8, spFoot - s*8, spX - s*2, spFoot - s*11, spX, spFoot - s*11.5);
-  ctx.bezierCurveTo(spX + s*2, spFoot - s*11, spX + s*2.8, spFoot - s*8, spX + s*2.8, spFoot - s*3.5);
-  ctx.closePath(); ctx.fill();
-
-  // Right arm extended toward mic
-  ctx.beginPath();
-  ctx.moveTo(spX + s*2.5, spFoot - s*9.5);
-  ctx.lineTo(spX + s*5,   spFoot - s*13.5);
-  ctx.lineTo(spX + s*4,   spFoot - s*14.2);
-  ctx.lineTo(spX + s*1.5, spFoot - s*10.2);
-  ctx.closePath(); ctx.fill();
-
-  // Head
-  ctx.beginPath();
-  ctx.arc(spX, spFoot - s*14, s*2.2, 0, Math.PI*2); ctx.fill();
-
-  // Microphone stand
-  ctx.fillStyle = 'rgba(80,60,30,0.85)';
-  ctx.fillRect(spX + s*4.5, spFoot - s*18, s*0.9, s*18);
-
-  // Mic base
-  ctx.fillRect(spX + s*2.8, spFoot - s*1, s*4.2, s*1.2);
-
-  // Mic head
-  const micX = spX + s*4.9, micY = spFoot - s*18;
-  ctx.beginPath();
-  ctx.ellipse(micX, micY, s*1.6, s*2.4, 0, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(200,160,80,0.75)'; ctx.fill();
-  ctx.strokeStyle = 'rgba(255,210,100,0.5)'; ctx.lineWidth = 0.5; ctx.stroke();
-
-  ctx.restore();
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — WORD PARTICLES
-// ═══════════════════════════════════════════════════════════════
-const ARG_WORDS = [
-  'Tone','Structure','Evidence','Emotion',
-  'Audience','Persuasion','Ethos','Pathos',
-  'Logos','Rhetoric','Voice','Purpose',
-  'Diction','Appeal','Cadence','Argument',
-];
-let wordParticles  = [];
-let pulseRings     = [];
-let dustParticles  = [];
-let lastWordTime   = -999;
-let lastPulseTime  = -999;
-
-function getMicPos() {
-  const s = Math.max(1, H * 0.018);
-  return { x: W/2 + s*4.9, y: H*0.615 - s*18 };
-}
-
-function initArgScene() {
-  wordParticles = [];
-  pulseRings    = [];
-  lastWordTime  = -999;
-  lastPulseTime = -999;
-
-  // Pre-fill dust
-  dustParticles = Array.from({ length: 110 }, () => {
-    const bx = W/2 + (Math.random()-0.5) * W * 0.55;
-    return {
-      x:     bx,
-      y:     H * 0.25 + Math.random() * H * 0.42,
-      vy:   -(0.12 + Math.random() * 0.28),
-      vx:    (Math.random()-0.5) * 0.08,
-      r:     Math.random() * 1.1 + 0.2,
-      alpha: Math.random() * 0.45 + 0.08,
-    };
-  });
-}
-
-function spawnWord(t) {
-  const mic = getMicPos();
-  const side = Math.random() < 0.5 ? -1 : 1;
-  const angle = (Math.PI * 0.5) + side * (Math.random() * Math.PI * 0.42 + 0.1);
-  const speed = 38 + Math.random() * 32;
-  wordParticles.push({
-    word:  ARG_WORDS[Math.floor(Math.random() * ARG_WORDS.length)],
-    x:     mic.x, y: mic.y,
-    vx:    Math.cos(angle) * speed,
-    vy:    Math.sin(angle) * speed,
-    born:  t,
-    life:  3.2 + Math.random() * 1.4,
-    size:  13 + Math.random() * 7,
-    glow:  Math.random() * 0.4 + 0.6,
-  });
-}
-
-function spawnPulse(t) {
-  const mic = getMicPos();
-  pulseRings.push({ x: mic.x, y: mic.y, born: t, life: 2.8 });
-}
-
-function updateAndDrawWords(t) {
-  if (t - lastWordTime > 1.15) { spawnWord(t); lastWordTime = t; }
-  if (t - lastPulseTime > 2.6)  { spawnPulse(t); lastPulseTime = t; }
-
-  // Pulse rings
-  ctx.save();
-  pulseRings = pulseRings.filter(p => t - p.born < p.life);
-  pulseRings.forEach(p => {
-    const pct = (t - p.born) / p.life;
-    const r   = pct * W * 0.38;
-    const a   = (1 - pct) * 0.18;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, r, 0, Math.PI*2);
-    ctx.strokeStyle = `rgba(255,200,80,${a})`;
-    ctx.lineWidth = 1.2 - pct * 0.8;
+  ctx.translate(cx, cy); ctx.scale(1, 0.56); ctx.translate(-cx, -cy);
+  for (const rp of argRipples) {
+    if (rp.cur <= 0) continue;
+    const a = (1 - rp.p) * 0.45;
+    ctx.beginPath(); ctx.arc(cx, cy, rp.cur, 0, 6.2832);
+    ctx.strokeStyle = argRGBA(ARG_COL.gold, a);
+    ctx.lineWidth = 1.5 + (1 - rp.p) * 7;
+    ctx.shadowColor = argRGBA(ARG_COL.amber, a);
+    ctx.shadowBlur = 26;
     ctx.stroke();
-  });
+  }
+  ctx.restore();
+  ctx.shadowBlur = 0;
+}
 
-  // Word particles
-  wordParticles = wordParticles.filter(p => t - p.born < p.life);
-  ctx.textBaseline = 'middle';
-  wordParticles.forEach(p => {
-    const age  = t - p.born;
-    const pct  = age / p.life;
-    const dt   = 1/60;
-    p.x += p.vx * dt;
-    p.y += p.vy * dt;
-    p.vx *= 0.992;
-    p.vy *= 0.992;
-
-    let a;
-    if (pct < 0.15)     a = pct / 0.15;
-    else if (pct < 0.6) a = 1;
-    else                a = 1 - (pct - 0.6) / 0.4;
-    a = clamp(a, 0, 1);
-
-    const scale = 0.85 + pct * 0.30;
-    const fs    = p.size * scale;
-
+// ── The crowd — rim-lit silhouettes that light up as ideas spread ─
+function drawArgAudience() {
+  for (const m of argAudience) {
+    const b = Math.min(1, m.baseB + m.glow * 0.85);
+    let col = argMix(ARG_COL.black, ARG_COL.gold, b);
+    if (m.glow > 0.02) col = argMix(col, ARG_COL.amber, m.glow * 0.3);
+    if (m.glow > 0.05) {
+      const rg = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.headR * 6);
+      rg.addColorStop(0, argRGBA(ARG_COL.amber, m.glow * 0.26));
+      rg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = rg;
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.headR * 6, 0, 6.2832); ctx.fill();
+    }
+    ctx.fillStyle = argRGBA(col, 1);
+    // shoulders / upper body
+    ctx.beginPath();
+    ctx.ellipse(m.x, m.y + m.headR * 2.15, m.headR * 1.95, m.headR * 1.95, 0, 0, 6.2832);
+    ctx.fill();
+    // head
+    ctx.beginPath();
+    ctx.ellipse(m.x, m.y, m.headR * 0.86, m.headR, 0, 0, 6.2832);
+    ctx.fill();
+    // warm rim light catching the stage glow on the crown of the head
+    const rimA = Math.min(0.7, m.rim + m.glow * 0.5);
     ctx.save();
-    ctx.font = `300 ${fs}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-
-    // Glow
-    ctx.shadowBlur  = 18 * p.glow * (1 - pct * 0.5);
-    ctx.shadowColor = `rgba(255,200,80,${a * 0.8})`;
-    ctx.fillStyle   = `rgba(255,${Math.round(200 + pct*30)},${Math.round(100 + pct*40)},${a * 0.92})`;
-    ctx.globalAlpha = a;
-    ctx.fillText(p.word, p.x, p.y);
+    ctx.globalCompositeOperation = 'screen';
+    ctx.lineWidth = Math.max(0.6, m.headR * 0.22);
+    ctx.strokeStyle = argRGBA(argMix(ARG_COL.gold, ARG_COL.warm, m.glow * 0.5), rimA);
+    ctx.beginPath();
+    ctx.ellipse(m.x, m.y - m.headR * 0.06, m.headR * 0.84, m.headR * 0.98, 0, Math.PI * 1.14, Math.PI * 1.86);
+    ctx.stroke();
     ctx.restore();
+  }
+}
+
+function drawArgCrowdFade() {
+  // dissolve the back rows of the crowd into the dark of the auditorium
+  const g = ctx.createLinearGradient(0, H * 0.52, 0, H * 0.74);
+  g.addColorStop(0, 'rgba(4,6,13,0.97)');
+  g.addColorStop(0.6, 'rgba(4,6,13,0.5)');
+  g.addColorStop(1, 'rgba(4,6,13,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, H * 0.5, W, H * 0.26);
+}
+
+// ── Theatrical stage framing — side drapes + proscenium top ────
+function drawArgFraming() {
+  const legW = W * 0.085;
+  [[0, 1], [W, -1]].forEach(([ox, dir]) => {
+    const x0 = Math.min(ox, ox + dir * legW);
+    const g = ctx.createLinearGradient(ox, 0, ox + dir * legW, 0);
+    g.addColorStop(0,    'rgba(3,4,10,0.96)');
+    g.addColorStop(0.55, 'rgba(5,6,14,0.72)');
+    g.addColorStop(1,    'rgba(5,6,14,0)');
+    ctx.fillStyle = g; ctx.fillRect(x0, 0, legW, H);
+    // faint warm inner edge where the drape catches the stage light
+    const ex = ox + dir * legW, ew = W * 0.012;
+    const e = ctx.createLinearGradient(ex, 0, ex - dir * ew, 0);
+    e.addColorStop(0, argRGBA(ARG_COL.amber, 0.10));
+    e.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = e; ctx.fillRect(Math.min(ex, ex - dir * ew), 0, ew, H);
   });
+  // proscenium top darkening
+  const tg = ctx.createLinearGradient(0, 0, 0, H * 0.16);
+  tg.addColorStop(0, 'rgba(3,4,10,0.85)');
+  tg.addColorStop(1, 'rgba(3,4,10,0)');
+  ctx.fillStyle = tg; ctx.fillRect(0, 0, W, H * 0.16);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  ARGUMENTATION — FLOATING FRAGMENTS
+// ═══════════════════════════════════════════════════════════════
+//  Key persuasion words drifting in the lit haze above the crowd.
+const ARG_FRAGS = [
+  { w:'Evidence',  x:0.12, y:0.40, s:18, dur:17, ph:-2,  lo:0.18, hi:0.50, blur:0.4 },
+  { w:'Emotion',   x:0.80, y:0.35, s:16, dur:19, ph:-6,  lo:0.16, hi:0.46, blur:0   },
+  { w:'Logic',     x:0.20, y:0.54, s:14, dur:15, ph:-9,  lo:0.12, hi:0.32, blur:1.0 },
+  { w:'Structure', x:0.74, y:0.52, s:20, dur:21, ph:-3,  lo:0.16, hi:0.50, blur:0   },
+  { w:'Audience',  x:0.30, y:0.31, s:13, dur:18, ph:-12, lo:0.12, hi:0.30, blur:1.4 },
+  { w:'Purpose',   x:0.64, y:0.44, s:14, dur:16, ph:-7,  lo:0.12, hi:0.34, blur:0.6 },
+  { w:'Tone',      x:0.34, y:0.46, s:17, dur:20, ph:-14, lo:0.14, hi:0.40, blur:0   },
+];
+function drawArgFragments(t) {
+  const sc = clamp(W / 1180, 0.75, 1.5);
+  ctx.save();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.letterSpacing = '0.18em';
+  for (const f of ARG_FRAGS) {
+    const k    = 0.5 - 0.5 * Math.cos((t / f.dur + f.ph) * Math.PI * 2); // 0..1..0 ease
+    const yoff = 6 - 16 * k;
+    const a    = f.lo + (f.hi - f.lo) * k;
+    ctx.font = `500 ${f.s * sc}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
+    ctx.shadowColor = argRGBA(ARG_COL.amber, a * 0.5);
+    ctx.shadowBlur  = 10 + f.blur * 8;
+    ctx.fillStyle   = argRGBA(ARG_COL.gold, a);
+    ctx.fillText(f.w.toUpperCase(), f.x * W, f.y * H + yoff);
+  }
+  ctx.letterSpacing = '0px';
   ctx.restore();
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  ARGUMENTATION — DUST PARTICLES
+//  ARGUMENTATION — BACKLIT SPEAKER
 // ═══════════════════════════════════════════════════════════════
-function updateAndDrawDust(t) {
+//  One elegant silhouette, centre stage, holding a microphone.
+const ARG_SPK_BODY = new Path2D("M120 96 C 104 96, 96 104, 92 118 C 80 122, 70 134, 66 154 L 58 250 C 56 264, 60 272, 70 274 C 74 300, 76 330, 80 360 L 84 470 C 84 486, 82 500, 78 520 C 76 534, 84 540, 96 540 C 106 540, 110 532, 111 520 L 116 410 C 117 398, 123 398, 124 410 L 129 520 C 130 532, 134 540, 144 540 C 156 540, 164 534, 162 520 C 158 500, 156 486, 156 470 L 160 360 C 164 330, 166 300, 170 274 C 180 272, 184 264, 182 250 L 174 154 C 170 134, 160 122, 148 118 C 144 104, 136 96, 120 96 Z");
+const ARG_SPK_ARM  = new Path2D("M150 124 C 166 128, 178 140, 184 158 C 190 176, 188 196, 178 208 C 172 215, 162 214, 158 206 C 154 198, 158 190, 162 182 C 166 172, 162 160, 152 152 C 146 147, 142 138, 144 130 C 145 125, 147 123, 150 124 Z");
+
+function drawArgSpeaker(t) {
+  const sc = (H * 0.34) / 560;          // viewBox is 240×560; feet at y≈540
+  const baseX = W * 0.5, baseY = H * ARG_STAGE_Y;
+
+  // warm backlight halo wrapping the silhouette's edge
   ctx.save();
-  dustParticles.forEach(d => {
-    d.x += d.vx + Math.sin(t * 0.3 + d.y * 0.01) * 0.06;
-    d.y += d.vy;
-    if (d.y < H * 0.20) {
-      d.y = H * 0.62 + Math.random() * H * 0.06;
-      d.x = W/2 + (Math.random()-0.5) * W * 0.55;
-    }
-
-    // Only visible within approximate spotlight cone (within ~45% of center)
-    const distFromCenter = Math.abs(d.x - W/2) / (W * 0.5);
-    const heightFactor   = clamp(1 - (d.y / H - 0.2) / 0.45, 0, 1);
-    const inBeam         = clamp(1 - distFromCenter * 1.8, 0, 1) * heightFactor;
-    if (inBeam < 0.02) return;
-
-    const pulse = 0.7 + 0.3 * Math.sin(t * 1.2 + d.x * 0.05);
-    ctx.globalAlpha = d.alpha * inBeam * pulse;
-    ctx.beginPath();
-    ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(255,210,140,1)';
-    ctx.fill();
-  });
+  ctx.globalCompositeOperation = 'screen';
+  const halo = ctx.createRadialGradient(baseX, baseY - H*0.16, 0, baseX, baseY - H*0.16, H*0.26);
+  halo.addColorStop(0,   argRGBA(ARG_COL.warm, 0.30));
+  halo.addColorStop(0.5, argRGBA(ARG_COL.amber, 0.10));
+  halo.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = halo;
+  ctx.beginPath(); ctx.ellipse(baseX, baseY - H*0.16, H*0.12, H*0.24, 0, 0, 6.2832); ctx.fill();
   ctx.restore();
+
+  ctx.save();
+  ctx.translate(baseX, baseY);
+  ctx.scale(sc, sc);
+  ctx.translate(-120, -540);
+
+  // dark silhouette
+  ctx.fillStyle = '#05070e';
+  ctx.fill(ARG_SPK_BODY);
+  ctx.fill(ARG_SPK_ARM);
+  ctx.beginPath(); ctx.ellipse(120, 66, 29, 33, 0, 0, 6.2832); ctx.fill();   // head
+  ctx.beginPath(); ctx.ellipse(170, 208, 13, 12, 0, 0, 6.2832); ctx.fill();  // mic head
+  ctx.save();
+  ctx.translate(170, 210); ctx.rotate(14 * Math.PI / 180); ctx.translate(-170, -210);
+  litRoundRect(165, 206, 10, 40, 5); ctx.fill();                             // mic handle
+  ctx.restore();
+
+  // warm rim light along the lit edge
+  ctx.globalCompositeOperation = 'screen';
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = argRGBA(ARG_COL.gold, 0.5);
+  ctx.stroke(ARG_SPK_BODY);
+  ctx.stroke(ARG_SPK_ARM);
+  ctx.beginPath(); ctx.ellipse(120, 66, 29, 33, 0, 0, 6.2832); ctx.stroke();
+  ctx.globalCompositeOperation = 'source-over';
+
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  ARGUMENTATION — SCENE INIT
+// ═══════════════════════════════════════════════════════════════
+function initArgScene() {
+  argPrevT = 0;
+  buildArgScene();
+  argRipples = [];
+  argLastRipple = -2.0;
+  // pre-warm so the auditorium already feels alive on arrival (no blank/loading)
+  for (let i = 0; i < 90; i++) argStep(0.5 + i * 0.02, 0.02);
+  argRipples = [];        // discard pre-warm ripples; keep the audience glow
+  argLastRipple = -2.0;   // let the live loop spawn a fresh ripple promptly
+  argPrevT = 0;
 }
 
 // ═══════════════════════════════════════════════════════════════
 //  ARGUMENTATION — FULL SCENE
 // ═══════════════════════════════════════════════════════════════
 function drawAuditorium(t) {
-  // Background
-  const bg = ctx.createLinearGradient(W/2, 0, W/2, H);
-  bg.addColorStop(0,    '#040208');
-  bg.addColorStop(0.25, '#060410');
-  bg.addColorStop(0.55, '#08050f');
-  bg.addColorStop(1,    '#060408');
-  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  // advance the living scene
+  const dt = Math.min(0.05, Math.max(0, t - argPrevT));
+  argPrevT = t;
+  argStep(t, dt);
 
-  // Subtle warm ambient at stage level
-  const ambient = ctx.createRadialGradient(W/2, H*0.55, 0, W/2, H*0.55, W*0.60);
-  ambient.addColorStop(0,   'rgba(180,100,20,0.08)');
-  ambient.addColorStop(0.5, 'rgba(120,60,10,0.03)');
-  ambient.addColorStop(1,   'rgba(0,0,0,0)');
-  ctx.fillStyle = ambient; ctx.fillRect(0, 0, W, H);
+  // base gradient — deep black → navy
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0,    argRGBA(ARG_COL.black, 1));
+  g.addColorStop(0.4,  argRGBA(ARG_COL.deep, 1));
+  g.addColorStop(0.68, argRGBA(ARG_COL.navy, 1));
+  g.addColorStop(1,    argRGBA(ARG_COL.black, 1));
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
-  drawSpotlights(t);
-  drawStage(t);
-  drawBalconies();
-  ctx.drawImage(audienceCvs, 0, 0);
-  updateAndDrawDust(t);
-  drawSpeaker();
-  updateAndDrawWords(t);
+  // warm key light
+  const rg = ctx.createRadialGradient(W*0.5, H*ARG_FOCUS_Y, 0, W*0.5, H*ARG_FOCUS_Y, H*0.75);
+  rg.addColorStop(0, 'rgba(64,46,28,0.55)');
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
 
-  // Vignette
-  const vig = ctx.createRadialGradient(W/2, H*0.50, H*0.15, W/2, H*0.50, H*0.85);
+  // volumetric light (additive): beams, haze, stage pool, ripples
+  ctx.globalCompositeOperation = 'screen';
+  drawArgBeams(t);
+  drawArgHaze(t);
+  drawArgStagePool(t);
+  drawArgRipples();
+  ctx.globalCompositeOperation = 'source-over';
+
+  // the crowd
+  drawArgCrowdFade();
+  drawArgAudience();
+
+  // theatrical framing
+  drawArgFraming();
+
+  // vignette (frames the crowd; speaker + fragments sit above it)
+  const vig = ctx.createRadialGradient(W/2, H*0.46, H*0.18, W/2, H*0.50, H*0.92);
   vig.addColorStop(0,   'rgba(0,0,0,0)');
-  vig.addColorStop(0.65,'rgba(0,0,0,0.10)');
-  vig.addColorStop(1,   'rgba(0,0,0,0.82)');
+  vig.addColorStop(0.62,'rgba(4,6,13,0.18)');
+  vig.addColorStop(1,   'rgba(4,6,13,0.86)');
   ctx.fillStyle = vig; ctx.fillRect(0, 0, W, H);
 
-  // Subtle cursor lens (warm)
-  const la = 0.06;
-  const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 100);
-  lg.addColorStop(0,   `rgba(200,150,60,${la})`);
-  lg.addColorStop(0.55,`rgba(100,70,20,${la*0.3})`);
+  // fragments in the haze, then the lone speaker on top
+  drawArgFragments(t);
+  drawArgSpeaker(t);
+
+  // subtle warm cursor lens (consistent with the rest of the site)
+  const la = 0.05;
+  const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 110);
+  lg.addColorStop(0,   argRGBA(ARG_COL.gold, la));
+  lg.addColorStop(0.55,argRGBA(ARG_COL.amber, la*0.3));
   lg.addColorStop(1,   'rgba(0,0,0,0)');
   ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H);
 }
@@ -1325,74 +1316,75 @@ function drawNeuralLines(t, orb, positions) {
   ctx.restore();
 }
 
-// ── Glass lens card ────────────────────────────────────────────
+// ── Circular glass lens ────────────────────────────────────────
 function drawLensCard(card, pos, t) {
-  const w = clamp(W * 0.18, 196, 300) * card.scale;
-  const h = w * 1.32;
-  const x = pos.x - w/2, y = pos.y - h/2;
+  const R = clamp(W * 0.074, 80, 124) * card.scale;
   const [hr, hg, hb] = card.hue;
-
+  const cx = pos.x, cy = pos.y;
   ctx.save();
 
-  // soft reflection beneath
-  const rgUnder = ctx.createRadialGradient(pos.x, y+h+10, 0, pos.x, y+h+10, w*0.55);
-  rgUnder.addColorStop(0, `rgba(${hr},${hg},${hb},0.14)`);
-  rgUnder.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = rgUnder;
-  ctx.beginPath();
-  ctx.ellipse(pos.x, y+h+12, w*0.5, h*0.10, 0, 0, Math.PI*2);
-  ctx.fill();
+  // soft outer glow
+  ctx.globalCompositeOperation = 'screen';
+  const glow = ctx.createRadialGradient(cx, cy, R*0.5, cx, cy, R*1.75);
+  glow.addColorStop(0,   `rgba(${hr},${hg},${hb},0.26)`);
+  glow.addColorStop(0.5, `rgba(${hr},${hg},${hb},0.10)`);
+  glow.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath(); ctx.arc(cx, cy, R*1.75, 0, Math.PI*2); ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
 
-  // outer glow
-  ctx.shadowBlur = 46; ctx.shadowColor = `rgba(${hr},${hg},${hb},0.40)`;
+  // transparent tinted glass body
+  const body = ctx.createRadialGradient(cx - R*0.32, cy - R*0.36, 0, cx, cy, R);
+  body.addColorStop(0,    `rgba(${Math.min(255,hr+55)},${Math.min(255,hg+55)},${Math.min(255,hb+45)},0.24)`);
+  body.addColorStop(0.55, `rgba(${hr},${hg},${hb},0.12)`);
+  body.addColorStop(0.85, `rgba(${hr},${hg},${hb},0.055)`);
+  body.addColorStop(1,    'rgba(18,22,46,0.02)');
+  ctx.fillStyle = body;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fill();
 
-  // glass body
-  const gg = ctx.createLinearGradient(x, y, x, y+h);
-  gg.addColorStop(0,   `rgba(${hr},${hg},${hb},0.16)`);
-  gg.addColorStop(0.5, 'rgba(120,140,210,0.07)');
-  gg.addColorStop(1,   'rgba(40,50,110,0.05)');
-  ctx.fillStyle = gg;
-  litRoundRect(x, y, w, h, 16); ctx.fill();
-  ctx.shadowBlur = 0;
+  // chromatic refraction inside — colour separates, fusing toward white
+  const off = R*0.11 + Math.sin(t*0.6 + card.phase)*R*0.03;
+  ctx.globalCompositeOperation = 'screen';
+  [[hr,hg,hb],[235,242,255]].forEach((col, i) => {
+    const a  = card.phase + i*Math.PI + t*0.2;
+    const ox = Math.cos(a)*off, oy = Math.sin(a)*off;
+    const g  = ctx.createRadialGradient(cx+ox, cy+oy, 0, cx+ox, cy+oy, R*0.72);
+    g.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},0.13)`);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(cx+ox, cy+oy, R*0.72, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.globalCompositeOperation = 'source-over';
 
-  // border
-  ctx.strokeStyle = `rgba(${Math.min(255,hr+60)},${Math.min(255,hg+60)},255,0.40)`;
-  ctx.lineWidth = 1.2;
-  litRoundRect(x, y, w, h, 16); ctx.stroke();
+  // concentric rings — optical element
+  ctx.strokeStyle = `rgba(${Math.min(255,hr+70)},${Math.min(255,hg+70)},255,0.50)`;
+  ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();
+  ctx.strokeStyle = `rgba(${Math.min(255,hr+70)},${Math.min(255,hg+70)},255,0.20)`;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, R*0.72, 0, Math.PI*2); ctx.stroke();
 
   // top sheen
-  const sheen = ctx.createLinearGradient(x, y, x, y + h*0.4);
-  sheen.addColorStop(0, 'rgba(255,255,255,0.14)');
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.clip();
+  const sheen = ctx.createLinearGradient(cx, cy-R, cx, cy);
+  sheen.addColorStop(0, 'rgba(255,255,255,0.22)');
   sheen.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = sheen;
-  litRoundRect(x+1, y+1, w-2, h*0.4, 15); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(cx, cy - R*0.46, R*0.64, R*0.36, 0, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
 
-  // lens glyph
-  const lx = pos.x, ly = y + h*0.30;
-  const lgg = ctx.createRadialGradient(lx, ly, 0, lx, ly, w*0.16);
-  lgg.addColorStop(0,   `rgba(${hr},${hg},${hb},0.6)`);
-  lgg.addColorStop(0.6, `rgba(${hr},${hg},${hb},0.12)`);
-  lgg.addColorStop(1,   'rgba(0,0,0,0)');
-  ctx.fillStyle = lgg;
-  ctx.beginPath(); ctx.arc(lx, ly, w*0.16, 0, Math.PI*2); ctx.fill();
-  ctx.strokeStyle = 'rgba(220,230,255,0.5)'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.arc(lx, ly, w*0.11, 0, Math.PI*2); ctx.stroke();
+  // specular highlight
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.beginPath(); ctx.arc(cx - R*0.33, cy - R*0.35, R*0.05, 0, Math.PI*2); ctx.fill();
 
-  // text
+  // lens name beneath
   ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(240,244,255,0.96)';
-  ctx.font = `600 ${w*0.125}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
+  ctx.fillStyle = 'rgba(238,242,255,0.92)';
+  ctx.font = `500 ${clamp(W*0.0125,14,19)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
   ctx.shadowBlur = 12; ctx.shadowColor = `rgba(${hr},${hg},${hb},0.7)`;
-  ctx.fillText(card.title, pos.x, y + h*0.60);
+  ctx.fillText(card.title, cx, cy + R + 30);
   ctx.shadowBlur = 0;
-
-  ctx.fillStyle = 'rgba(200,210,240,0.62)';
-  ctx.font = `300 ${w*0.064}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-  ctx.fillText(card.sub, pos.x, y + h*0.74);
-
-  ctx.fillStyle = `rgba(${hr},${hg},${hb},0.7)`;
-  ctx.font = `500 ${w*0.05}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-  ctx.fillText('— CRITICAL LENS —', pos.x, y + h*0.86);
 
   ctx.restore();
 }
@@ -1413,14 +1405,6 @@ function drawLensSpace(t) {
   order.forEach(i => drawLensCard(LIT_CARDS[i], positions[i], t));
 
   drawLitParticles(t, true);    // front particles
-
-  // Brooks reference caption
-  ctx.save();
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(190,200,235,0.48)';
-  ctx.font = `300 ${clamp(W*0.011,12,15)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-  ctx.fillText('One advertisement, three readings — interpreting the Brooks ad through each lens', W/2, H*0.90);
-  ctx.restore();
 
   // vignette
   const vig = ctx.createRadialGradient(W/2, H*0.48, H*0.16, W/2, H*0.48, H*0.85);
@@ -1749,14 +1733,6 @@ function drawBookSpace(t) {
 
   drawBookParticles(t, true);
   drawBeamLabels(t, g);
-
-  // caption — the thesis of the unit
-  ctx.save();
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(205,215,245,0.5)';
-  ctx.font = `300 ${clamp(W*0.011,12,15)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-  ctx.fillText('One text, one first reading — many deeper understandings, revisited and discussed.', W/2, H*0.93);
-  ctx.restore();
 
   // light vignette (brighter than the lens-space)
   const vig = ctx.createRadialGradient(W/2, H*0.5, H*0.2, W/2, H*0.5, H*0.9);
@@ -2147,14 +2123,6 @@ function drawDramaRoom(t) {
   drawDeskLamp(t);
   drawDramaDust(t);
 
-  // caption — the lesson of the unit
-  ctx.save();
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(220,190,150,0.5)';
-  ctx.font = `300 ${clamp(W*0.011,12,15)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
-  ctx.fillText('Meaning lives beyond the dialogue — in staging, body, voice, and the motives underneath.', W/2, H*0.94);
-  ctx.restore();
-
   // heavy vignette (hidden meaning)
   const vig = ctx.createRadialGradient(W/2, H*0.5, H*0.12, W/2, H*0.5, H*0.9);
   vig.addColorStop(0, 'rgba(0,0,0,0)');
@@ -2166,6 +2134,400 @@ function drawDramaRoom(t) {
   const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 100);
   lg.addColorStop(0, 'rgba(230,170,80,0.06)');
   lg.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  CONCLUSION — COSMIC CONVERGENCE
+// ═══════════════════════════════════════════════════════════════
+//  Every unit becomes one orbiting echo, converging on a single
+//  glowing lens — the realization that ties the whole course
+//  together: look beyond the surface.
+//  Ordered as the course chain: Persuasion → Perspective → Understanding → Motivation.
+const CONC_NODES = [
+  { key: 'Persuasion',    beyond: 'BEYOND THE WORDS',        baseAng: -Math.PI*0.75, col: [255,196,92],  glyph: 'waves'   }, // Argumentation — gold/amber
+  { key: 'Perspective',   beyond: 'BEYOND ONE READING',      baseAng: -Math.PI*0.25, col: [150,170,255], glyph: 'cards'   }, // Literary Criticism — violet/blue
+  { key: 'Understanding', beyond: 'BEYOND FIRST IMPRESSIONS',baseAng:  Math.PI*0.25, col: [196,224,255], glyph: 'prism'   }, // Book Club — white/prism
+  { key: 'Motivation',    beyond: 'BEYOND THE ACTIONS',      baseAng:  Math.PI*0.75, col: [226,98,74],   glyph: 'strings' }, // Drama — deep red/amber
+];
+let concStars = [], concParticles = [], concT0 = null;
+
+function initConcScene() {
+  concT0 = null;
+  // Pre-filled so the final understanding already exists on arrival — no reveal delay.
+  concStars = Array.from({ length: 480 }, () => ({
+    x: Math.random()*W, y: Math.random()*H,
+    r: Math.random()*1.5 + 0.2,
+    base: Math.random()*0.7 + 0.18,
+    phase: Math.random()*Math.PI*2,
+    freq: (Math.random()*0.4 + 0.15)*0.02,
+    depth: Math.random(),
+  }));
+  concParticles = Array.from({ length: 140 }, () => ({
+    x: Math.random()*W, y: Math.random()*H,
+    r: Math.random()*1.7 + 0.3,
+    vx: (Math.random()-0.5)*0.08,
+    vy: -(0.03 + Math.random()*0.16),
+    base: Math.random()*0.5 + 0.12,
+    phase: Math.random()*Math.PI*2,
+    freq: Math.random()*0.03 + 0.008,
+    tint: Math.random(),
+  }));
+}
+
+function concParallax() { return { x: (mx/W - 0.5), y: (my/H - 0.5) }; }
+function concCenter(par) { return { x: W*0.5 + par.x*16, y: H*0.55 + par.y*12 }; }
+
+function concNodePos(node, t, c, par) {
+  const ang = node.baseAng + t*0.045;                 // slow, cinematic orbit
+  const rx = W*0.27, ry = H*0.265;
+  const breathe = 1 + Math.sin(t*0.5 + node.baseAng)*0.02;
+  return {
+    x: c.x + Math.cos(ang)*rx*breathe + par.x*38,     // nodes parallax deeper than lens
+    y: c.y + Math.sin(ang)*ry*breathe + par.y*26,
+  };
+}
+
+// ── Environment ────────────────────────────────────────────────
+function drawConcBackground(t) {
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0,    '#06060f');
+  bg.addColorStop(0.4,  '#080718');
+  bg.addColorStop(0.75, '#0a0716');
+  bg.addColorStop(1,    '#05040c');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  // one drifting nebula per unit palette, blended together via screen
+  const clouds = [
+    [0.20, 0.26, 0.42, '150,110,40',  0.16, 0.05],   // argumentation — gold
+    [0.82, 0.32, 0.44, '90,80,200',   0.16, 0.04],   // literary       — violet/blue
+    [0.50, 0.16, 0.40, '120,150,210', 0.10, 0.06],   // book club      — cool white
+    [0.74, 0.82, 0.42, '150,40,40',   0.13, 0.05],   // drama          — deep red
+    [0.24, 0.80, 0.40, '110,80,170',  0.12, 0.045],  // violet fill
+  ];
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  clouds.forEach(([fx, fy, fr, col, a, sp], i) => {
+    const dx = Math.sin(t*sp + i)*W*0.02;
+    const dy = Math.cos(t*sp*0.8 + i)*H*0.02;
+    const g = ctx.createRadialGradient(fx*W+dx, fy*H+dy, 0, fx*W+dx, fy*H+dy, fr*W);
+    g.addColorStop(0,   `rgba(${col},${a})`);
+    g.addColorStop(0.5, `rgba(${col},${a*0.32})`);
+    g.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  });
+  ctx.restore();
+}
+
+function drawConcStars(t, par) {
+  ctx.save();
+  concStars.forEach(s => {
+    s.phase += s.freq;
+    const a = s.base*(0.6 + 0.4*Math.sin(s.phase));
+    const sx = s.x + par.x*30*s.depth;
+    const sy = s.y + par.y*30*s.depth;
+    ctx.globalAlpha = a*0.13;
+    const h = ctx.createRadialGradient(sx, sy, 0, sx, sy, s.r*5);
+    h.addColorStop(0, '#fff'); h.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = h; ctx.fillRect(sx-s.r*5, sy-s.r*5, s.r*10, s.r*10);
+    ctx.globalAlpha = a;
+    ctx.beginPath(); ctx.arc(sx, sy, s.r, 0, Math.PI*2);
+    ctx.fillStyle = s.depth > 0.7 ? '#cdd8ff' : '#ffffff'; ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawConcParticles(t, front) {
+  ctx.save();
+  concParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.phase += p.freq;
+    if (p.y < -10) { p.y = H + 10; p.x = Math.random()*W; }
+    if (p.x < -10) p.x = W + 10;
+    if (p.x > W+10) p.x = -10;
+    const isFront = p.r > 1.05;
+    if (isFront !== front) return;
+    const a = p.base*(0.5 + 0.5*Math.sin(p.phase));
+    let col;                                          // cosmic dust tinted from every palette
+    if (p.tint < 0.3)       col = '255,210,150';      // gold
+    else if (p.tint < 0.55) col = '190,200,255';      // violet/blue
+    else if (p.tint < 0.8)  col = '220,235,255';      // white
+    else                    col = '255,150,130';      // red
+    ctx.globalAlpha = a;
+    ctx.shadowBlur = 6; ctx.shadowColor = `rgba(${col},0.8)`;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(${col},1)`; ctx.fill();
+  });
+  ctx.restore();
+}
+
+// ── The central lens (understanding) ───────────────────────────
+function drawConcLens(t, cx, cy) {
+  const R = H*0.165;
+  const r = R * (1 + Math.sin(t*0.6)*0.03);           // slow breathing
+  ctx.save();
+
+  // vast soft aura — atmospheric light
+  ctx.globalCompositeOperation = 'screen';
+  let aura = ctx.createRadialGradient(cx, cy, 0, cx, cy, r*3.0);
+  aura.addColorStop(0,    'rgba(200,205,255,0.12)');
+  aura.addColorStop(0.28, 'rgba(150,140,230,0.07)');
+  aura.addColorStop(0.6,  'rgba(120,90,160,0.03)');
+  aura.addColorStop(1,    'rgba(0,0,0,0)');
+  ctx.fillStyle = aura; ctx.fillRect(0, 0, W, H);
+
+  // chromatic refraction — the four unit colours offset, blending to white at the core
+  const off = r*0.08 + Math.sin(t*0.5)*r*0.02;
+  const baseA = t*0.12;
+  [[255,196,92],[150,170,255],[120,220,255],[226,98,74]].forEach((col, i) => {
+    const a2 = baseA + i*(Math.PI/2);
+    const ox = Math.cos(a2)*off, oy = Math.sin(a2)*off;
+    const g = ctx.createRadialGradient(cx+ox, cy+oy, 0, cx+ox, cy+oy, r*0.96);
+    g.addColorStop(0,   `rgba(${col},0.22)`);
+    g.addColorStop(0.5, `rgba(${col},0.10)`);
+    g.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(cx+ox, cy+oy, r*0.96, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.globalCompositeOperation = 'source-over';
+
+  // glass disc body
+  const glass = ctx.createRadialGradient(cx - r*0.2, cy - r*0.25, 0, cx, cy, r);
+  glass.addColorStop(0,    'rgba(225,230,255,0.22)');
+  glass.addColorStop(0.55, 'rgba(120,130,200,0.10)');
+  glass.addColorStop(0.85, 'rgba(60,60,120,0.06)');
+  glass.addColorStop(1,    'rgba(20,20,50,0.02)');
+  ctx.fillStyle = glass;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
+
+  // concentric optical rings
+  ctx.globalCompositeOperation = 'screen';
+  [0.62, 0.78, 0.92, 1.0].forEach((rr, i) => {
+    ctx.beginPath(); ctx.arc(cx, cy, r*rr, 0, Math.PI*2);
+    ctx.strokeStyle = `rgba(190,200,255,${0.16 - i*0.02})`;
+    ctx.lineWidth = i === 3 ? 1.6 : 1;
+    ctx.stroke();
+  });
+
+  // bright core
+  const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, r*0.5);
+  core.addColorStop(0,    'rgba(255,255,255,0.95)');
+  core.addColorStop(0.25, 'rgba(225,228,255,0.55)');
+  core.addColorStop(0.6,  'rgba(160,160,240,0.14)');
+  core.addColorStop(1,    'rgba(0,0,0,0)');
+  ctx.fillStyle = core;
+  ctx.beginPath(); ctx.arc(cx, cy, r*0.5, 0, Math.PI*2); ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
+
+  // rim highlight
+  const rim = ctx.createRadialGradient(cx, cy, r*0.86, cx, cy, r*1.02);
+  rim.addColorStop(0,   'rgba(210,220,255,0)');
+  rim.addColorStop(0.7, 'rgba(210,220,255,0.30)');
+  rim.addColorStop(1,   'rgba(150,160,255,0)');
+  ctx.fillStyle = rim;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r*1.02, 0, Math.PI*2);
+  ctx.arc(cx, cy, r*0.86, 0, Math.PI*2, true); ctx.fill();
+
+  // top sheen
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.clip();
+  const sheen = ctx.createLinearGradient(cx, cy-r, cx, cy);
+  sheen.addColorStop(0, 'rgba(255,255,255,0.18)');
+  sheen.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = sheen;
+  ctx.beginPath(); ctx.ellipse(cx, cy-r*0.42, r*0.74, r*0.40, 0, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+// ── Cinematic lens flare ───────────────────────────────────────
+function drawConcFlare(t, cx, cy) {
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  const pulse = 0.85 + 0.15*Math.sin(t*0.9);
+
+  // anamorphic horizontal streak
+  const sw = W*0.42*pulse;
+  const hg = ctx.createLinearGradient(cx-sw, cy, cx+sw, cy);
+  hg.addColorStop(0,   'rgba(120,150,255,0)');
+  hg.addColorStop(0.5, 'rgba(170,190,255,0.5)');
+  hg.addColorStop(1,   'rgba(120,150,255,0)');
+  ctx.fillStyle = hg; ctx.fillRect(cx-sw, cy-1.2, sw*2, 2.4);
+
+  // vertical streak
+  const sh = H*0.16*pulse;
+  const vg = ctx.createLinearGradient(cx, cy-sh, cx, cy+sh);
+  vg.addColorStop(0,   'rgba(200,210,255,0)');
+  vg.addColorStop(0.5, 'rgba(220,225,255,0.4)');
+  vg.addColorStop(1,   'rgba(200,210,255,0)');
+  ctx.fillStyle = vg; ctx.fillRect(cx-1, cy-sh, 2, sh*2);
+
+  // diagonal coloured ghosts
+  const dx = W*0.30, dy = -H*0.16;
+  [[-0.34, 22, '255,196,92', 0.12],
+   [-0.16, 12, '150,170,255',0.14],
+   [ 0.22, 16, '120,220,255',0.12],
+   [ 0.42, 28, '226,98,74',  0.10],
+   [ 0.62, 10, '200,210,255',0.12]].forEach(([f, rad, col, a]) => {
+    const gx = cx + dx*f, gy = cy + dy*f;
+    const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, rad);
+    g.addColorStop(0, `rgba(${col},${a})`);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(gx, gy, rad, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.restore();
+}
+
+// ── Convergence threads (every lesson flowing into the lens) ────
+function drawConcThreads(t, cx, cy, positions) {
+  ctx.save();
+  positions.forEach((p, i) => {
+    const [r, g, b] = CONC_NODES[i].col;
+    const dx = cx - p.x, dy = cy - p.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const nx = -dy/len, ny = dx/len;
+    const bow = Math.sin(t*0.4 + i)*18;
+    const pc = { x: (p.x+cx)/2 + nx*bow, y: (p.y+cy)/2 + ny*bow };
+
+    const grad = ctx.createLinearGradient(p.x, p.y, cx, cy);
+    grad.addColorStop(0,   `rgba(${r},${g},${b},0.05)`);
+    grad.addColorStop(0.5, `rgba(${r},${g},${b},0.22)`);
+    grad.addColorStop(1,   `rgba(${r},${g},${b},0.05)`);
+    ctx.strokeStyle = grad; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.quadraticCurveTo(pc.x, pc.y, cx, cy); ctx.stroke();
+
+    // pulses travelling inward — lessons converging on understanding
+    for (let k = 0; k < 2; k++) {
+      const u  = ((t*0.16 + i*0.3 + k*0.5) % 1);
+      const pt = quadPoint(p, pc, { x: cx, y: cy }, u);
+      const pa = Math.sin(u*Math.PI);
+      ctx.beginPath(); ctx.arc(pt.x, pt.y, 2.2, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${pa*0.9})`;
+      ctx.shadowBlur = 10; ctx.shadowColor = `rgba(${r},${g},${b},0.9)`;
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
+  });
+  ctx.restore();
+}
+
+// ── Unit echo glyphs (recognisable, not literal) ───────────────
+function drawGlyphWaves(t, r, g, b, R) {       // Argumentation — voice / sound waves
+  ctx.strokeStyle = `rgba(${r},${g},${b},0.85)`; ctx.lineWidth = 1.4;
+  for (let i = 1; i <= 3; i++) {
+    const rad = R*0.22*i + Math.sin(t*1.5)*1.5;
+    ctx.globalAlpha = 0.8 - i*0.2;
+    ctx.beginPath(); ctx.arc(0, 0, rad, -Math.PI*0.55, Math.PI*0.55); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, rad, Math.PI*0.45, Math.PI*1.55); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = `rgba(${r},${g},${b},0.95)`;
+  ctx.beginPath(); ctx.arc(0, 0, R*0.12, 0, Math.PI*2); ctx.fill();
+}
+function drawGlyphCards(r, g, b, R) {           // Literary Criticism — lens cards / fragments
+  [[-R*0.18, -0.22], [R*0.06, 0.16]].forEach(([ox, rot], i) => {
+    ctx.save(); ctx.translate(ox, 0); ctx.rotate(rot);
+    const w = R*0.5, h = R*0.72;
+    ctx.fillStyle = `rgba(${r},${g},${b},${0.16 + i*0.10})`;
+    ctx.strokeStyle = `rgba(${Math.min(255,r+60)},${Math.min(255,g+60)},255,0.7)`;
+    ctx.lineWidth = 1;
+    litRoundRect(-w/2, -h/2, w, h, 4); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = 'rgba(220,230,255,0.7)';
+    ctx.beginPath(); ctx.arc(0, -h*0.18, R*0.07, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
+}
+function drawGlyphPrism(r, g, b, R) {           // Book Club — prism dispersing light
+  ctx.strokeStyle = 'rgba(255,255,255,0.85)'; ctx.lineWidth = 1.4;     // white in-beam
+  ctx.beginPath(); ctx.moveTo(-R*0.62, 0); ctx.lineTo(0, 0); ctx.stroke();
+  ['255,90,90','255,200,80','120,230,140','96,150,255','176,116,255'].forEach((c, i) => {
+    ctx.strokeStyle = `rgba(${c},0.8)`; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(R*0.6, -R*0.1 + (i-2)*2.4); ctx.stroke();
+  });
+  ctx.strokeStyle = 'rgba(220,235,255,0.9)'; ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(0, -R*0.42); ctx.lineTo(R*0.40, R*0.30); ctx.lineTo(-R*0.40, R*0.30); ctx.closePath();
+  ctx.fillStyle = 'rgba(200,220,255,0.10)'; ctx.fill(); ctx.stroke();
+}
+function drawGlyphStrings(r, g, b, R) {         // Drama — pins linked by red string
+  const pins = [[-R*0.32, -R*0.18], [R*0.30, -R*0.26], [0, R*0.30]];
+  ctx.strokeStyle = `rgba(${r},${g},${b},0.9)`; ctx.lineWidth = 1.3;
+  ctx.beginPath();
+  ctx.moveTo(pins[0][0], pins[0][1]);
+  ctx.lineTo(pins[1][0], pins[1][1]);
+  ctx.lineTo(pins[2][0], pins[2][1]); ctx.closePath(); ctx.stroke();
+  pins.forEach(([x, y]) => {
+    ctx.fillStyle = `rgba(${Math.min(255,r+50)},${g},${b},0.95)`;
+    ctx.shadowBlur = 6; ctx.shadowColor = `rgba(${r},${g},${b},0.8)`;
+    ctx.beginPath(); ctx.arc(x, y, R*0.10, 0, Math.PI*2); ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+}
+
+function drawConcNode(node, p, t) {
+  const [r, g, b] = node.col;
+  const R = H*0.05;
+  ctx.save();
+
+  // coloured halo
+  ctx.globalCompositeOperation = 'screen';
+  const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, R*1.8);
+  halo.addColorStop(0,   `rgba(${r},${g},${b},0.34)`);
+  halo.addColorStop(0.5, `rgba(${r},${g},${b},0.12)`);
+  halo.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(p.x, p.y, R*1.8, 0, Math.PI*2); ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
+
+  // echo glyph
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  if      (node.glyph === 'waves')   drawGlyphWaves(t, r, g, b, R);
+  else if (node.glyph === 'cards')   drawGlyphCards(r, g, b, R);
+  else if (node.glyph === 'prism')   drawGlyphPrism(r, g, b, R);
+  else                               drawGlyphStrings(r, g, b, R);
+  ctx.restore();
+
+  // keyword + faint unit tag
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(${Math.min(255,r+40)},${Math.min(255,g+40)},${Math.min(255,b+40)},0.96)`;
+  ctx.font = `600 ${clamp(W*0.0125,14,19)}px -apple-system, 'Helvetica Neue', Arial, sans-serif`;
+  ctx.shadowBlur = 14; ctx.shadowColor = `rgba(${r},${g},${b},0.8)`;
+  ctx.fillText(node.key, p.x, p.y + R + 28);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+// ── Full convergence scene ─────────────────────────────────────
+function drawConclusion(t) {
+  if (!concStars.length) initConcScene();
+  const par = concParallax();
+  const c   = concCenter(par);
+
+  drawConcBackground(t);
+  drawConcStars(t, par);
+  drawConcParticles(t, false);
+
+  const positions = CONC_NODES.map(n => concNodePos(n, t, c, par));
+
+  drawConcThreads(t, c.x, c.y, positions);
+  drawConcLens(t, c.x, c.y);
+  drawConcFlare(t, c.x, c.y);
+  positions.forEach((p, i) => drawConcNode(CONC_NODES[i], p, t));
+
+  drawConcParticles(t, true);
+
+  // vignette
+  const vig = ctx.createRadialGradient(c.x, c.y, H*0.18, c.x, c.y, H*0.92);
+  vig.addColorStop(0,    'rgba(0,0,0,0)');
+  vig.addColorStop(0.62, 'rgba(0,0,0,0.16)');
+  vig.addColorStop(1,    'rgba(3,3,12,0.82)');
+  ctx.fillStyle = vig; ctx.fillRect(0, 0, W, H);
+
+  // cursor lens
+  const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 110);
+  lg.addColorStop(0,    'rgba(190,195,255,0.06)');
+  lg.addColorStop(0.55, 'rgba(120,110,200,0.02)');
+  lg.addColorStop(1,    'rgba(0,0,0,0)');
   ctx.fillStyle = lg; ctx.fillRect(0, 0, W, H);
 }
 
@@ -2226,8 +2588,11 @@ function frame(ts) {
     if (!dramaT0) dramaT0 = ts;
     const dt = (ts - dramaT0) / 1000;
     drawDramaRoom(dt);
+  } else if (currentPage === 'conclusion') {
+    if (!concT0) concT0 = ts;
+    const ct = (ts - concT0) / 1000;
+    drawConclusion(ct);
   } else {
-    // Placeholder for future pages
     ctx.fillStyle = '#06060f'; ctx.fillRect(0, 0, W, H);
     drawNebulae(1); drawStars(1);
   }
@@ -2248,7 +2613,7 @@ function revealIntroHero() {
 
 function revealArgHero() {
   argT0 = null;
-  [['arg-eyebrow',0],['arg-title',200],['arg-bullets',600]]
+  [['arg-title',0],['arg-takeaway',300],['arg-bullets',550]]
     .forEach(([id, d]) => setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.classList.add('show');
@@ -2256,7 +2621,7 @@ function revealArgHero() {
 }
 
 function resetArgHeroReveal() {
-  ['arg-eyebrow','arg-title','arg-bullets'].forEach(id => {
+  ['arg-title','arg-takeaway','arg-bullets'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('show');
   });
@@ -2264,7 +2629,7 @@ function resetArgHeroReveal() {
 
 function revealLitHero() {
   litT0 = null;
-  [['lit-eyebrow',0],['lit-title',200],['lit-bullets',600]]
+  [['lit-title',0],['lit-takeaway',300],['lit-bullets',550]]
     .forEach(([id, d]) => setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.classList.add('show');
@@ -2272,7 +2637,7 @@ function revealLitHero() {
 }
 
 function resetLitHeroReveal() {
-  ['lit-eyebrow','lit-title','lit-bullets'].forEach(id => {
+  ['lit-title','lit-takeaway','lit-bullets'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('show');
   });
@@ -2280,7 +2645,7 @@ function resetLitHeroReveal() {
 
 function revealBookHero() {
   bookT0 = null;
-  [['book-eyebrow',0],['book-title',200],['book-bullets',600]]
+  [['book-title',0],['book-takeaway',300],['book-bullets',550]]
     .forEach(([id, d]) => setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.classList.add('show');
@@ -2288,7 +2653,7 @@ function revealBookHero() {
 }
 
 function resetBookHeroReveal() {
-  ['book-eyebrow','book-title','book-bullets'].forEach(id => {
+  ['book-title','book-takeaway','book-bullets'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('show');
   });
@@ -2296,7 +2661,7 @@ function resetBookHeroReveal() {
 
 function revealDramaHero() {
   dramaT0 = null;
-  [['drama-eyebrow',0],['drama-title',200],['drama-bullets',600]]
+  [['drama-title',0],['drama-takeaway',300],['drama-bullets',550]]
     .forEach(([id, d]) => setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.classList.add('show');
@@ -2304,7 +2669,23 @@ function revealDramaHero() {
 }
 
 function resetDramaHeroReveal() {
-  ['drama-eyebrow','drama-title','drama-bullets'].forEach(id => {
+  ['drama-title','drama-takeaway','drama-bullets'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('show');
+  });
+}
+
+function revealConcHero() {
+  concT0 = null;
+  [['conc-title',0]]
+    .forEach(([id, d]) => setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('show');
+    }, d));
+}
+
+function resetConcHeroReveal() {
+  ['conc-title'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('show');
   });
