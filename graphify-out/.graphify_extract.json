@@ -1,0 +1,772 @@
+{
+  "nodes": [
+    {
+      "id": "index_eng4u_isp",
+      "label": "ENG4U Independent Study Project",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "title/intro",
+      "source_url": null,
+      "captured_at": null,
+      "author": "An Shi Wang",
+      "contributor": null
+    },
+    {
+      "id": "index_look_beyond_the_surface",
+      "label": "Look Beyond the Surface (central theme)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "intro subtitle / conclusion",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_look_deeper",
+      "label": "ENG4U Taught Me to Look Deeper (conclusion thesis)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "conclusion",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_argumentation",
+      "label": "Argumentation (Unit)",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "hero-arg",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_look_beyond_the_words",
+      "label": "Look Beyond the Words (Argumentation takeaway)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "arg-takeaway",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_persuasive_techniques",
+      "label": "Persuasive Techniques",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_ted_talks",
+      "label": "TED Talks",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_rick_mercer_rants",
+      "label": "Rick Mercer Rants",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_stylistic_devices",
+      "label": "Stylistic Devices and Methods of Development",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_persuasion",
+      "label": "Persuasion (course node)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "CONC_NODES",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_literary_criticism",
+      "label": "Literary Criticism (Unit)",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "hero-lit",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_look_beyond_a_single_interpretation",
+      "label": "Look Beyond a Single Interpretation (Literary Criticism takeaway)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "lit-takeaway",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_critical_lenses",
+      "label": "Critical Lenses",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_marxist_lens",
+      "label": "Marxist Lens",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_feminist_lens",
+      "label": "Feminist Lens",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_psychoanalytic_lens",
+      "label": "Psychoanalytic Lens",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_perspective",
+      "label": "Perspective (course node)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "CONC_NODES",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_book_club",
+      "label": "Book Club (Unit)",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "hero-book",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_look_beyond_my_first_understanding",
+      "label": "Look Beyond My First Understanding (Book Club takeaway)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "book-takeaway",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_refining_first_impressions",
+      "label": "Refining First Impressions Through Discussion",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_evidence_and_research",
+      "label": "Using Evidence and Research to Deepen Understanding",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_learning_from_others",
+      "label": "Learning From the Insights of Others",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_understanding",
+      "label": "Understanding (course node)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "CONC_NODES",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_drama_hamilton",
+      "label": "Drama / Hamilton (Unit)",
+      "file_type": "document",
+      "source_file": "index.html",
+      "source_location": "hero-drama",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_hamilton",
+      "label": "Hamilton (musical / drama studied)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "hero-drama",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_look_beyond_actions_and_dialogue",
+      "label": "Look Beyond Actions and Dialogue (Drama takeaway)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "drama-takeaway",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_theatrical_devices",
+      "label": "Theatrical Devices, Staging, Body Language, and Voice",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "drama-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_character_motivations_and_conflicts",
+      "label": "Character Motivations and Conflicts",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "drama-bullets",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_motivation",
+      "label": "Motivation (course node)",
+      "file_type": "concept",
+      "source_file": "index.html",
+      "source_location": "CONC_NODES",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_course_chain",
+      "label": "Course Chain: Persuasion to Perspective to Understanding to Motivation",
+      "file_type": "rationale",
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_argumentation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "nav-tabs",
+      "weight": 1.0
+    },
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_literary_criticism",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "nav-tabs",
+      "weight": 1.0
+    },
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_book_club",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "nav-tabs",
+      "weight": 1.0
+    },
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_drama_hamilton",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "nav-tabs",
+      "weight": 1.0
+    },
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_look_beyond_the_surface",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "intro subtitle",
+      "weight": 1.0
+    },
+    {
+      "source": "index_eng4u_isp",
+      "target": "index_look_deeper",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "conclusion",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_deeper",
+      "target": "index_look_beyond_the_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "conclusion comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_argumentation",
+      "target": "index_look_beyond_the_words",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "arg-takeaway",
+      "weight": 1.0
+    },
+    {
+      "source": "index_argumentation",
+      "target": "index_persuasive_techniques",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_persuasive_techniques",
+      "target": "index_ted_talks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_persuasive_techniques",
+      "target": "index_rick_mercer_rants",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_argumentation",
+      "target": "index_stylistic_devices",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "arg-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_argumentation",
+      "target": "index_persuasion",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_beyond_the_words",
+      "target": "index_look_beyond_the_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "takeaways",
+      "weight": 1.0
+    },
+    {
+      "source": "index_literary_criticism",
+      "target": "index_look_beyond_a_single_interpretation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "lit-takeaway",
+      "weight": 1.0
+    },
+    {
+      "source": "index_literary_criticism",
+      "target": "index_critical_lenses",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_critical_lenses",
+      "target": "index_marxist_lens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_critical_lenses",
+      "target": "index_feminist_lens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_critical_lenses",
+      "target": "index_psychoanalytic_lens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "lit-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_literary_criticism",
+      "target": "index_perspective",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_beyond_a_single_interpretation",
+      "target": "index_look_beyond_the_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "takeaways",
+      "weight": 1.0
+    },
+    {
+      "source": "index_book_club",
+      "target": "index_look_beyond_my_first_understanding",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "book-takeaway",
+      "weight": 1.0
+    },
+    {
+      "source": "index_book_club",
+      "target": "index_refining_first_impressions",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_book_club",
+      "target": "index_evidence_and_research",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_book_club",
+      "target": "index_learning_from_others",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "book-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_book_club",
+      "target": "index_understanding",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_beyond_my_first_understanding",
+      "target": "index_look_beyond_the_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "takeaways",
+      "weight": 1.0
+    },
+    {
+      "source": "index_drama_hamilton",
+      "target": "index_hamilton",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "hero-drama",
+      "weight": 1.0
+    },
+    {
+      "source": "index_drama_hamilton",
+      "target": "index_look_beyond_actions_and_dialogue",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "drama-takeaway",
+      "weight": 1.0
+    },
+    {
+      "source": "index_drama_hamilton",
+      "target": "index_theatrical_devices",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "drama-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_drama_hamilton",
+      "target": "index_character_motivations_and_conflicts",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "drama-bullets",
+      "weight": 1.0
+    },
+    {
+      "source": "index_drama_hamilton",
+      "target": "index_motivation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_beyond_actions_and_dialogue",
+      "target": "index_look_beyond_the_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "index.html",
+      "source_location": "takeaways",
+      "weight": 1.0
+    },
+    {
+      "source": "index_course_chain",
+      "target": "index_persuasion",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_course_chain",
+      "target": "index_perspective",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_course_chain",
+      "target": "index_understanding",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_course_chain",
+      "target": "index_motivation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html",
+      "source_location": "CONC_NODES comment",
+      "weight": 1.0
+    },
+    {
+      "source": "index_look_beyond_the_words",
+      "target": "index_look_beyond_a_single_interpretation",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "index.html",
+      "source_location": "takeaways",
+      "weight": 1.0
+    },
+    {
+      "source": "index_refining_first_impressions",
+      "target": "index_look_beyond_a_single_interpretation",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "index.html",
+      "source_location": "bullets/takeaways",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "eng4u_four_units",
+      "label": "Four ENG4U Units Converging on Looking Deeper",
+      "nodes": [
+        "index_argumentation",
+        "index_literary_criticism",
+        "index_book_club",
+        "index_drama_hamilton",
+        "index_look_beyond_the_surface"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "index.html"
+    },
+    {
+      "id": "eng4u_course_node_chain",
+      "label": "Course Node Progression (Persuasion to Motivation)",
+      "nodes": [
+        "index_persuasion",
+        "index_perspective",
+        "index_understanding",
+        "index_motivation"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "index.html"
+    },
+    {
+      "id": "literary_critical_lenses",
+      "label": "Critical Lenses Triad",
+      "nodes": [
+        "index_marxist_lens",
+        "index_feminist_lens",
+        "index_psychoanalytic_lens"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "index.html"
+    }
+  ],
+  "input_tokens": 48000,
+  "output_tokens": 6250
+}
